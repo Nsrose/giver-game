@@ -11,13 +11,21 @@
             <div class='field-form-group'><%= text_field :game, :title, id: 'Title', size: '65' %></div>
 
             <div class='field-form-group'>
-              <%= radio_button_tag(:game_access_level, "private", true, :id=>"private_game") %>
+              <%= radio_button(:game, :is_private, true, :id=>"private_game", checked: true) %>
               <%= label_tag(:private, "Private game") %>
               <small>Your game will be unlisted and only accessible through a link.</small>
               <br>
-              <%= radio_button_tag(:game_access_level, "public", false, :id=>"public_game") %>
+              <%= radio_button(:game, :is_private, false, :id=>"public_game", checked: false) %>
               <%= label_tag(:public, "Public game") %>
               <small>Your game will be listed publicly and can be played by anyone.</small>
+
+              <!--<%= radio_button_tag("game[game_access_level]", "private", true, :id=>"private_game") %>-->
+              <!--<%= label_tag(:private, "Private game") %>-->
+
+              <!--<br>-->
+              <!--<%= radio_button_tag("game[game_access_level]", "public", false, :id=>"public_game") %>-->
+              <!--<%= label_tag(:public, "Public game") %>-->
+
 
             </div>
 

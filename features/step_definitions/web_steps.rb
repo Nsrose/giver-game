@@ -114,7 +114,7 @@ end
 Then /^(?:|I )should see "([^"]*)" appear[s]? "([\d]*)" time[s]?$/ do |text, number|
   regexp = Regexp.new(text)
   number = number.to_i
-  page.find(:xpath, '//body').text.split(regexp).length.should == number + 1
+  expect(page).to have_content(text, count: number)
 end
 
 Then /^(?:|I )should see \/([^\/]*)\/$/ do |regexp|

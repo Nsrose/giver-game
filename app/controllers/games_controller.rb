@@ -1,8 +1,10 @@
+require 'securerandom'
+
 class GamesController < ApplicationController
 
   def game_params
     params.require(:game).permit(:title,
-                                 :game_access_level,
+                                 :is_private,
                                  :description,
                                  :total_money,
                                  :per_transaction,
@@ -94,15 +96,22 @@ class GamesController < ApplicationController
         redirect_to new_game_path
         return
     end
-    game_access_level = gp.delete :game_access_level
+
     game = GivingGame.new(gp)
 
-
-    
+    if game.is_private?
+      game.private_id = SecureRandom.hex
+    end
     if game.valid?
       @game = game
       game.save()
-      flash[:success] = "Giving Game #{@game.title} successfully created."
+
+      message = "Giving Game #{@game.title} successfully created."
+      if game.is_private
+        full_game_url = "#{request.host_with_port}/games/play/#{game.private_id}"
+        message += " Your private game URL: " + full_game_url
+      end
+      flash[:success] = message
       current_user.add_to_created_giving_games(game)
     else
       totalMessage = ""
@@ -126,6 +135,7 @@ class GamesController < ApplicationController
 
   def play_index
     @games = GivingGame.where("expired = ? AND (expiration_time > ? OR expiration_time IS NULL)", false, DateTime.now)
+    @games = @games.where(:is_private => false)
     @counter = @games.length
     @charityVotedFor = params[:charity]
   end
