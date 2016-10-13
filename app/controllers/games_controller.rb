@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
 
   def game_params
-    params.require(:game).permit(:title, :description, :total_money, :per_transaction, :charityA_title, :descriptionA, :charityB_title, :descriptionB, :expiration_time, :tutorial, :show_results, :charityA_image, :charityB_image, :charityA_image_cache, :charityB_image_cache)
+    params.require(:game).permit(:title, :game_access_level, :description, :total_money, :per_transaction, :charityA_title, :descriptionA, :charityB_title, :descriptionB, :expiration_time, :tutorial, :show_results, :charityA_image, :charityB_image, :charityA_image_cache, :charityB_image_cache)
   end
   
   def home
