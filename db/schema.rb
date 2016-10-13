@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160428095457) do
+ActiveRecord::Schema.define(version: 20161013033156) do
 
   create_table "giving_games", force: :cascade do |t|
     t.string   "title",                                   default: "default title"
@@ -34,6 +34,8 @@ ActiveRecord::Schema.define(version: 20160428095457) do
     t.boolean  "expired",                                 default: false
     t.string   "charityA_image"
     t.string   "charityB_image"
+    t.boolean  "is_private",                              default: false
+    t.string   "private_id"
   end
 
   create_table "uploads", force: :cascade do |t|

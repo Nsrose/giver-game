@@ -1,7 +1,22 @@
 class GamesController < ApplicationController
 
   def game_params
-    params.require(:game).permit(:title, :game_access_level, :description, :total_money, :per_transaction, :charityA_title, :descriptionA, :charityB_title, :descriptionB, :expiration_time, :tutorial, :show_results, :charityA_image, :charityB_image, :charityA_image_cache, :charityB_image_cache)
+    params.require(:game).permit(:title,
+                                 :game_access_level,
+                                 :description,
+                                 :total_money,
+                                 :per_transaction,
+                                 :charityA_title,
+                                 :descriptionA,
+                                 :charityB_title,
+                                 :descriptionB,
+                                 :expiration_time,
+                                 :tutorial,
+                                 :show_results,
+                                 :charityA_image,
+                                 :charityB_image,
+                                 :charityA_image_cache,
+                                 :charityB_image_cache)
   end
   
   def home
@@ -79,7 +94,10 @@ class GamesController < ApplicationController
         redirect_to new_game_path
         return
     end
+    game_access_level = gp.delete :game_access_level
     game = GivingGame.new(gp)
+
+
     
     if game.valid?
       @game = game
