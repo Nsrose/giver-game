@@ -19,16 +19,16 @@ module NavigationHelpers
     when /^the existing games page$/
       play_index_path
     when /^the tutorial page$/
-      id = GivingGame.where(:title => "Tutorial").first.id
-      play_game_path(id)
+      resource_id = GivingGame.where(:title => "Tutorial").first.resource_id
+      play_game_path(resource_id)
     when /^the new games page$/
       new_game_path
     when /^the results page for "([^"]*)"$/
-      id = GivingGame.where(:title => $1).first.id
-      results_path(id)
+      resource_id = GivingGame.where(:title => $1).first.resource_id
+      results_path(resource_id)
     when /^the game page for "([^"]*)"$/
-      id = GivingGame.where(:title => $1).first.id
-      play_game_path(id)
+      resource_id = GivingGame.where(:title => $1).first.resource_id
+      play_game_path(resource_id)
     when /^the sign in page$/
       new_user_session_path
     when /^the sign up page$/
@@ -38,12 +38,12 @@ module NavigationHelpers
       user_profile_path(id)
     when /^the edit page for "([^"]*)"$/
       game = GivingGame.where(:title => $1).first
-      edit_game_path(game.user_id, game.id)
+      edit_game_path(game.user_id, game.resource_id)
     when /^the archive page$/
       archive_path
     when /^the expired game info page for "([^"]*)"$/
-      id = GivingGame.where(:title => $1).first.id
-      archive_game_path(id)
+      resource_id = GivingGame.where(:title => $1).first.resource_id
+      archive_game_path(resource_id)
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

@@ -6,7 +6,7 @@
                     <i class="fa fa-arrow-left" aria-hidden="true" style="padding-right: 5px"></i>Go Back to Expired Games List
                 <% end %>
                 <% if @showResults == true%>
-                    <%= link_to results_path(params[:id]), class:'btn btn-default' do %>
+                    <%= link_to results_path(params[:resource_id]), class:'btn btn-default' do %>
                         <i class="fa fa-bar-chart" aria-hidden="true" style="padding-right: 5px"></i>See Results for this Giving Game
                     <% end %>
                 <% end %>

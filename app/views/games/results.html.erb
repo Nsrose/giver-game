@@ -3,7 +3,7 @@
         <div class="page-header">
             <div class="pull-right">
                 <% if @expired %>
-                    <%= link_to archive_game_path(params[:id]), class:'btn btn-default' do %>
+                    <%= link_to archive_game_path(params[:resource_id]), class:'btn btn-default' do %>
                         <i class="fa fa-arrow-left" aria-hidden="true" style="padding-right: 5px"></i>Go back to Game Page
                     <% end %>
                     <%= link_to archive_path, class:'btn btn-default' do %>

@@ -37,11 +37,11 @@
                                           <td>Public</td>
                                         <% end %>
                                         <% if !game.expired %>
-                                            <td><a href=<%= edit_game_path(current_user.id, game.id)%>><button type="button" class="btn btn-default btn-circle"><i class="fa fa-pencil-square-o"></i></button></a></td>
+                                            <td><a href=<%= edit_game_path(current_user.id, game.resource_id)%>><button type="button" class="btn btn-default btn-circle"><i class="fa fa-pencil-square-o"></i></button></a></td>
                                         <%else %>
                                             <td></td>
                                         <%end%>
-                                        <td><a href=<%= results_path(:id => game.id)%>><button type="button" class="btn btn-default btn-circle"><i class="fa fa-bar-chart"></i></button></a></td>
+                                        <td><a href=<%= results_path(:resource_id => game.resource_id)%>><button type="button" class="btn btn-default btn-circle"><i class="fa fa-bar-chart"></i></button></a></td>
                                      </tr>
                                 <% end %>
                             </tbody>

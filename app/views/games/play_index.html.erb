@@ -28,7 +28,7 @@
                <tbody>
                   <% @games.each do |game| %>
                      <tr style="text-align: center">
-                        <td style="text-align: left"><%= link_to game.title, play_game_path(game.id)%></a></td>
+                        <td style="text-align: left"><%= link_to game.title, play_game_path(game.resource_id)%></a></td>
                         <td>$<%= game.total_money%></td>
                         <td>$<%= game.per_transaction %></td>
                         <td><% if game.tutorial %>&#10004;<% end %></td>

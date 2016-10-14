@@ -5,10 +5,10 @@ Feature: As a user who wants to play
   Background:  
     Given I am on the home page
     And the following games exist:
-    | title                   | description                                 | charityA_title | charityB_title | show_results |
-    | Tutorial                | 'This is the tutorial for the Giving Game'  | Charity A      | Charity B      | true         |
-    | Tutorial 2              | 'This is another tutorial!'                 | Charity 1      | Charity 2      | true         |
-    | Regular Game            | 'This is a game'                            | Charity 3      | Charity 4      | true         |
+    | title                   | description                                 | charityA_title | charityB_title | show_results | resource_id |
+    | Tutorial                | 'This is the tutorial for the Giving Game'  | Charity A      | Charity B      | true         | 1           |
+    | Tutorial 2              | 'This is another tutorial!'                 | Charity 1      | Charity 2      | true         | 2           |
+    | Regular Game            | 'This is a game'                            | Charity 3      | Charity 4      | true         | 3           |
     
     Given the following users exist:
     | username           | password   | password_confirmation  |     email             |

@@ -6,7 +6,7 @@ Feature: Create a new game
   Background:
   
     Given the following games exist:
-    | title       | description                                | per_transaction | charityA_title | charityB_title | is_private | id   |
+    | title       | description                                | per_transaction | charityA_title | charityB_title | is_private | resource_id   |
     | Secret game | something something                        |      10         | A charity      | what           | true       | 1abc |
     | Public game | something something else                   |      1          | Another one    | cold           | false      | 1    |
   

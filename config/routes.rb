@@ -16,15 +16,15 @@ Rails.application.routes.draw do
   get '/games/tutorial', to: 'games#tutorial', as: 'tutorial_game'
   # get '/games/results/:id', to: 'games#results', as: 'results'
   # post '/games/results/:id', to: 'games#results', as: 'results'
-  match '/games/results/:id' => 'games#results', as: 'results', via: [:get, :post]
+  match '/games/results/:resource_id' => 'games#results', as: 'results', via: [:get, :post]
   post '/games/create', to: 'games#create', as: 'create_game'
-  get '/games/play/:id', to: 'games#play_game', as: 'play_game'
+  get '/games/play/:resource_id', to: 'games#play_game', as: 'play_game'
   get '/users/:id', to: 'users#profile', as: 'user_profile'
-  get '/users/:id/games/edit/:id', to: 'games#edit', as: 'edit_game'
-  post '/users/:id/games/update/:id', to: 'games#update', as: 'update_game'
+  get '/users/:id/games/edit/:resource_id', to: 'games#edit', as: 'edit_game'
+  post '/users/:id/games/update/:resource_id', to: 'games#update', as: 'update_game'
   post '/games/check', to: 'games#check_if_played_and_reroute', as: 'check_played'
   get '/games/archive', to: 'games#archive', as: 'archive'
-  get 'games/archive/:id', to: 'games#archive_game', as: 'archive_game'
+  get 'games/archive/:resource_id', to: 'games#archive_game', as: 'archive_game'
 
 
 #  get '/movies/:id/similar', to: 'movies#similar', as: 'search_directors'

@@ -6,10 +6,10 @@ Feature: Make Games End
   Background:
     Given I am on the home page
     And the following games exist:
-    | title        | id | description                                 | charityA_title | charityB_title | expired | expiration_time          | total_money | per_transaction  | votesA |    
-    | Expirein     |  1 | 'This game should expire'                   | Charity A      | Charity B      | true    |                          | 100         | 1                |        |
-    | Expire2      |  2 | 'This game should also expire'              | Charity 1      | Charity 2      | false   | 2016-04-20 01:00:00 UTC  | 100         | 1                |        |
-    | Expire3      |  3 | 'This game should also expire too'          | Charity 4      | Charity 5      | false   |                          | 100         | 1                | 99     | 
+    | title        | id | description                                 | charityA_title | charityB_title | expired | expiration_time          | total_money | per_transaction  | votesA | resource_id |   
+    | Expirein     |  1 | 'This game should expire'                   | Charity A      | Charity B      | true    |                          | 100         | 1                |        | 1           |
+    | Expire2      |  2 | 'This game should also expire'              | Charity 1      | Charity 2      | false   | 2016-04-20 01:00:00 UTC  | 100         | 1                |        | 2           |
+    | Expire3      |  3 | 'This game should also expire too'          | Charity 4      | Charity 5      | false   |                          | 100         | 1                | 99     | 3           |
     And the following users exist:
     | username           | password   | password_confirmation  |     email             |
     | Traitor_JOSEPHINE  | TRAITORJOE |  TRAITORJOE            |  j0e@tr8er.org        |

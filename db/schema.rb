@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20161013033156) do
     t.string   "charityA_image"
     t.string   "charityB_image"
     t.boolean  "is_private",                              default: false
-    t.string   "private_id"
+    t.string   "resource_id"
   end
 
   create_table "uploads", force: :cascade do |t|

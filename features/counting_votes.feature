@@ -6,9 +6,9 @@ Feature: Display votes
   Background: games exist
     Given I am on the home page
     And the following games exist:
-    | title                   | description                                 | charityA_title | charityB_title | votesA | votesB | tutorial | show_results |
-    | TutorialGame            | 'This is the tutorial for the Giving Game'  | Charity A      | Charity B      | 0      | 0      | true     | true         |
-    | NoShow                  | 'This is a game without showing results on' | Charity A      | Charity B      | 100    | 0      | false    | false        |
+    | title                   | description                                 | charityA_title | charityB_title | votesA | votesB | tutorial | show_results | resource_id |
+    | TutorialGame            | 'This is the tutorial for the Giving Game'  | Charity A      | Charity B      | 0      | 0      | true     | true         | 1           |
+    | NoShow                  | 'This is a game without showing results on' | Charity A      | Charity B      | 100    | 0      | false    | false        | 2           |
     And the following users exist:
     | username           | password   | password_confirmation  |     email             |
     | Traitor_JOSEPHINE   | TRAITORJOE |  TRAITORJOE            |  j0e@tr8er.org        |

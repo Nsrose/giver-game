@@ -23,7 +23,7 @@
         <ul class="dropdown-menu" id=dropdown>
             <% @tutorials.each do |tutorial| %>
               <li>
-                <%= link_to tutorial.title, play_game_path(:id => tutorial.id) %>
+                <%= link_to tutorial.title, play_game_path(:resource_id => tutorial.resource_id) %>
               </li>
             <% end %>
         </ul>
