@@ -1,7 +1,24 @@
+require 'securerandom'
+
 class GamesController < ApplicationController
 
   def game_params
-    params.require(:game).permit(:title, :description, :total_money, :per_transaction, :charityA_title, :descriptionA, :charityB_title, :descriptionB, :expiration_time, :tutorial, :show_results, :charityA_image, :charityB_image, :charityA_image_cache, :charityB_image_cache)
+    params.require(:game).permit(:title,
+                                 :is_private,
+                                 :description,
+                                 :total_money,
+                                 :per_transaction,
+                                 :charityA_title,
+                                 :descriptionA,
+                                 :charityB_title,
+                                 :descriptionB,
+                                 :expiration_time,
+                                 :tutorial,
+                                 :show_results,
+                                 :charityA_image,
+                                 :charityB_image,
+                                 :charityA_image_cache,
+                                 :charityB_image_cache)
   end
   
   def home
@@ -79,12 +96,22 @@ class GamesController < ApplicationController
         redirect_to new_game_path
         return
     end
+
     game = GivingGame.new(gp)
-    
+
+    if game.is_private?
+      game.private_id = SecureRandom.hex
+    end
     if game.valid?
       @game = game
       game.save()
-      flash[:success] = "Giving Game #{@game.title} successfully created."
+
+      message = "Giving Game #{@game.title} successfully created."
+      if game.is_private
+        full_game_url = "#{request.host_with_port}/games/play/#{game.private_id}"
+        message += " Your private game URL: " + full_game_url
+      end
+      flash[:success] = message
       current_user.add_to_created_giving_games(game)
     else
       totalMessage = ""
@@ -108,6 +135,7 @@ class GamesController < ApplicationController
 
   def play_index
     @games = GivingGame.where("expired = ? AND (expiration_time > ? OR expiration_time IS NULL)", false, DateTime.now)
+    @games = @games.where(:is_private => false)
     @counter = @games.length
     @charityVotedFor = params[:charity]
   end

@@ -22,6 +22,7 @@
                             <thead>
                                 <tr>
                                     <th style="text-align: left">Games</th>
+                                    <th>Privacy</th>
                                     <th>Edit Game</th>
                                     <th>See Results</th>
                                 </tr>
@@ -30,6 +31,11 @@
                                  <% @games.each do |game| %>
                                      <tr>
                                         <td><%= game.title%></a></td>
+                                        <% if game.is_private %>
+                                          <td>Private</td>
+                                        <% else %>
+                                          <td>Public</td>
+                                        <% end %>
                                         <% if !game.expired %>
                                             <td><a href=<%= edit_game_path(current_user.id, game.id)%>><button type="button" class="btn btn-default btn-circle"><i class="fa fa-pencil-square-o"></i></button></a></td>
                                         <%else %>
