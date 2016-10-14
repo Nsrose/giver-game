@@ -47,7 +47,7 @@ class GamesController < ApplicationController
   end
   
   def update
-    game = GivingGame.find(params[:resource_id])
+    game = GivingGame.where(:resource_id => params[:resource_id]).first
     gp = game_params
     begin 
       if gp[:expiration_time]
@@ -100,7 +100,11 @@ class GamesController < ApplicationController
 
     game = GivingGame.new(gp)
 
-
+    # if self.is_private?
+    #   game.resource_id =  SecureRandom.hex
+    # else
+    #   game.resource_id =  game.id
+    # end
     
     if game.valid?
       @game = game
@@ -224,7 +228,7 @@ class GamesController < ApplicationController
   end
   
   def results
-    @game = GivingGame.find(params[:resource_id])
+    @game = GivingGame.where(:resource_id => params[:resource_id]).first
     @owner = @game.user_id
     @expired = @game.expired
     @charityVotedFor = params[:charity]
