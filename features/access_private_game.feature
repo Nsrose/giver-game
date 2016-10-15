@@ -15,12 +15,12 @@ Feature: Create a new game
     | Traitor_JOSEPHINE   | TRAITORJOE |  TRAITORJOE            |  j0e@tr8er.org        |
 
   Scenario: I try to visit the play page for a private game
-    Given I go to "games/play/1abc"
+    Given I am logged in as "j0e@tr8er.org" with password "TRAITORJOE"
+    Given I visit the url /games/play/1abc
     Then I should see "Play the game: Secret game"
-    
   Scenario: I try to visit a private game's results
-    Given I go to "games/results/1abc"
-    Then I should see "Results: Secret Game"
+    Given I visit the url /games/results/1abc
+    Then I should see "Results: Secret game"
     
   Scenario: I go to the public "play game" page
     Given I go to the existing games page
