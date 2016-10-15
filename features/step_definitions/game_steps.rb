@@ -5,7 +5,7 @@ Then(/^I should see: "([^"]*)", "([^"]*)", "([^"]*)", "([^"]*)"$/) do |arg1, arg
   step "I should see \"#{arg4}\""
 end
 
-Then(/^I should see only "([^"]*)" games$/) do |arg1|
+Then(/^I should see only "([^"]*)" games?$/) do |arg1|
   step "I should see \"Total Number of Games: #{arg1}\""
 end
 

@@ -100,16 +100,17 @@ class GamesController < ApplicationController
 
     game = GivingGame.new(gp)
 
-    # if self.is_private?
-    #   game.resource_id =  SecureRandom.hex
-    # else
-    #   game.resource_id =  game.id
-    # end
-    
     if game.valid?
-      @game = game
+      game.save() ## need to have game in database in order to have an id
+      if game.is_private?
+        game.resource_id =  SecureRandom.hex
+      else
+        game.resource_id =  game.id
+      end
+      
       game.save()
 
+      @game = game
       message = "Giving Game #{@game.title} successfully created."
       if game.is_private
         full_game_url = "#{request.host_with_port}/games/play/#{game.resource_id}"
