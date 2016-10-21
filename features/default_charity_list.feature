@@ -16,8 +16,8 @@ Background:
     Given I am logged in as "j0e@tr8er.org" with password "TRAITORJOE"
     When I am on the new games page
     And I fill out the form with values "Title": "Secret New Game","Description": "Descriptive description to describe","TotalMoney": "100","AmountPerVote": "10"
-    When I select "We Do Good" from the "charity_a" dropdown list
-    When I select "Cars4KidsAsInBabyGoatKids" from the "charity_b" dropdown list
+    When I select "We Do Good" from "charity_a"
+    When I select "Cars4KidsAsInBabyGoatKids" from "charity_b"
     Then I should see "Read the title."
     Then I should see "Don't be a baaad driver."
     And I press "Submit New Game"
@@ -28,7 +28,7 @@ Scenario: Ensure game is not allowed to be created if we do not select a charity
     Given I am logged in as "j0e@tr8er.org" with password "TRAITORJOE"
     When I am on the new games page
     And I fill out the form with values "Title": "Secret New Game","Description": "Descriptive description to describe","TotalMoney": "100","AmountPerVote": "10"
-    When I select "We Do Good" from the "charity_a" dropdown list
+    When I select "We Do Good" from "charity_a"
     Then I should see "Read the title."
     And I press "Submit New Game"
     Then I should be on the new games page
@@ -38,7 +38,7 @@ Scenario: Ensure game is not allowed to be created if we do not select a charity
     Given I am logged in as "j0e@tr8er.org" with password "TRAITORJOE"
     When I am on the new games page
     And I fill out the form with values "Title": "Secret New Game","Description": "Descriptive description to describe","TotalMoney": "100","AmountPerVote": "10"
-    When I select "We Do Good" from the "charity_b" dropdown list
+    When I select "We Do Good" from "charity_b"
     Then I should see "Read the title."
     And I press "Submit New Game"
     Then I should be on the new games page
@@ -48,9 +48,9 @@ Scenario: Ensure game is not allowed to be created if we do not select a charity
     Given I am logged in as "j0e@tr8er.org" with password "TRAITORJOE"
     When I am on the new games page
     And I fill out the form with values "Title": "Secret New Game","Description": "Descriptive description to describe","TotalMoney": "100","AmountPerVote": "10"
-    When I select "We Do Good" from the "charity_a" dropdown list
-    When I select "We Do Good" from the "charity_b" dropdown list
-    Then I should see "Read the title." appear 2 times.
+    When I select "We Do Good" from "charity_a"
+    When I select "We Do Good" from "charity_b"
+    Then I should see "Read the title." appear "2" times
     And I press "Submit New Game"
     Then I should be on the home page
     And I should see "Charities A and B must be different"
