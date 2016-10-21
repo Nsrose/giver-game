@@ -51,7 +51,7 @@ Scenario: Ensure game is not allowed to be created if we do not select a charity
     When I select "We Do Good" from the "charity_a" dropdown list
     When I select "We Do Good" from the "charity_b" dropdown list
     Then I should see "Read the title."
-    Then I should see "Don't be a baaad driver."
+    Then I should see "Read the title."
     And I press "Submit New Game"
     Then I should be on the home page
     And I should see "Charities A and B must be different"
