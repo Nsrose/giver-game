@@ -43,3 +43,15 @@ Scenario: Ensure game is not allowed to be created if we do not select a charity
     And I press "Submit New Game"
     Then I should be on the new games page
     And I should see "Charity A not specified"
+
+ Scenario: Ensure game is not created if we choose the same charity.
+    Given I am logged in as "j0e@tr8er.org" with password "TRAITORJOE"
+    When I am on the new games page
+    And I fill out the form with values "Title": "Secret New Game","Description": "Descriptive description to describe","TotalMoney": "100","AmountPerVote": "10"
+    When I select "We Do Good" from the "charity_a" dropdown list
+    When I select "We Do Good" from the "charity_b" dropdown list
+    Then I should see "Read the title."
+    Then I should see "Don't be a baaad driver."
+    And I press "Submit New Game"
+    Then I should be on the home page
+    And I should see "Charities A and B must be different"
