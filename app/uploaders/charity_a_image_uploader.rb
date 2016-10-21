@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class CharityAImageUploader < CarrierWave::Uploader::Base
-
+#Will probably deprecate once we have the charities activerecord db set up
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick

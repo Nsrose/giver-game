@@ -1,5 +1,8 @@
 class GivingGame < ActiveRecord::Base
   belongs_to :user
+  #using two has_one associations since there will be strictly 2 charities, defined explicitly as A and B
+  has_one :charity_a, :class_name => 'Charity', :foreign_key => :charity_a_id
+  has_one :charity_b, :class_name => 'Charity', :foreign_key => :charity_b_id
 
   # titles of giving games should be unique
   validates :title, uniqueness: true
