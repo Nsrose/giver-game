@@ -6,6 +6,10 @@ class GivingGame < ActiveRecord::Base
 
   # titles of giving games should be unique
   validates :title, uniqueness: true
+  #can't choose teh same charity twice
+  validates :charity_a, uniqueness: {scope: :charity_b}
+  validates :charity_b, uniqueness: {scope: :charity_a}
+
   
   # resource_id of giving games should be unique
   # validates :resource_id, uniqueness: true
