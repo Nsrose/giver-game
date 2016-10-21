@@ -50,8 +50,7 @@ Scenario: Ensure game is not allowed to be created if we do not select a charity
     And I fill out the form with values "Title": "Secret New Game","Description": "Descriptive description to describe","TotalMoney": "100","AmountPerVote": "10"
     When I select "We Do Good" from the "charity_a" dropdown list
     When I select "We Do Good" from the "charity_b" dropdown list
-    Then I should see "Read the title."
-    Then I should see "Read the title."
+    Then I should see "Read the title." appear 2 times.
     And I press "Submit New Game"
     Then I should be on the home page
     And I should see "Charities A and B must be different"
