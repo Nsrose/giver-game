@@ -1,14 +1,14 @@
 class GivingGame < ActiveRecord::Base
   belongs_to :user
   #using two has_one associations since there will be strictly 2 charities, defined explicitly as A and B
-  has_one :charity_a, :class_name => 'Charity', :foreign_key => :charity_a_id
-  has_one :charity_b, :class_name => 'Charity', :foreign_key => :charity_b_id
+  #has_one :charity_a, :class_name => 'Charity', :foreign_key => :charity_a_id
+  #has_one :charity_b, :class_name => 'Charity', :foreign_key => :charity_b_id
 
   # titles of giving games should be unique
   validates :title, uniqueness: true
   #can't choose teh same charity twice
-  validates :charity_a, uniqueness: {scope: :charity_b}
-  validates :charity_b, uniqueness: {scope: :charity_a}
+  #validates :charity_a, uniqueness: {scope: :charity_b}
+  #validates :charity_b, uniqueness: {scope: :charity_a}
 
   
   # resource_id of giving games should be unique
