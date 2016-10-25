@@ -13,9 +13,9 @@ Feature:  Access Admin Accounts
     Scenario: Log in in to an admin account
       Given I am logged in as "daniel@gmail.com" with password "lollolol"
       When I go to the user page for "daniel@gmail.com"
-      Then I should see "Admin"
+      Then I should see "Profile [Administrator]"
 
     Scenario: Log in to a regular account
       Given I am logged in as "joe@gmail.com" with password "password"
       When I go to the user page for "daniel@gmail.com"
-      Then I should not see "Admin"
+      Then I should not see "Profile [Administrator]"
