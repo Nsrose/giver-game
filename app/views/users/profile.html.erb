@@ -1,6 +1,10 @@
 <head>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <%= stylesheet_link_tag "bootstrap.min.css" %>
     <%= stylesheet_link_tag "profile_style.css" %>
+    <%= javascript_include_tag "bootstrap.min.js" %>
+    <%= javascript_include_tag "clipboard.min.js" %>
+    <%= javascript_include_tag "profile.js" %>
 </head>
 
 <body>
@@ -8,7 +12,7 @@
         <div class="row">
             <div id="flash"><% if flash[:notice] %><div class="notice"><%= flash[:notice] %></div><% end %></div>
             <div class="page-header">
-                <h3 style="color: #244354"><%= @user.username %>'s Profile</h3>
+                <h3 style="color: #244354"><%= @user.username %>'s Profile <% if @user.is_admin? %>[Administrator]<% end %></h3>
             </div>
         </div>
         <div class="row">
@@ -25,6 +29,7 @@
                                     <th>Privacy</th>
                                     <th>Edit Game</th>
                                     <th>See Results</th>
+                                    <th>Copy Link</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -41,7 +46,20 @@
                                         <%else %>
                                             <td></td>
                                         <%end%>
-                                        <td><a href=<%= results_path(:resource_id => game.resource_id)%>><button type="button" class="btn btn-default btn-circle"><i class="fa fa-bar-chart"></i></button></a></td>
+                                        <td>
+                                          <a href=<%= results_path(:resource_id => game.resource_id)%>>
+                                            <button type="button" class="btn btn-default btn-circle">
+                                              <i class="fa fa-bar-chart"></i>
+                                            </button>
+                                          </a>
+                                        </td>
+                                        <td>
+
+                                           <button type="button" class="btn btn-default btn-circle link-btn fa fa-link"
+                                                   data-clipboard-text="<%= play_game_url(:resource_id => game.resource_id) %>">
+
+                                           </button>
+                                        </td>
                                      </tr>
                                 <% end %>
                             </tbody>

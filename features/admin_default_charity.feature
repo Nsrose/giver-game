@@ -9,7 +9,7 @@ Background:
             | Daniel        | lollolol |  lollolol            |  daniel@gmail.com     |     true    |
             | Joe           | password |  password            |  joe@gmail.com        |     false   |
     Given the following charities exist:
-            |charityName| ein | description
+            |name| ein | description
             |charity1   | 492 | charity1 description
 
 Scenario: Non-Admin cannot view existing default charities

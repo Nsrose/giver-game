@@ -21,3 +21,5 @@
 /coverage/*
 .idea
 .byebug_history
+
+/db/schema.rb
