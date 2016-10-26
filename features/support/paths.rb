@@ -44,6 +44,13 @@ module NavigationHelpers
     when /^the expired game info page for "([^"]*)"$/
       resource_id = GivingGame.where(:title => $1).first.resource_id
       archive_game_path(resource_id)
+    when /^the charities page$/
+      charity_index_path
+    when /^the new charity page$/
+      charity_new_path
+    when /^the edit charity page for "([^"])"$/
+      charity_id = Charity.where(:name => $1)
+      charity_edit_path(charity_id)
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
