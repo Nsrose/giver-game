@@ -1,0 +1,35 @@
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <%= stylesheet_link_tag "play_index_style.css" %>
+</head>
+
+<body>
+   <div class="container">
+      <div class="row">
+         <div class="col-lg-10 col-lg-offset-1">
+            <div class="page-header">
+               <h3 style="color: #244354">Existing Charities</h3>
+            </div>
+            <%= link_to new_charity_path, class:'btn btn-default btn-sm' do %>
+                Create New Charity
+            <% end %>
+
+            <table class="table table-hover">
+               <thead>
+                  <tr>
+                     <th>Charity Name</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <% @charities.each do |charity| %>
+                     <tr style="text-align: center">
+                        <td style="text-align: left"><%= link_to charity.name, edit_charity(charity.id)%></a></td>
+                     </tr>
+                  <% end %>
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
+
+</body>

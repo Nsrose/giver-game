@@ -31,7 +31,7 @@ Scenario: Admin can view existing default charities
 Scenario: Admin can create new default charities
   Given I am logged in as "daniel@gmail.com" with password "lollolol"
   When I go to the charities page
-  When I press "Create New Charity"
+  When I follow "Create New Charity"
   Then I should be on the new charity page
   When I fill out the form with values "Charity Name": "New Charity", "ein": 123, "description": "charity description", "image url": "fakeurl.com", "charity link": "general link", "charity donation link": "donation link"
   When I press "Save New Charity"
