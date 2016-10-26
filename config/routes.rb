@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   get 'games/archive/:resource_id', to: 'games#archive_game', as: 'archive_game'
   
   
-  resource :charities
+  resources :charities
 
 
 #  get '/movies/:id/similar', to: 'movies#similar', as: 'search_directors'
