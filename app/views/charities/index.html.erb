@@ -23,7 +23,7 @@
                <tbody>
                   <% @charities.each do |charity| %>
                      <tr style="text-align: center">
-                        <td style="text-align: left"><%= link_to charity.name, edit_charity(charity.id)%></a></td>
+                        <td style="text-align: left"><%= link_to charity.name, edit_charity_path(charity.id)%></a></td>
                      </tr>
                   <% end %>
                </tbody>

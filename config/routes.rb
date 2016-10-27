@@ -28,6 +28,9 @@ Rails.application.routes.draw do
   
   
   resources :charities
+  post '/charities/:id/update', to: 'charities#update', as: 'update_charity'
+  post '/charities/create', to: 'charities#create', as: 'create_charity'
+
 
 
 #  get '/movies/:id/similar', to: 'movies#similar', as: 'search_directors'
