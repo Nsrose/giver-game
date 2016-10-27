@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161025061703) do
+ActiveRecord::Schema.define(version: 20161026012728) do
+
+  create_table "charities", force: :cascade do |t|
+    t.string "name",          default: "", null: false
+    t.text   "description",   default: "", null: false
+    t.string "ein",           default: "", null: false
+    t.string "image_link"
+    t.string "homepage_link", default: "", null: false
+    t.string "donation_link", default: "", null: false
+  end
 
   create_table "giving_games", force: :cascade do |t|
     t.string   "title",                                   default: "default title"

@@ -16,25 +16,7 @@ class GivingGame < ActiveRecord::Base
   mount_uploader :charityA_image, CharityAImageUploader
   mount_uploader :charityB_image, CharityBImageUploader
   
-  # def initialize(args)
-  #   super(args)
-  #   if self.is_private?
-  #     write_attribute(:resource_id, SecureRandom.hex)
-  #   else
-  #     write_attribute(:resource_id, self.id)
-  #   end
-  # end
-  
-  # def create(args)
-  #   super(args)
-  #   if self.is_private?
-  #     p self
-  #     write_attribute(:resource_id, SecureRandom.hex)
-  #   else
-  #     write_attribute(:resource_id, self.id)
-  #   end
-  # end
-  
+ 
   def voteForA
     self.votesA += 1
     self.save
