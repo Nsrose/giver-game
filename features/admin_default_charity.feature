@@ -9,21 +9,23 @@ Background:
             | Daniel        | lollolol |  lollolol            |  daniel@gmail.com     |     true    |
             | Joe           | password |  password            |  joe@gmail.com        |     false   |
     Given the following charities exist:
-            |name| ein | description
-            |charity1   | 492 | charity1 description
+            |name       | ein | description           |donation_link  |
+            |charity1   | 492 | charity1 description  |link           |
 
 Scenario: Non-Admin cannot view existing default charities
   Given I am logged in as "joe@gmail.com" with password "password"
   When I go to the home page
   Then I should not see "Admin"
+  When I go to the charities page
+  Then I should see "Only Administrators can create charities"
   
 
 Scenario: Admin can view existing default charities
   Given I am logged in as "daniel@gmail.com" with password "lollolol"
   When I go to the home page
-  When I press "admin_drop_down_button"
+  When I follow "admin_dropdown_anchor"
   Then I should see "Charities"
-  When I follow "admin_charities_link"
+  When I follow "Charities"
   Then I should be on the charities page
   And I should see "charity1"
   

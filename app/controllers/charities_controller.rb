@@ -59,10 +59,10 @@ class CharitiesController < ApplicationController
         
     protected 
     def validate_admin
-        # if !current_user.isAdmin?
-        #     flash[:warning] = "Only Administrators can create charities"
-        #     redirect_to new_user_session_path
-        # end
-        # return
+        if !current_user || !current_user.is_admin
+            flash[:warning] = "Only Administrators can create charities"
+            redirect_to root_path
+        end
+        return
     end
 end
