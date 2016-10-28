@@ -18,11 +18,14 @@ class CharitiesController < ApplicationController
     def new
     end
     
+    
     def create
+        p ("AT CREATE")
        charity = Charity.new(charity_params)
        if charity.valid?
            charity.save
            flash[:success] = "Charity was Successfully Created."
+           p "SUCCESS"
            redirect_to charities_path
        else
            totalMessage = ""
@@ -30,7 +33,8 @@ class CharitiesController < ApplicationController
                totalMessage += "#{key.to_s().gsub('_', ' ').capitalize} #{message.join("', and'")}; "
            end
            flash[:danger] = totalMessage
-           redirect_to post new_charity_path()
+           p "FAILURE"
+           redirect_to new_charity_path()
        end
     end
     
@@ -59,10 +63,10 @@ class CharitiesController < ApplicationController
         
     protected 
     def validate_admin
-        if !current_user || !current_user.is_admin
-            flash[:warning] = "Only Administrators can create charities"
-            redirect_to root_path
-        end
+        # if !current_user || !current_user.is_admin?
+        #     flash[:warning] = "Only Administrators can create charities"
+        #     redirect_to root_path
+        # end
         return
     end
 end

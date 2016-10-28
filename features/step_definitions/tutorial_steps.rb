@@ -6,8 +6,8 @@ Given /the following games exist/ do |games_table|
   end
 end
 
-When(/^I follow "([^"]*)" from the dropdown menu in the navbar$/) do |tutorial|
-  within('ul.dropdown-menu', visible: false) do
+When(/^I follow "([^"]*)" from the tutorial dropdown menu in the navbar$/) do |tutorial|
+  within('ul.dropdown-menu#dropdown_tutorial', visible: false) do
     click_link tutorial
   end
 end

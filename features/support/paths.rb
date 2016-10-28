@@ -47,10 +47,10 @@ module NavigationHelpers
     when /^the charities page$/
       charities_path
     when /^the new charity page$/
-      charity_new_path
+      new_charity_path
     when /^the edit charity page for "([^"])"$/
       charity_id = Charity.where(:name => $1)
-      charity_edit_path(charity_id)
+      edit_charity_path(charity_id)
     when /^the charities page$/
       charities_path
     # Add more mappings here.

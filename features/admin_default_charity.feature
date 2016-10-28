@@ -23,9 +23,7 @@ Scenario: Non-Admin cannot view existing default charities
 Scenario: Admin can view existing default charities
   Given I am logged in as "daniel@gmail.com" with password "lollolol"
   When I go to the home page
-  When I follow "admin_dropdown_anchor"
-  Then I should see "Charities"
-  When I follow "Charities"
+  When I follow "Charities" from the admin dropdown menu in the navbar
   Then I should be on the charities page
   And I should see "charity1"
   
@@ -35,8 +33,11 @@ Scenario: Admin can create new default charities
   When I go to the charities page
   When I follow "Create New Charity"
   Then I should be on the new charity page
-  When I fill out the form with values "Charity Name": "New Charity", "ein": 123, "description": "charity description", "image url": "fakeurl.com", "charity link": "general link", "charity donation link": "donation link"
-  When I press "Save New Charity"
+  When I fill out the form with values "Title": "New Charity","Description": "charity description","ein": "123","image_link": "fakeurl.com","homepage_link": "general link","donation_link": "donation link"
+  When janet wants to debug
+  When I press "Submit"
+  # When janet wants to debug
+
   Then I should be on the charities page
   When I follow "New Charity" 
   Then I should see "New Charity"
@@ -49,7 +50,7 @@ Scenario: Admin can edit existing default charities
   Then I follow "charity1"
   Then I should be on the edit charity page for "charity1"
   When I fill out the form with values "Charity Name": "New Charity", "description": "new description"
-  When I press "Save Charity"
+  When I press "Submit Changes"
   Then I should be on the charities page
   And I should see "New Charity"
   When I follow "New Charity" 
