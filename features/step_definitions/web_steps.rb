@@ -81,7 +81,7 @@ end
 # based on naming conventions.
 #
 When /^janet wants to debug$/ do
-  puts page.body
+  expect(page).to have_selector("input[value='New Charity']")
 end
 When /^(?:|I )fill in the following:$/ do |fields|
   fields.rows_hash.each do |name, value|
@@ -117,6 +117,7 @@ Then /^(?:|I )should see "([^"]*)"$/ do |text|
     assert page.has_content?(text)
   end
 end
+
 
 Then /^(?:|I )should see "([^"]*)" appear[s]? "([\d]*)" time[s]?$/ do |text, number|
   regexp = Regexp.new(text)
