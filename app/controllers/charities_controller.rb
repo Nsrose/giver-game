@@ -20,12 +20,10 @@ class CharitiesController < ApplicationController
     
     
     def create
-        p ("AT CREATE")
        charity = Charity.new(charity_params)
        if charity.valid?
            charity.save
-           flash[:success] = "Charity was Successfully Created."
-           p "SUCCESS"
+           flash[:success] = "Charity Successfully Created."
            redirect_to charities_path
        else
            totalMessage = ""

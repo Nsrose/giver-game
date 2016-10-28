@@ -35,7 +35,7 @@ Scenario: Admin can create new default charities
   Then I should be on the new charity page
   When I fill out the form with values "Title": "New Charity","Description": "charity description","ein": "123","image_link": "fakeurl.com","homepage_link": "general link","donation_link": "donation link"
   When I press "Submit"
-  Then I should see "Charity Succesfully Created"
+  Then I should see "Charity Successfully Created."
   Then I should be on the charities page
   When I follow "New Charity" 
   Then I should see "New Charity"
