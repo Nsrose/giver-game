@@ -49,7 +49,7 @@ Scenario: Admin can edit existing default charities
   When I go to the charities page
   Then I follow "charity1"
   Then I should be on the edit charity page for "charity1"
-  When I fill out the form with values "Charity Name": "New Charity", "description": "new description"
+  When I fill out the form with values "Title": "New Charity","Description": "new description"
   When I press "Submit Changes"
   Then I should be on the charities page
   And I should see "New Charity"

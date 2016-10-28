@@ -48,8 +48,8 @@ module NavigationHelpers
       charities_path
     when /^the new charity page$/
       new_charity_path
-    when /^the edit charity page for "([^"])"$/
-      charity_id = Charity.where(:name => $1)
+    when /^the edit charity page for "([^"]*)"$/
+      charity_id = Charity.where(:name => $1).first
       edit_charity_path(charity_id)
     when /^the charities page$/
       charities_path
