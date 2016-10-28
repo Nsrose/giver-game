@@ -23,7 +23,7 @@ class CharitiesController < ApplicationController
        charity = Charity.new(charity_params)
        if charity.valid?
            charity.save
-           flash[:success] = "Charity Successfully Created."
+           flash[:success] = "#{charity.name} was Successfully Created."
            redirect_to charities_path
        else
            totalMessage = ""
@@ -47,7 +47,7 @@ class CharitiesController < ApplicationController
         charity.assign_attributes(cp)
         if charity.valid?
            charity.save
-           flash[:success] = "Charity was Successfully Updated."
+           flash[:success] = "#{charity.name} was Successfully Updated."
            redirect_to charities_path
         else
            totalMessage = ""
@@ -61,10 +61,10 @@ class CharitiesController < ApplicationController
         
     protected 
     def validate_admin
-        # if !current_user || !current_user.is_admin?
-        #     flash[:warning] = "Only Administrators can create charities"
-        #     redirect_to root_path
-        # end
+        if !current_user || !current_user.is_admin?
+            flash[:warning] = "Only Administrators can create charities"
+            redirect_to root_path
+        end
         return
     end
 end

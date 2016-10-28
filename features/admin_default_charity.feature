@@ -27,7 +27,17 @@ Scenario: Admin can view existing default charities
   Then I should be on the charities page
   And I should see "charity1"
   
- 
+Scenario: Admin must fill out charity name, ein, description, and donation link
+  Given I am logged in as "daniel@gmail.com" with password "lollolol"
+  When I go to the charities page
+  When I follow "Create New Charity"
+  When I press "Submit"
+  Then I should see "Name can't be blank"
+  And I should see "Ein can't be blank"
+  And I should see "Donation link can't be blank"
+  And I should be on the new charity page
+
+
 Scenario: Admin can create new default charities
   Given I am logged in as "daniel@gmail.com" with password "lollolol"
   When I go to the charities page
@@ -35,8 +45,8 @@ Scenario: Admin can create new default charities
   Then I should be on the new charity page
   When I fill out the form with values "Title": "New Charity","Description": "charity description","ein": "123","image_link": "fakeurl.com","homepage_link": "general link","donation_link": "donation link"
   When I press "Submit"
-  Then I should see "Charity Successfully Created."
   Then I should be on the charities page
+  Then I should see "New Charity was Successfully Created."
   When I follow "New Charity" 
   Then I should see "New Charity"
   Then I should see the input text "fakeurl.com"
@@ -50,6 +60,7 @@ Scenario: Admin can edit existing default charities
   When I fill out the form with values "Title": "New Charity","Description": "new description"
   When I press "Submit Changes"
   Then I should be on the charities page
+  Then I should see "New Charity was Successfully Updated."
   And I should see "New Charity"
   When I follow "New Charity" 
   Then I should see "New Charity"
