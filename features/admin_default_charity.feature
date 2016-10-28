@@ -39,7 +39,7 @@ Scenario: Admin can create new default charities
   Then I should be on the charities page
   When I follow "New Charity" 
   Then I should see "New Charity"
-  Then I should see "fakeurl.com"
+  Then I should see the input text "fakeurl.com"
   
 
 Scenario: Admin can edit existing default charities 
@@ -54,4 +54,4 @@ Scenario: Admin can edit existing default charities
   When I follow "New Charity" 
   Then I should see "New Charity"
   Then I should see "new description"
-  Then I should see "492"
+  Then I should see the input text "492"
