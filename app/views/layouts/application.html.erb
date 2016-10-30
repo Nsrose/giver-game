@@ -20,7 +20,7 @@
       <li><%= link_to 'Create New Game', new_game_path%></li>
       <li>
         <a class="dropdown-toggle" data-toggle="dropdown">Play Tutorial</a>
-        <ul class="dropdown-menu" id=dropdown>
+        <ul class="dropdown-menu" id=dropdown_tutorial>
             <% @tutorials.each do |tutorial| %>
               <li>
                 <%= link_to tutorial.title, play_game_path(:resource_id => tutorial.resource_id) %>
@@ -32,7 +32,18 @@
       <li><%= link_to 'View Expired Games', archive_path %></li>
       <li><% if user_signed_in? %>
           <%= link_to 'Profile', user_profile_path(current_user.id) %>
-          <% end %></li>
+          <% end %>
+      </li>
+      <li>
+          <% if current_user && current_user.is_admin? %>
+            <a class="dropdown-toggle" id="admin_dropdown_anchor" data-toggle="dropdown">Admin</a>
+            <ul class="dropdown-menu" id=dropdown_admin>
+                  <li>
+                    <%= link_to "Charities", charities_path %>
+                  </li>
+            </ul>
+          <% end %>
+      </li>
       <li><% if user_signed_in? %>
           <%= link_to "Sign Out", destroy_user_session_path, :method => :delete %>
           <% else %>

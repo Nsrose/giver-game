@@ -11,10 +11,10 @@ Feature: Play and choose from multiple tutorials
 
     Scenario: Select and play from multiple tutorials
       Given I am on the home page
-      When I follow "Tutorial" from the dropdown menu in the navbar
+      When I follow "Tutorial" from the tutorial dropdown menu in the navbar
       Then The tutorial titled "Tutorial" should be there
       Given I am on the home page
-      When I follow "Tutorial 2" from the dropdown menu in the navbar
+      When I follow "Tutorial 2" from the tutorial dropdown menu in the navbar
       Then The tutorial titled "Tutorial 2" should be there
 
 

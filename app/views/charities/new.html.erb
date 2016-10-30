@@ -1,0 +1,21 @@
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <%= stylesheet_link_tag "new_style.css" %>
+</head>
+
+<body>
+    <div id="container" class="container">
+        <div id=header>Create Charity </div>
+        <div class="form">
+        <%= form_tag create_charity_path(), method: :post do %>
+            <%= render 'charity_form' %>
+            
+            <div class="actions-form-group">
+                <%= submit_tag 'Submit' %>
+            </div>
+        <% end %>
+        </div>
+    
+        <%= link_to "Back", charities_path%></a>
+    </div>
+</body>
