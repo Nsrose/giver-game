@@ -25,7 +25,7 @@ benchmark against which other, more expensive approaches are evaluated.'
 charities = [{:name => 'Against Malaria Foundation', :description => malaria_description, :ein => '20-3069841', :image_link => 'https://www.againstmalaria.com/images/logo_AMF.gif', :homepage_link => 'https://www.againstmalaria.com/Default.aspx', :donation_link => 'https://www.againstmalaria.com/donate.aspx?GroupID=81'},
              {:name => 'Schistosomiasis Control Initiative (SCI)', :description => sci_description, :ein => '20-8625442', :image_link => 'http://www3.imperial.ac.uk/newseventsimages?p_image_type=mainnews2012&p_image_id=35469', :homepage_link => 'https://www.imperial.ac.uk/schistosomiasis-control-initiative', :donation_link => 'http://www.imperial.ac.uk/schistosomiasis-control-initiative/donate/'}, 
              {:name => 'Deworm the World Initiative', :description => deworm_description, :ein => '26-3455539', :homepage_link => 'http://www.evidenceaction.org/dewormtheworld/', :donation_link => 'https://give.evidenceaction.org'},
-             {:name => 'GiveDirectly', :description => 'giveDirectly_description', :ein => '27-1661997', :image_link => 'https://cdn.givedirectly.org/8fa1cf088be076b2943084a6efe2b7ab/basic-income-link.jpg', :homepage_link => 'https://www.givedirectly.org', :donation_link => 'https://www.givedirectly.org/give-now'}
+             {:name => 'GiveDirectly', :description => giveDirectly_description, :ein => '27-1661997', :image_link => 'https://cdn.givedirectly.org/8fa1cf088be076b2943084a6efe2b7ab/basic-income-link.jpg', :homepage_link => 'https://www.givedirectly.org', :donation_link => 'https://www.givedirectly.org/give-now'}
              ]
 
 charities.each do |game|

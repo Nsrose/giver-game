@@ -38,7 +38,7 @@
                 
                 <div class="col-sm-6">
                 <div class=form-header>Charity A</div>
-                <div class='field-form-group'><%= collection_select(:game, :charityA_title, @defaultCharities, :id, :name, prompt: true)%></div>
+                <div class='field-form-group'><%= collection_select(:game, :default_charity_a, @defaultCharities, :id, :name, { :selected => @defaultCharities[0].id.to_s })%></div>
                                 <!-- <div class="form-header">Charity A Image</div> -->
                 <!--<div class="field-form-group"><%= file_field :game, :charityA_image, id: 'CharityA-Image' %></div> -->
                 <!-- <div class="field-form-group"><%= hidden_field :game, :charityA_image_cache, id: 'CharityA-Image-hidden' %></div> -->
@@ -46,7 +46,7 @@
                 
                 <div class="col-sm-6">
                 <div class=form-header>Charity B</div>
-                    <div class='field-form-group'><%= collection_select(:game, :charityB_title, @defaultCharities, :id, :name, prompt: true)%></div>
+                    <div class='field-form-group'><%= collection_select(:game, :default_charity_b, @defaultCharities, :id, :name, { :selected => @defaultCharities[0].id.to_s })%></div>
 
                 <!-- <div class="form-header">Charity B Image</div> -->
                 <!--<div class="field-form-group"><%= file_field :game, :charityB_image, id: 'CharityB-Image' %></div> -->

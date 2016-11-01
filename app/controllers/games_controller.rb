@@ -19,7 +19,29 @@ class GamesController < ApplicationController
                                  :charityA_image,
                                  :charityB_image,
                                  :charityA_image_cache,
-                                 :charityB_image_cache)
+                                 :charityB_image_cache,
+                                 :default_charity_a,
+                                 :default_charity_b)
+  end
+  
+  def populateCharityInfo(game)
+    charity_a = Charity.find(game.default_charity_a)
+    if charity_a != nil
+        game.charityA_title = charity_a.name
+        game.descriptionA = charity_a.description
+    else
+        game.charityA_title = game.charityA_title
+        game.descriptionA = game.descriptionA    
+    end
+    charity_b = Charity.find(game.default_charity_b)
+    if charity_b != nil 
+        game.charityB_title = charity_b.name
+        game.descriptionB = charity_b.description
+    else
+        game.charityB_title = game.charityB_title
+        game.descriptionB = game.descriptionB    
+    end
+    return game
   end
   
   def home
@@ -45,6 +67,7 @@ class GamesController < ApplicationController
       session.delete :game
     else
       @game = GivingGame.where(:resource_id => params[:resource_id])[0]
+      @game = populateCharityInfo(@game)
     end
   end
   
@@ -113,6 +136,7 @@ class GamesController < ApplicationController
       game.save()
 
       @game = game
+      @game = populateCharityInfo(@game)
       message = "Giving Game #{@game.title} successfully created."
       if game.is_private
         full_game_url = "#{request.host_with_port}/games/play/#{game.resource_id}"
@@ -155,6 +179,7 @@ class GamesController < ApplicationController
       redirect_to new_user_session_path
     else
       @game = chosen_game
+      @game = populateCharityInfo(@game)
       @charityA = @game.charityA_title
       @charityB = @game.charityB_title
       @description = @game.description
@@ -216,11 +241,13 @@ class GamesController < ApplicationController
   
   def archive
     @games = GivingGame.where("expired = ? OR expiration_time < ?", true, DateTime.now)
+    # We possibly need to populate the charityA_title and charityB_title fields
     @counter = @games.length
   end
   
   def archive_game
       @game = GivingGame.where(:resource_id => params[:resource_id])[0]
+      @game = populateCharityInfo(@game)
       @charityA = @game.charityA_title
       @charityB = @game.charityB_title
       @description = @game.description
@@ -232,6 +259,7 @@ class GamesController < ApplicationController
   
   def results
     @game = GivingGame.where(:resource_id => params[:resource_id]).first
+    @game = populateCharityInfo(@game)
     @owner = @game.user_id
     @expired = @game.expired
     @charityVotedFor = params[:charity]
