@@ -36,8 +36,6 @@ class GamesController < ApplicationController
     @game.charityB_title = defaultCharities[1].name
     @game.descriptionA = defaultCharities[0].description
     @game.descriptionB = defaultCharities[1].description
-
-
     if session and session.key? :game
       session.delete(:game)
     end

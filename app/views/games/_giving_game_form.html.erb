@@ -41,9 +41,6 @@
                 <div class='field-form-group'><%= text_field :game, :charityA_title, id: 'Charity A', size: "50" %></div>
                 <div class='field-form-group'><%= collection_select(:game, :charityA_title, @defaultCharities, :id, :name, prompt: true)%></div>
                 
-                <div class=form-header>Description A</div>
-                <div class='field-form-group'><%= text_area :game, :descriptionA, id: 'DescriptionA', rows: "7", cols: "50"%></div>
-                
                 <!-- <div class="form-header">Charity A Image</div> -->
                 <!--<div class="field-form-group"><%= file_field :game, :charityA_image, id: 'CharityA-Image' %></div> -->
                 <!-- <div class="field-form-group"><%= hidden_field :game, :charityA_image_cache, id: 'CharityA-Image-hidden' %></div> -->
@@ -53,9 +50,6 @@
                 <div class=form-header>Charity B</div>
                     <div class='field-form-group'><%= collection_select(:game, :charityB_title, @defaultCharities, :id, :name, prompt: true)%></div>
 
-                <div class=form-header>Description B</div>
-                <div class='field-form-group'><%= text_area :game, :descriptionB, id: 'DescriptionB', rows: "7", cols: "50" %></div>
-                
                 <!-- <div class="form-header">Charity B Image</div> -->
                 <!--<div class="field-form-group"><%= file_field :game, :charityB_image, id: 'CharityB-Image' %></div> -->
                 <!-- <div class="field-form-group"><%= hidden_field :game, :charityB_image_cache, id: 'CharityB-Image-hidden'%></div> -->
