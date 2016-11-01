@@ -30,11 +30,12 @@ class GamesController < ApplicationController
       flash[:warning] = "You must be logged in to create a new giving game."
       redirect_to new_user_session_path
     end
-    @dropdownOptions = Charity.all
-    p ">>>>>>>>>>>>>>>>>>>>>>>>>>"
-    p @dropdownOptions
-    p ">>>>>>>>>>>>>>>>>>>>>>>>>>"
     @game = GivingGame.new(session[:game]) || GivingGame.new()
+    @defaultCharities = Charity.all
+    @game.charityA_title = @defaultCharities[0].name
+    @game.charityB_title = @defaultCharities[0].name
+    @game.descriptionA = @defaultCharities[0].description
+    @game.descriptionB = @defaultCharities[0].description
     if session and session.key? :game
       session.delete(:game)
     end
