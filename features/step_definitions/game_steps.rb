@@ -112,3 +112,17 @@ end
 Then /^I should see the image "(.+)"$/ do |image|
    expect(page).to have_xpath("//img[contains(@src,'#{image}')]")
 end
+
+When /^I create a( private)? game called "(.*)"$/ do |secret, name|
+  steps %Q{
+    When I am on the new games page
+    And I fill out the form with values "Title": "#{name}","Description": "Descriptive description to describe","TotalMoney": "100","AmountPerVote": "10","Charity A": "Give Directly","DescriptionA": "Provides money directly to groups of impoverished people.","Charity B": "Malaria Nets","DescriptionB": "Provides malaria nets to locals."
+    Then the "private_game" radio button should be chosen
+  }
+  if not secret
+    steps %Q{When I choose "public_game"}
+  end
+  steps %Q{
+    And I press "Submit New Game"
+  }
+end

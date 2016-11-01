@@ -45,7 +45,7 @@ Setup
 4. Run locally:  
 
 
-    $ rail s
+    $ rails s -b $IP -p $PORT
 
 
 
