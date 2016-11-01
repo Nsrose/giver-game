@@ -38,6 +38,7 @@ class GamesController < ApplicationController
   end
   
   def edit
+    @defaultCharities = Charity.all
     if session and session[:game]
       @game = GivingGame.new(session[:game])
       @game.resource_id = params[:resource_id]
