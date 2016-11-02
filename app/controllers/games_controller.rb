@@ -25,7 +25,7 @@ class GamesController < ApplicationController
   end
   
   def populateCharityInfo(game)
-    charity_a = Charity.find(game.default_charity_a)
+    charity_a =  Charity.find_by(id: game.default_charity_a)
     if charity_a != nil
         game.charityA_title = charity_a.name
         game.descriptionA = charity_a.description
@@ -33,7 +33,7 @@ class GamesController < ApplicationController
         game.charityA_title = game.charityA_title
         game.descriptionA = game.descriptionA    
     end
-    charity_b = Charity.find(game.default_charity_b)
+    charity_b =  Charity.find_by(id: game.default_charity_b)
     if charity_b != nil 
         game.charityB_title = charity_b.name
         game.descriptionB = charity_b.description
