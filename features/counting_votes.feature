@@ -12,20 +12,20 @@ Feature: Display votes
   Scenario: Select game and vote
     When I follow "Play a giving game"
     And I should be on the existing games page
-    Then I should see "TutorialGame" in my table
-    And The game "TutorialGame" should be able to show results
-    When I follow "TutorialGame" in my table
-    Then I should be on the game page for "TutorialGame"
+    Then I should see "Game 1" in my table
+    And The game "Game 1" should be able to show results
+    When I follow "Game 1" in my table
+    Then I should be on the game page for "Game 1"
     And I press "Donate to GiveDirectly"
-    Then I should be on the results page for "TutorialGame"
+    Then I should be on the results page for "Game 1"
     And I should see "Votes for GiveDirectly: 1"
 
   Scenario: Selecting one charity and confirming the votes for the other charity did not increase
     When I follow "Play a giving game"
     And I should be on the existing games page
-    Then I should see "TutorialGame" in my table
-    And The game "TutorialGame" should be able to show results
-    When I follow "TutorialGame" in my table
+    Then I should see "Game 1" in my table
+    And The game "Game 1" should be able to show results
+    When I follow "Game 1" in my table
     And I press "Donate to Against Malaria Foundation"
     Then I should be on the results page for "TutorialGame"
     And I should see "Votes for GiveDirectly: 0"
@@ -33,8 +33,8 @@ Feature: Display votes
   Scenario: Should not be able to view results if the option is not selected
     When I follow "Play a giving game"
     And I should be on the existing games page
-    Then I should see "NoShow" in my table
-    And The game "NoShow" should not be able to show results
-    When I follow "NoShow" in my table
+    Then I should see "Game 2" in my table
+    And The game "Game 2" should not be able to show results
+    When I follow "Game 2" in my table
     And I press "Donate to Deworm the World Initiative"
     Then I should be on the existing games page

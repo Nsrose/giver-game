@@ -14,6 +14,7 @@ Feature: Create a new game
     | username           | password   | password_confirmation  |     email             |
     | Traitor_JOSEPHINE   | TRAITORJOE |  TRAITORJOE            |  j0e@tr8er.org        |
 
+    Given some charities exist
   Scenario: Create the first game
     Given I am logged in as "j0e@tr8er.org" with password "TRAITORJOE"
     When I am on the new games page

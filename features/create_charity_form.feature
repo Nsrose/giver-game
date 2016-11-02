@@ -4,6 +4,7 @@ Feature: Adding Charity Fields to Forms
   I want to have more fields to add images and descriptions for charities
   
 Background:
+  Given some charities exist
   Given the following users exist:
   | username            | password   | password_confirmation  |     email           |
   | Traitor_JOSEPHINE   | TRAITORJOE |  TRAITORJOE            |  j0e@tr8er.org      |
@@ -12,8 +13,8 @@ Background:
     Given I am logged in as "j0e@tr8er.org" with password "TRAITORJOE"
     When I am on the new games page
     When I fill out the form without descriptions
-    And I fill in "DescriptionA" with "Description 1."
-    And I fill in "DescriptionB" with "Description 2."
+   # And I fill in "DescriptionA" with "Description 1."
+  #  And I fill in "DescriptionB" with "Description 2."
     #And I upload an image called "img_1.png"
     And I press "Submit New Game"
     Then I should be on the home page
