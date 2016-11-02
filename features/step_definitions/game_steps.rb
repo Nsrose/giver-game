@@ -21,6 +21,8 @@ When /^I fill out the form$/ do
     And I fill in "Description" with "Descriptive description to describe"
     And I fill in "TotalMoney" with "1000"
     And I fill in "AmountPerVote" with "10"
+    When I select "Against Malaria Foundation" from "game_default_charity_a"
+    When I select "GiveDirectly" from "game_default_charity_b"
     }
 end
 

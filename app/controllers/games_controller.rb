@@ -122,10 +122,17 @@ class GamesController < ApplicationController
         redirect_to new_game_path
         return
     end
+    
+
 
     game = GivingGame.new(gp)
 
     if game.valid?
+      if gp[:default_charity_a] == gp[:default_charity_b]
+        flash[:warning] = "Charities A and B must be different!"
+        redirect_to new_game_path
+        return
+      end
       game.save() ## need to have game in database in order to have an id
       if game.is_private?
         game.resource_id =  SecureRandom.hex

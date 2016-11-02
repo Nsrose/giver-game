@@ -24,7 +24,7 @@ Scenario: Ensure game is not created if we choose the same charity.
   When I am on the new games page
   And I fill out the form with values "Title": "Secret New Game","Description": "Descriptive description to describe","TotalMoney": "100","AmountPerVote": "10"
   When I select "Deworm the World Initiative" from "game_default_charity_a"
-  When I select "GiveDirectly" from "game_default_charity_b"
+  When I select "Deworm the World Initiative" from "game_default_charity_b"
   And I press "Submit New Game"
-  Then I should be on the home page
+  Then I should be on the new games page
   And I should see "Charities A and B must be different"
