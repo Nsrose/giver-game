@@ -21,11 +21,9 @@ When /^I fill out the form$/ do
     And I fill in "Description" with "Descriptive description to describe"
     And I fill in "TotalMoney" with "1000"
     And I fill in "AmountPerVote" with "10"
-    And I fill in "Charity A" with "Syrian Refugees"
-    And I fill in "DescriptionA" with "Provides money to Syrians displaced by the civil war."
-    And I fill in "Charity B" with "Trump Refugees"
-    And I fill in "DescriptionB" with "Donates directly to people leaving America because of Trump's policies"
-  }
+    When I select "Against Malaria Foundation" from "game_default_charity_a"
+    When I select "GiveDirectly" from "game_default_charity_b"
+    }
 end
 
 When /^I fill out the form with a second game$/ do
@@ -34,10 +32,8 @@ When /^I fill out the form with a second game$/ do
     And I fill in "Description" with "Descriptive description to describe"
     And I fill in "TotalMoney" with "100"
     And I fill in "AmountPerVote" with "10"
-    And I fill in "Charity A" with "Give Directly"
-    And I fill in "DescriptionA" with "Provides money directly to groups of impoverished people."
-    And I fill in "Charity B" with "Malaria Nets"
-    And I fill in "DescriptionB" with "Provides malaria nets to locals."
+    When I select "Schistosomiasis Control Initiative (SCI)" from "game_default_charity_a"
+    When I select "GiveDirectly" from "game_default_charity_b"
   }
 end
 
@@ -68,10 +64,6 @@ When /^the form is blank$/ do
     And I fill in "Description" with ""
     And I fill in "TotalMoney" with ""
     And I fill in "AmountPerVote" with ""
-    And I fill in "Charity A" with ""
-    And I fill in "DescriptionA" with ""
-    And I fill in "Charity B" with ""
-    And I fill in "DescriptionB" with ""
   }
 end
 
@@ -81,8 +73,8 @@ When /^I fill out the form without descriptions$/ do
     And I fill in "Description" with "Descriptive description to describe"
     And I fill in "TotalMoney" with "1000"
     And I fill in "AmountPerVote" with "10"
-    And I fill in "Charity A" with "Syrian Refugees"
-    And I fill in "Charity B" with "Trump Refugees"
+    When I select "Schistosomiasis Control Initiative (SCI)" from "game_default_charity_a"
+    When I select "GiveDirectly" from "game_default_charity_b"
   }
 end
 
@@ -116,7 +108,9 @@ end
 When /^I create a( private)? game called "(.*)"$/ do |secret, name|
   steps %Q{
     When I am on the new games page
-    And I fill out the form with values "Title": "#{name}","Description": "Descriptive description to describe","TotalMoney": "100","AmountPerVote": "10","Charity A": "Give Directly","DescriptionA": "Provides money directly to groups of impoverished people.","Charity B": "Malaria Nets","DescriptionB": "Provides malaria nets to locals."
+    And I fill out the form with values "Title": "#{name}","Description": "Descriptive description to describe","TotalMoney": "100","AmountPerVote": "10"
+    When I select "Schistosomiasis Control Initiative (SCI)" from "game_default_charity_a"
+    When I select "GiveDirectly" from "game_default_charity_b"
     Then the "private_game" radio button should be chosen
   }
   if not secret

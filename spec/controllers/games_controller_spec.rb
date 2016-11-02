@@ -3,14 +3,16 @@ require 'factory_girl'
 
 RSpec.describe GamesController, :type => :controller do
   login_user
+  create_charity
+  
 
   describe 'POST - /games/create SUCCESS' do
     it 'should redirect you to the home page' do 
       params = {:game => {:title => "title", :description => "description", 
             :total_money => 10.00, :per_transaction => 1.00, 
-            :charityA_title => "charity A", :descriptionA => "description A", 
-            :charityB_title => "charity B", :descriptionB => "description B", 
-            :tutorial => false}}
+            :charityA_title => "Against Malaria Foundation", :descriptionA => "description A", 
+            :charityB_title => "GiveDirectly", :descriptionB => "description B", 
+            :tutorial => false, :default_charity_a => 1, :default_charity_b => 4}}
       post :create, params
 
       expect(response).to redirect_to(root_path)

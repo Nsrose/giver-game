@@ -4,8 +4,8 @@ Feature: Edit existing giving games
   I want to be able to edit my giving game
   
   Background: Users with games exist
-    
-    Given some games and some users exist:
+    Given some charities exist
+    Given some games and some users exist
     
     #Happy Path
     Scenario: Edit a game
