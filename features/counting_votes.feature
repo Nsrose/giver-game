@@ -27,7 +27,7 @@ Feature: Display votes
     And The game "Game 1" should be able to show results
     When I follow "Game 1" in my table
     And I press "Donate to Against Malaria Foundation"
-    Then I should be on the results page for "TutorialGame"
+    Then I should be on the results page for "Game 1"
     And I should see "Votes for GiveDirectly: 0"
 
   Scenario: Should not be able to view results if the option is not selected

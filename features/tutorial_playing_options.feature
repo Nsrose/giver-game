@@ -4,13 +4,14 @@ Feature: Tutorial and playing options
   So that I can easily navigate through the site, learn about charities, and choose how to go about a giving game
 
   Background:
+    Given some charities exist
     Given the following users exist:
     | username            | password   | password_confirmation  |     email             |
     | Traitor_JOSEPHINE   | TRAITORJOE |  TRAITORJOE            |  j0e@tr8er.org        |
     
     And the following games exist: # features/step_definitions/tutorial_steps.rb:1
-      | title    | description                                | charityA_title | charityB_title | tutorial | resource_id |
-      | Tutorial | 'This is the tutorial for the Giving Game' | Charity A      | Charity B      | true     | 1           |
+    | title                   | description                                 | charityA_title                                | charityB_title | tutorial | show_results |resource_id|default_charity_a|default_charity_b|
+    | Tutorial                | 'This is the tutorial for the Giving Game'  | Schistosomiasis Control Initiative (SCI)      | GiveDirectly   | true     | true         |1          |2                |4               |
 
   Scenario: Clicking on the Tutorial link should direct users to the tutorial
     Given I am on the home page
