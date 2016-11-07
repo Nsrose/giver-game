@@ -98,7 +98,7 @@ class GamesController < ApplicationController
         if params.key? key 
           params.delete key  
         end
-        totalMessage += "#{key.to_s().gsub('_', ' ').capitalize} #{message.join("', and'")}; "
+        totalMessage += "#{key.to_s().tr('_', ' ').capitalize} #{message.join("', and'")}; "
       end
       flash[:danger] = totalMessage
       session[:game] = params[:game]
@@ -109,7 +109,7 @@ class GamesController < ApplicationController
   def create
     success = true
     gp = game_params
-    begin 
+    begin
       if gp[:expiration_time]
         if gp[:expiration_time] == ''
           gp[:expiration_time] = nil
@@ -122,8 +122,6 @@ class GamesController < ApplicationController
         redirect_to new_game_path
         return
     end
-    
-
 
     game = GivingGame.new(gp)
 
@@ -144,22 +142,22 @@ class GamesController < ApplicationController
 
       @game = game
       @game = populateCharityInfo(@game)
-      message = "Giving Game #{@game.title} successfully created."
+      success_message = "Giving Game #{@game.title} successfully created."
       if game.is_private
         full_game_url = "#{request.host_with_port}/games/play/#{game.resource_id}"
-        message += " Your private game URL: " + full_game_url
+        success_message += " Your private game URL: " + full_game_url
       end
-      flash[:success] = message
+      flash[:success] = success_message
       current_user.add_to_created_giving_games(game)
     else
-      totalMessage = ""
+      total_message = ""
       game.errors.messages.each do |key, message|
         if params[:game].key? key
           params[:game].delete(key)
         end
-        totalMessage += "#{key.to_s().gsub('_', ' ').capitalize} #{message.join("', and'")}; "
+        total_message += "#{key.to_s().gsub('_', ' ').capitalize} #{message.join("', and'")}; "
       end
-      flash[:danger] = totalMessage
+      flash[:danger] = total_message
       session[:game] = params[:game]
       success = false
     end
