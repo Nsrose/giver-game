@@ -1,5 +1,22 @@
 require 'securerandom'
 
+# Parse Game Params for expiration time and adjust if necessary.
+# If successful, return true, otherwise false
+def parse_expiration_date(gp)
+  begin
+    if gp[:expiration_time]
+      if gp[:expiration_time] == ''
+        gp[:expiration_time] = nil
+      else
+        gp[:expiration_time] = Date.strptime(gp[:expiration_time], "%m/%d/%Y")
+      end
+    end
+    return true
+  rescue
+    return false
+  end
+end
+
 class GamesController < ApplicationController
 
   def game_params
@@ -74,19 +91,12 @@ class GamesController < ApplicationController
   def update
     game = GivingGame.where(:resource_id => params[:resource_id]).first
     gp = game_params
-    begin 
-      if gp[:expiration_time]
-        if gp[:expiration_time] == ''
-          gp[:expiration_time] = nil
-        else
-          gp[:expiration_time] = Date.strptime(gp[:expiration_time], "%m/%d/%Y")
-        end
-      end
-    rescue
-        flash[:danger] = "Invalid date passed"
-        redirect_to user_profile_path(current_user.id)
-        return
+    if !parse_expiration_date(gp)
+      flash[:danger] = "Invalid date passed"
+      redirect_to user_profile_path(current_user.id)
+      return
     end
+
     game.assign_attributes(gp)
     if game.valid?
       GivingGame.update(game.id, gp)
@@ -98,7 +108,7 @@ class GamesController < ApplicationController
         if params.key? key 
           params.delete key  
         end
-        totalMessage += "#{key.to_s().gsub('_', ' ').capitalize} #{message.join("', and'")}; "
+        totalMessage += "#{key.to_s().tr('_', ' ').capitalize} #{message.join("', and'")}; "
       end
       flash[:danger] = totalMessage
       session[:game] = params[:game]
@@ -109,21 +119,11 @@ class GamesController < ApplicationController
   def create
     success = true
     gp = game_params
-    begin 
-      if gp[:expiration_time]
-        if gp[:expiration_time] == ''
-          gp[:expiration_time] = nil
-        else
-          gp[:expiration_time] = Date.strptime(gp[:expiration_time], "%m/%d/%Y")
-        end
-      end
-    rescue
-        flash[:danger] = "Invalid date passed"
-        redirect_to new_game_path
-        return
+    if !parse_expiration_date(gp)
+      flash[:danger] = "Invalid date passed"
+      redirect_to new_game_path
+      return
     end
-    
-
 
     game = GivingGame.new(gp)
 
@@ -144,22 +144,22 @@ class GamesController < ApplicationController
 
       @game = game
       @game = populateCharityInfo(@game)
-      message = "Giving Game #{@game.title} successfully created."
+      success_message = "Giving Game #{@game.title} successfully created."
       if game.is_private
         full_game_url = "#{request.host_with_port}/games/play/#{game.resource_id}"
-        message += " Your private game URL: " + full_game_url
+        success_message += " Your private game URL: " + full_game_url
       end
-      flash[:success] = message
+      flash[:success] = success_message
       current_user.add_to_created_giving_games(game)
     else
-      totalMessage = ""
+      total_message = ""
       game.errors.messages.each do |key, message|
         if params[:game].key? key
           params[:game].delete(key)
         end
-        totalMessage += "#{key.to_s().gsub('_', ' ').capitalize} #{message.join("', and'")}; "
+        total_message += "#{key.to_s().tr('_', ' ').capitalize} #{message.join("', and'")}; "
       end
-      flash[:danger] = totalMessage
+      flash[:danger] = total_message
       session[:game] = params[:game]
       success = false
     end
@@ -222,24 +222,16 @@ class GamesController < ApplicationController
       end
     end
 
-    charityA = game.charityA_title
-    charityB = game.charityB_title
     charity = params[:charity]
-    if charity == charityA
-      game.voteForA
-    elsif charity == charityB
-      game.voteForB
-    end
-    total_moneyA = game.votesA * game.per_transaction
-    total_moneyB = game.votesB * game.per_transaction
+    game.vote(charity)
     money_allowed = game.total_money
-    if money_allowed <= total_moneyA + total_moneyB
+    if money_allowed <= game.total_moneyA + game.total_moneyB
       if !game.tutorial
         game.expired = true
         game.save
       end
     end
-    if game.show_results == true
+    if game.show_results
       redirect_to results_path(:resource_id => game.resource_id, :charity => charity)
     else
       redirect_to play_index_path(:charity => charity)
