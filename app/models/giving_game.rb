@@ -16,7 +16,14 @@ class GivingGame < ActiveRecord::Base
 
   mount_uploader :charityA_image, CharityAImageUploader
   mount_uploader :charityB_image, CharityBImageUploader
-  
+
+  def vote(charity)
+    if charity == self.charityA_title
+      self.voteForA
+    elsif charity == self.charityB_title
+      self.voteForB
+    end
+  end
  
   def voteForA
     self.votesA += 1
@@ -26,5 +33,13 @@ class GivingGame < ActiveRecord::Base
   def voteForB
     self.votesB += 1
     self.save
+  end
+
+  def total_moneyA
+    self.votesA * self.per_transaction
+  end
+
+  def total_moneyB
+    self.votesB * self.per_transaction
   end
 end
