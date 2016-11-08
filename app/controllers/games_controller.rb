@@ -214,7 +214,7 @@ class GamesController < ApplicationController
     game = GivingGame.find(params[:id])
     
     if !game.tutorial
-      if current_user.present? and current_user.played_games.include? game.id
+      if current_user.has_played_game?(game)
         flash[:warning] = "You have already played that game."
         redirect_to play_index_path and return
       else
@@ -224,13 +224,8 @@ class GamesController < ApplicationController
 
     charity = params[:charity]
     game.vote(charity)
-    money_allowed = game.total_money
-    if money_allowed <= game.total_moneyA + game.total_moneyB
-      if !game.tutorial
-        game.expired = true
-        game.save
-      end
-    end
+    game.check_total_money
+
     if game.show_results
       redirect_to results_path(:resource_id => game.resource_id, :charity => charity)
     else

@@ -42,4 +42,13 @@ class GivingGame < ActiveRecord::Base
   def total_moneyB
     self.votesB * self.per_transaction
   end
+
+  def check_total_money
+    if self.total_money <= self.total_moneyA + self.total_moneyB
+      if !self.tutorial
+        self.expired = true
+        self.save
+      end
+    end
+  end
 end

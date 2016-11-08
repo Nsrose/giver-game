@@ -14,6 +14,10 @@ class User < ActiveRecord::Base
   has_many :giving_games
   attr_accessor :login
   serialize :played_games,Array
+
+  def has_played_game?(game)
+    self.present? and self.played_games.include? game.id
+  end
   
   def add_to_created_giving_games(game)
     self.giving_games << game
