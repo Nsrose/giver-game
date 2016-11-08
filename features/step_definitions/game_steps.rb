@@ -101,10 +101,6 @@ When(/^I upload an image called "([^"]*)"$/) do |image|
 end
 
 
-Then /^I should see the image "(.+)"$/ do |image|
-   expect(page).to have_xpath("//img[contains(@src,'#{image}')]")
-end
-
 When /^I create a( private)? game called "(.*)"$/ do |secret, name|
   steps %Q{
     When I am on the new games page
