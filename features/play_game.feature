@@ -4,8 +4,8 @@ Feature: As a user who wants to play
   
   Background:  
     Given I am on the home page
-    Given some games and some users exist
     Given some charities exist
+    Given some games and some users exist
 
   Scenario: Go to the games page and select a game 
     Given I am logged in as "j0e@tr8er.org" with password "TRAITORJOE"

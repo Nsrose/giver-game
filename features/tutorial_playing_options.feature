@@ -10,8 +10,8 @@ Feature: Tutorial and playing options
     | Traitor_JOSEPHINE   | TRAITORJOE |  TRAITORJOE            |  j0e@tr8er.org        |
     
     And the following games exist: # features/step_definitions/tutorial_steps.rb:1
-    | title                   | description                                 | charityA_title                                | charityB_title | tutorial | show_results |resource_id|default_charity_a|default_charity_b|
-    | Tutorial                | 'This is the tutorial for the Giving Game'  | Schistosomiasis Control Initiative (SCI)      | GiveDirectly   | true     | true         |1          |2                |4               |
+    | title                   | description                                 | tutorial | show_results |resource_id|charity_a_id     |charity_b_id|
+    | Tutorial                | 'This is the tutorial for the Giving Game'  | true     | true         |1          |2                |4               |
 
   Scenario: Clicking on the Tutorial link should direct users to the tutorial
     Given I am on the home page
