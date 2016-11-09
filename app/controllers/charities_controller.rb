@@ -16,22 +16,24 @@ class CharitiesController < ApplicationController
     end
     
     def new
+        @charity = Charity.new(session[:charity]) || Charity.new()
+        session[:charity] = nil
     end
     
     
     def create
-       charity = Charity.new(charity_params)
-       if charity.valid?
-           charity.save
-           flash[:success] = "Charity Successfully Created."
+       @charity = Charity.new(charity_params)
+       if @charity.valid?
+           @charity.save
+           flash[:success] = "#{@charity.name} was Successfully Created."
            redirect_to charities_path
        else
            totalMessage = ""
-           charity.errors.messages.each do |key, message|
+           @charity.errors.messages.each do |key, message|
                totalMessage += "#{key.to_s().gsub('_', ' ').capitalize} #{message.join("', and'")}; "
            end
            flash[:danger] = totalMessage
-           p "FAILURE"
+           session[:charity] = @charity
            redirect_to new_charity_path()
        end
     end
@@ -47,7 +49,7 @@ class CharitiesController < ApplicationController
         charity.assign_attributes(cp)
         if charity.valid?
            charity.save
-           flash[:success] = "Charity was Successfully Updated."
+           flash[:success] = "#{charity.name} was Successfully Updated."
            redirect_to charities_path
         else
            totalMessage = ""
@@ -61,10 +63,10 @@ class CharitiesController < ApplicationController
         
     protected 
     def validate_admin
-        # if !current_user || !current_user.is_admin?
-        #     flash[:warning] = "Only Administrators can create charities"
-        #     redirect_to root_path
-        # end
+        if !current_user || !current_user.is_admin?
+            flash[:warning] = "Only Administrators can create charities"
+            redirect_to root_path
+        end
         return
     end
 end

@@ -5,11 +5,12 @@ Feature: Make Games End
 
   Background:
     Given I am on the home page
+    Given some charities exist
     And the following games exist:
-    | title        | id | description                                 | charityA_title | charityB_title | expired | expiration_time          | total_money | per_transaction  | votesA | resource_id |   
-    | Expirein     |  1 | 'This game should expire'                   | Charity A      | Charity B      | true    |                          | 100         | 1                |        | 1           |
-    | Expire2      |  2 | 'This game should also expire'              | Charity 1      | Charity 2      | false   | 2016-04-20 01:00:00 UTC  | 100         | 1                |        | 2           |
-    | Expire3      |  3 | 'This game should also expire too'          | Charity 4      | Charity 5      | false   |                          | 100         | 1                | 99     | 3           |
+    | title        | id | description                                 | charityA_title                                | charityB_title                                | expired | expiration_time          | total_money | per_transaction  | votesA | resource_id | default_charity_a| default_charity_b|  
+    | Expirein     |  1 | 'This game should expire'                   | GiveDirectly                                  | Against Malaria Foundation                    | true    |                          | 100         | 1                |        | 1           | 4                |1|
+    | Expire2      |  2 | 'This game should also expire'              | Against Malaria Foundation                    | Schistosomiasis Control Initiative (SCI)      | false   | 2016-04-20 01:00:00 UTC  | 100         | 1                |        | 2           |1                 |2|
+    | Expire3      |  3 | 'This game should also expire too'          | Schistosomiasis Control Initiative (SCI)      | GiveDirectly                                  | false   |                          | 100         | 1                | 99     | 3           |2                 |4|
     And the following users exist:
     | username           | password   | password_confirmation  |     email             |
     | Traitor_JOSEPHINE  | TRAITORJOE |  TRAITORJOE            |  j0e@tr8er.org        |
@@ -29,5 +30,5 @@ Feature: Make Games End
     Given I am logged in as "j0e@tr8er.org" with password "TRAITORJOE"
     When I follow "Play a giving game"
     And I follow "Expire3" in my table
-    And I press "Donate to Charity 4"
+    And I press "Donate to Schistosomiasis Control Initiative (SCI)"
     Then I should not see "Expire3"

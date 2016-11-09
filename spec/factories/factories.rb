@@ -23,3 +23,14 @@ FactoryGirl.define do
     password_confirmation "password"
   end
 end
+
+FactoryGirl.define do
+  factory :charity do
+    name 'Against Malaria Foundation'
+    description "Description"
+    ein '20-3069841'
+    image_link 'https://www.againstmalaria.com/images/logo_AMF.gif'
+    homepage_link 'https://www.againstmalaria.com/Default.aspx'
+    donation_link 'https://www.againstmalaria.com/donate.aspx?GroupID=81'
+  end
+end
