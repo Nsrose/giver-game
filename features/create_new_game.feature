@@ -6,9 +6,9 @@ Feature: Create a new game
   Background:
   
     Given the following games exist:
-    | title       | description                                | per_transaction | resource_id |
-    | First game  | something something                        |      10         | 1           |
-    | Second game | something something else                   |      1          | 2           |
+    | title       | description                                | per_transaction | resource_id | is_private | charity_a_id  | charity_b_id
+    | First game  | something something                        |      10         | 1           | false      | 1             | 2
+    | Second game | something something else                   |      1          | 2           | false      | 1             | 2
   
     Given the following users exist:
     | username           | password   | password_confirmation  |     email             |

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161109004735) do
+ActiveRecord::Schema.define(version: 20161109031544) do
 
   create_table "charities", force: :cascade do |t|
     t.string "name",          default: "", null: false
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20161109004735) do
     t.boolean  "expired",                                 default: false
     t.string   "charityA_image"
     t.string   "charityB_image"
-    t.boolean  "is_private",                              default: false
+    t.boolean  "is_private",                              default: true
     t.string   "resource_id"
     t.integer  "charity_a_id"
     t.integer  "charity_b_id"

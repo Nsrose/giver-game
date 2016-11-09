@@ -24,7 +24,8 @@ Given(/^some games and some users exist$/) do
             :resource_id => 9873,
             :show_results => true,
             :charity_a_id => 4,
-            :charity_b_id => 1
+            :charity_b_id => 1,
+            :is_private => false
             },
           {
             :title => 'Game 2',
@@ -33,7 +34,8 @@ Given(/^some games and some users exist$/) do
             :resource_id => 9872,
             :show_results => false,
             :charity_a_id => 3,
-            :charity_b_id => 4
+            :charity_b_id => 4,
+            :is_private => false
           },
           {
             :title => 'Game 3',
@@ -41,8 +43,9 @@ Given(/^some games and some users exist$/) do
             :tutorial => false,
             :resource_id => 3493,
             :charity_a_id => 2,
-            :charity_b_id => 4}
-            ]
+            :charity_b_id => 4,
+            :is_private => false
+          },
           {   
             :title => 'Game 4',
             :description => 'This games charityA has no image',
@@ -51,6 +54,7 @@ Given(/^some games and some users exist$/) do
             :charity_a_id => 5,
             :charity_b_id => 4
           }
+          ]
   games.each do |game|
     GivingGame.create!(game)
   end
@@ -100,7 +104,8 @@ Given(/^some charities exist$/) do
                  :description => without_image_description,
                  :ein =>'fake_ein',
                  :homepage_link => 'http://www.evidenceaction.org/dewormtheworld/',
-                 :donation_link => 'https://give.evidenceaction.org'}
+                 :donation_link => 'https://give.evidenceaction.org'
+               }
                ]
   
   charities.each do |game|

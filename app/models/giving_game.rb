@@ -23,7 +23,7 @@ class GivingGame < ActiveRecord::Base
   mount_uploader :charityB_image, CharityBImageUploader
   
   def check_charities_not_equal
-    errors.add("Charity A", "cannot be the same as Charity B") if self.charity_a_id == self.charity_b_id
+    errors.add("Charities", "A and B must be different") if self.charity_a_id == self.charity_b_id
   end
   
   def generate_error_message()
