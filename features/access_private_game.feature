@@ -6,9 +6,9 @@ Feature: Create a new game
   Background:
     Given some charities exist
     Given the following games exist:
-    | title       | description                                | per_transaction | charityA_title                   | charityB_title        | is_private | resource_id|default_charity_a|default_charity_b|
-    | Secret game | something something                        |      10         | Against Malaria Foundation       | GiveDirectly          | true       | 1abc       |1                |4                |
-    | Public game | something something else                   |      1          | Against Malaria Foundation       | GiveDirectly          | false      | 1          |1                |4                |
+    | title       | description                                | per_transaction |  is_private | resource_id|charity_a_id     |charity_b_id     |
+    | Secret game | something something                        |      10         | true        | 1abc       |1                |4                |
+    | Public game | something something else                   |      1          | false       | 1          |1                |4                |
   
     Given the following users exist:
     | username           | password   | password_confirmation  |     email             |

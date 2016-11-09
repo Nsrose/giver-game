@@ -7,7 +7,7 @@ Feature: Make Games End
     Given I am on the home page
     Given some charities exist
     And the following games exist:
-    | title        | id | description                                 | expired | expiration_time          | total_money | per_transaction  | votesA | resource_id | default_charity_a| default_charity_b|  
+    | title        | id | description                                 | expired | expiration_time          | total_money | per_transaction  | votesA | resource_id | charity_a_id     | charity_b_id|  
     | Expirein     |  1 | 'This game should expire'                   | true    |                          | 100         | 1                |        | 1           | 4                |1|
     | Expire2      |  2 | 'This game should also expire'              | false   | 2016-04-20 01:00:00 UTC  | 100         | 1                |        | 2           |1                 |2|
     | Expire3      |  3 | 'This game should also expire too'          | false   |                          | 100         | 1                | 99     | 3           |2                 |4|

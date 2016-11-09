@@ -26,10 +26,6 @@ class GamesController < ApplicationController
                                  :description,
                                  :total_money,
                                  :per_transaction,
-                                 :charityA_title,
-                                 :descriptionA,
-                                 :charityB_title,
-                                 :descriptionB,
                                  :expiration_time,
                                  :tutorial,
                                  :show_results,
@@ -37,28 +33,8 @@ class GamesController < ApplicationController
                                  :charityB_image,
                                  :charityA_image_cache,
                                  :charityB_image_cache,
-                                 :default_charity_a,
-                                 :default_charity_b)
-  end
-  
-  def populateCharityInfo(game)
-    charity_a =  Charity.find_by(id: game.default_charity_a)
-    if charity_a != nil
-        game.charityA_title = charity_a.name
-        game.descriptionA = charity_a.description
-    else
-        game.charityA_title = game.charityA_title
-        game.descriptionA = game.descriptionA    
-    end
-    charity_b =  Charity.find_by(id: game.default_charity_b)
-    if charity_b != nil 
-        game.charityB_title = charity_b.name
-        game.descriptionB = charity_b.description
-    else
-        game.charityB_title = game.charityB_title
-        game.descriptionB = game.descriptionB    
-    end
-    return game
+                                 :charity_a_id,
+                                 :charity_b_id)
   end
   
   def home
@@ -84,7 +60,7 @@ class GamesController < ApplicationController
       session.delete :game
     else
       @game = GivingGame.where(:resource_id => params[:resource_id])[0]
-      @game = populateCharityInfo(@game)
+      # @game = populateCharityInfo(@game)
     end
   end
   
@@ -108,7 +84,7 @@ class GamesController < ApplicationController
         if params.key? key 
           params.delete key  
         end
-        totalMessage += "#{key.to_s().tr('_', ' ').capitalize} #{message.join("', and'")}; "
+        totalMessage += "#{key.to_s().tr('_', ' ').capitalize} #{message.join("', and'")} "
       end
       flash[:danger] = totalMessage
       session[:game] = params[:game]
@@ -126,24 +102,17 @@ class GamesController < ApplicationController
     end
 
     game = GivingGame.new(gp)
-
     if game.valid?
-      if gp[:default_charity_a] == gp[:default_charity_b]
-        flash[:warning] = "Charities A and B must be different!"
-        redirect_to new_game_path
-        return
-      end
       game.save() ## need to have game in database in order to have an id
       if game.is_private?
         game.resource_id =  SecureRandom.hex
       else
         game.resource_id =  game.id
       end
-      
       game.save()
 
       @game = game
-      @game = populateCharityInfo(@game)
+      # @game = populateCharityInfo(@game)
       success_message = "Giving Game #{@game.title} successfully created."
       if game.is_private
         full_game_url = "#{request.host_with_port}/games/play/#{game.resource_id}"
@@ -186,20 +155,13 @@ class GamesController < ApplicationController
       redirect_to new_user_session_path
     else
       @game = chosen_game
-      @game = populateCharityInfo(@game)
-      @charityA = @game.charityA_title
-      @charityB = @game.charityB_title
-      @description = @game.description
-      @title = @game.title
-      @descriptionA = @game.descriptionA
-      @descriptionB = @game.descriptionB
-      @showResults = @game.show_results
+      @charityA = @game.charity_a
+      @charityB = @game.charity_b
       if @game.expiration_time?
         @expiration_time = @game.expiration_time.strftime("%m/%d/%Y")
       else
         @expiration_time = 'None'
       end
-      @tutorial = @game.tutorial
     end
   end
 
@@ -223,7 +185,7 @@ class GamesController < ApplicationController
     end
 
     charity = params[:charity]
-    game.vote(charity)
+    game.vote(charity.to_i)
     game.check_total_money
 
     if game.show_results
@@ -240,26 +202,17 @@ class GamesController < ApplicationController
   end
   
   def archive_game
-      @game = GivingGame.where(:resource_id => params[:resource_id])[0]
-      @game = populateCharityInfo(@game)
-      @charityA = @game.charityA_title
-      @charityB = @game.charityB_title
-      @description = @game.description
-      @title = @game.title
-      @descriptionA = @game.descriptionA
-      @descriptionB = @game.descriptionB
-      @showResults = @game.show_results
+    @game = GivingGame.where(:resource_id => params[:resource_id])[0]
+    @charityA = @game.charity_a
+    @charityB = @game.charity_b
   end
   
   def results
     @game = GivingGame.where(:resource_id => params[:resource_id]).first
-    @game = populateCharityInfo(@game)
-    @owner = @game.user_id
-    @expired = @game.expired
+    # @game = populateCharityInfo(@game)
     @charityVotedFor = params[:charity]
-    @title = @game.title
-    @charityA = @game.charityA_title
-    @charityB = @game.charityB_title
+    @charityA = @game.charity_a
+    @charityB = @game.charity_b
     @votesA = @game.votesA
     @votesB = @game.votesB
     @current_moneyA = @votesA * @game.per_transaction

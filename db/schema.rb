@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161101053808) do
+ActiveRecord::Schema.define(version: 20161109004735) do
 
   create_table "charities", force: :cascade do |t|
     t.string "name",          default: "", null: false
@@ -23,30 +23,26 @@ ActiveRecord::Schema.define(version: 20161101053808) do
   end
 
   create_table "giving_games", force: :cascade do |t|
-    t.string   "title",                                     default: "default title"
-    t.text     "description",                               default: "default description"
+    t.string   "title",                                   default: "default title"
+    t.text     "description",                             default: "default description"
     t.datetime "release_date"
-    t.decimal  "total_money",       precision: 8, scale: 2, default: 10.0
-    t.decimal  "per_transaction",   precision: 8, scale: 2, default: 1.0
+    t.decimal  "total_money",     precision: 8, scale: 2, default: 10.0
+    t.decimal  "per_transaction", precision: 8, scale: 2, default: 1.0
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "charityA_title",                            default: "Charity A"
-    t.integer  "votesA",                                    default: 0
-    t.string   "charityB_title",                            default: "Charity B"
-    t.integer  "votesB",                                    default: 0
+    t.integer  "votesA",                                  default: 0
+    t.integer  "votesB",                                  default: 0
     t.boolean  "tutorial"
-    t.string   "descriptionA"
-    t.string   "descriptionB"
     t.boolean  "show_results"
     t.integer  "user_id"
     t.datetime "expiration_time"
-    t.boolean  "expired",                                   default: false
+    t.boolean  "expired",                                 default: false
     t.string   "charityA_image"
     t.string   "charityB_image"
-    t.boolean  "is_private",                                default: false
+    t.boolean  "is_private",                              default: false
     t.string   "resource_id"
-    t.integer  "default_charity_a"
-    t.integer  "default_charity_b"
+    t.integer  "charity_a_id"
+    t.integer  "charity_b_id"
   end
 
   create_table "uploads", force: :cascade do |t|
