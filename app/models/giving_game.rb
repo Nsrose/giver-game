@@ -34,7 +34,32 @@ class GivingGame < ActiveRecord::Base
     return totalMessage
   end
       
- 
+  def current_moneyA
+    self.votesA * self.per_transaction
+  end
+  
+  def current_moneyB
+    self.votesB * self.per_transaction
+  end
+  
+  def votes_progressA
+    (self.current_moneyA / self.total_money) * 100
+  end
+  
+  def votes_progressB
+    (self.current_moneyB / self.total_money) * 100
+  end
+
+  def leadingCharity
+    if self.votesA > self.votesB
+      return self.charity_a
+    elsif self.votesA < self.votesB
+      return self.charity_b
+    else
+      return nil
+    end
+  end
+  
   def vote(charity)
     if charity == self.charity_a_id
       self.voteForA

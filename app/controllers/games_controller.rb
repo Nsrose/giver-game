@@ -201,22 +201,13 @@ class GamesController < ApplicationController
     @charityVotedFor = params[:charity]
     @charityA = @game.charity_a
     @charityB = @game.charity_b
-    @votesA = @game.votesA
-    @votesB = @game.votesB
-    @current_moneyA = @votesA * @game.per_transaction
-    @current_moneyB = @votesB * @game.per_transaction
-    @total_money = @game.total_money
-    @votes_progressA = (@current_moneyA / @total_money) * 100
-    @votes_progressB = (@current_moneyB / @total_money) * 100
+    @leadingCharity = @game.leadingCharity
     
-    # show which charity is in the lead
-    if @votesA > @votesB
-      @leadingCharity = @charityA
-    elsif @votesA < @votesB
-      @leadingCharity = @charityB
-    else
-      @leadingCharity = nil
-    end
+    @votes_progressA = @game.votes_progressA
+    @votes_progressB = @game.votes_progressB
+    
+    @current_moneyA = @game.current_moneyA
+    @current_moneyB = @game.current_moneyB
   end
   
   
