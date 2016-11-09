@@ -11,11 +11,11 @@
             <div class='field-form-group'><%= text_field :game, :title, id: 'Title', size: '65' %></div>
 
             <div class='field-form-group'>
-              <%= radio_button(:game, :is_private, true, :id=>"private_game", checked: true) %>
+              <%= radio_button(:game, :is_private, true, :id=>"private_game", checked: @game.is_private) %>
               <%= label_tag(:private, "Private game") %>
               <small>Your game will be unlisted and only accessible through a link.</small>
               <br>
-              <%= radio_button(:game, :is_private, false, :id=>"public_game", checked: false) %>
+              <%= radio_button(:game, :is_private, false, :id=>"public_game", checked: !@game.is_private) %>
               <%= label_tag(:public, "Public game") %>
               <small>Your game will be listed publicly and can be played by anyone.</small>
 
@@ -35,10 +35,9 @@
             </div>
 
             <div class="row">
-                
                 <div class="col-sm-6">
                 <div class=form-header>Charity A</div>
-                <div class='field-form-group'><%= collection_select(:game, :charity_a_id, @defaultCharities, :id, :name, { :selected => @defaultCharities[0] })%></div>
+                <div class='field-form-group'><%= collection_select(:game, :charity_a_id, @defaultCharities, :id, :name, { :selected => @game.charity_a_id })%></div>
                                 <!-- <div class="form-header">Charity A Image</div> -->
                 <!--<div class="field-form-group"><%= file_field :game, :charityA_image, id: 'CharityA-Image' %></div> -->
                 <!-- <div class="field-form-group"><%= hidden_field :game, :charityA_image_cache, id: 'CharityA-Image-hidden' %></div> -->
@@ -46,7 +45,7 @@
                 
                 <div class="col-sm-6">
                 <div class=form-header>Charity B</div>
-                    <div class='field-form-group'><%= collection_select(:game, :charity_b_id, @defaultCharities, :id, :name, { :selected => @defaultCharities[0] })%></div>
+                    <div class='field-form-group'><%= collection_select(:game, :charity_b_id, @defaultCharities, :id, :name, { :selected => @game.charity_b_id })%></div>
 
                 <!-- <div class="form-header">Charity B Image</div> -->
                 <!--<div class="field-form-group"><%= file_field :game, :charityB_image, id: 'CharityB-Image' %></div> -->

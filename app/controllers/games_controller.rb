@@ -79,13 +79,7 @@ class GamesController < ApplicationController
       flash[:success] = "Successfully edited."
       redirect_to user_profile_path(current_user.id)
     else
-      totalMessage = ""
-      game.errors.messages.each do |key, message|
-        if params.key? key 
-          params.delete key  
-        end
-        totalMessage += "#{key.to_s().tr('_', ' ').capitalize} #{message.join("', and'")} "
-      end
+      totalMessage = game.generate_error_message
       flash[:danger] = totalMessage
       session[:game] = params[:game]
       redirect_to edit_game_path(current_user.id, params[:resource_id])
@@ -121,13 +115,7 @@ class GamesController < ApplicationController
       flash[:success] = success_message
       current_user.add_to_created_giving_games(game)
     else
-      total_message = ""
-      game.errors.messages.each do |key, message|
-        if params[:game].key? key
-          params[:game].delete(key)
-        end
-        total_message += "#{key.to_s().tr('_', ' ').capitalize} #{message.join("', and'")}; "
-      end
+      total_message = game.generate_error_message
       flash[:danger] = total_message
       session[:game] = params[:game]
       success = false

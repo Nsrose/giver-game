@@ -23,11 +23,18 @@ class GivingGame < ActiveRecord::Base
   mount_uploader :charityB_image, CharityBImageUploader
   
   def check_charities_not_equal
-    errors.add("Charities", "A and B must be different") if self.charity_a_id == self.charity_b_id
+    errors.add("Charities ", "A and B must be different") if self.charity_a_id == self.charity_b_id
   end
   
   def generate_error_message()
+    totalMessage = ""
+      self.errors.messages.each do |key, message|
+        totalMessage += "#{key.to_s().tr('_', ' ').capitalize} #{message.join(", and ")}. "
+      end
+    return totalMessage
   end
+      
+ 
   def vote(charity)
     if charity == self.charity_a_id
       self.voteForA
