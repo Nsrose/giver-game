@@ -10,8 +10,8 @@ RSpec.describe GamesController, :type => :controller do
     it 'should redirect you to the home page' do 
       params = {:game => {:title => "title", :description => "description", 
             :total_money => 10.00, :per_transaction => 1.00, 
-            :charityA_title => "Against Malaria Foundation", :descriptionA => "description A", 
-            :charityB_title => "GiveDirectly", :descriptionB => "description B", 
+            :charity_a_id => 1,
+            :charity_b_id => 2, 
             :tutorial => false, :default_charity_a => 1, :default_charity_b => 4}}
       post :create, params
 

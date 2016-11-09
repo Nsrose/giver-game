@@ -23,8 +23,8 @@ RSpec.describe GivingGame, :type => :model do
         it 'should allow you to create giving games' do
             givingParams = {:title => "title", :description => "description", 
             :total_money => 10.00, :per_transaction => 1.00, 
-            :charityA_title => "charity A", :descriptionA => "description A", 
-            :charityB_title => "charity B", :descriptionB => "description B", 
+            :charity_a_id => 1,
+            :charity_b_id => 2, 
             :tutorial => false, :show_results => true}
             givingGame = GivingGame.create(givingParams)
             givingGame.valid?.should be true
@@ -33,8 +33,8 @@ RSpec.describe GivingGame, :type => :model do
         it 'should require the presence of the necessary fields' do 
             givingGame = GivingGame.create({:title => nil, :description => nil, 
             :total_money => nil, :per_transaction => nil, 
-            :charityA_title => nil, :descriptionA => nil, 
-            :charityB_title => nil, :descriptionB => nil,})
+            :charity_a_id => nil, 
+            :charity_b_id => nil})
             givingGame.valid?.should be false
             print givingGame.errors.messages
             print "\n"

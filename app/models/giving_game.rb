@@ -9,15 +9,12 @@ class GivingGame < ActiveRecord::Base
   # resource_id of giving games should be unique
   # validates :resource_id, uniqueness: true
   
-
   # money valuse should be greater than or equal to 0 and numbers
   validates :total_money, :numericality => { :greater_than_or_equal_to => 0 }
   validates :per_transaction, :numericality => { :greater_than_or_equal_to => 0 }
   # needs titles for all of the titles of things.
   validates_presence_of :title, :total_money, :per_transaction
-  
   validate :check_charities_not_equal
-
 
   mount_uploader :charityA_image, CharityAImageUploader
   mount_uploader :charityB_image, CharityBImageUploader
