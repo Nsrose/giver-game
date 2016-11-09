@@ -123,6 +123,10 @@ Then /^(?:|I )should see "([^"]*)"$/ do |text|
   end
 end
 
+Then(/^I should see the link named "([^"]*)" to "([^"]*)"$/) do |link_name, url| 
+    expect(page).to have_link(link_name, href: link)
+
+end
 
 Then /^(?:|I )should see "([^"]*)" appear[s]? "([\d]*)" time[s]?$/ do |text, number|
   regexp = Regexp.new(text)
@@ -181,6 +185,8 @@ Then /^the "([^"]*)" field(?: within (.*))? should not contain "([^"]*)"$/ do |f
     end
   end
 end
+
+
 
 Then /^the "([^"]*)" field should have the error "([^"]*)"$/ do |field, error_message|
   element = find_field(field)
@@ -297,4 +303,8 @@ end
 
 Then /^show me the page$/ do
   save_and_open_page
+end
+
+Then /^I should see the image "(.+)"$/ do |url|
+    page.should have_xpath("//img[@src=\"#{url}\"]")
 end

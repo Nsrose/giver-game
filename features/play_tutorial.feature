@@ -7,8 +7,8 @@ Feature: Play a tutorial
     Given I am on the home page
     Given some charities exist
     And the following games exist:
-    | title        | id | description                                 | charityA_title                  | charityB_title    | tutorial | show_results | resource_id | default_charity_a |default_charity_b|
-    | Tutorial     |  1 | 'This is the tutorial for the Giving Game'  | Against Malaria Foundation      | GiveDirectly      | true     | true         | 1           |1                  |4                |
+    | title        | id | description                                 | tutorial | show_results | resource_id | charity_a_id  |charity_b_id|
+    | Tutorial     |  1 | 'This is the tutorial for the Giving Game'  | true     | true         | 1           |1              |4                |
   
   Scenario: Go to the tutorial page
     When I follow "home_tutorial"

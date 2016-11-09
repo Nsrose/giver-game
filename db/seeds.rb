@@ -65,77 +65,65 @@ games = [
     {
         :title => 'Tutorial1',
         :description =>'This is the tutorial for the Giving Game',
-        :charityA_title => 'Against Malaria Foundation',
-        :charityB_title => 'Give Directly',
         :tutorial => true,
         :show_results => true,
         :is_private => false,
         :resource_id => "t1",
-        :default_charity_a => 1,
-        :default_charity_b => 4
+        :charity_a_id => 1,
+        :charity_b_id => 4
     },
     {
         :title => 'Tutorial2',
         :description =>'This is the second tutorial for the Giving Game',
-        :charityA_title => 'Schistosomiasis Control Initiative (SCI)',
-        :charityB_title => 'GiveDirectly',
         :tutorial => true,
         :show_results => true,
         :is_private => false,
         :resource_id => "t2",
-        :default_charity_a => 2,
-        :default_charity_b => 4
+        :charity_a_id => 2,
+        :charity_b_id => 4
     },
     {
         :title => 'Game 1',
         :description =>'This is not a tutorial',
-        :charityA_title => 'GiveDirectly',
-        :charityB_title => 'Deworm the World Initiative',
         :tutorial => false,
         :show_results => true,
         :is_private => false,
         :resource_id => "nt1",
-        :default_charity_a => 4,
-        :default_charity_b => 3
+        :charity_a_id => 4,
+        :charity_b_id => 3
     },
     {
         :title => 'Expired Game 1',
         :description =>'This is an expired game',
-        :charityA_title => 'Deworm the World Initiative',
-        :charityB_title => 'Against Malaria Foundation',
         :tutorial => false,
         :show_results => false,
         :expired => true,
         :is_private => false,
         :resource_id => "e1",
-        :default_charity_a => 3,
-        :default_charity_b => 1
+        :charity_a_id => 3,
+        :charity_b_id => 1
     },
     {
         :title => 'Expired Game 2',
         :description =>'This is also an expired game',
-        :charityA_title => 'Deworm the World Initiative',
-        :charityB_title => 'Schistosomiasis Control Initiative (SCI)',
         :tutorial => false,
         :show_results => false,
         :expired => true,
         :is_private => false,
         :resource_id => "e2",
-        :default_charity_a => 3,
-        :default_charity_b => 2
+        :charity_a_id => 3,
+        :charity_b_id => 2
     },
     {
         :title => 'Expired Game 3',
         :description =>'This is the last expired game',
-        :charityA_title => 'Schistosomiasis Control Initiative (SCI)',
-        :charityB_title => 'Against Malaria Foundation',
         :tutorial => false,
         :show_results => true,
         :expired => true,
         :is_private => false,
         :resource_id => "e3",
-        :default_charity_a => 2,
-        :default_charity_b => 1
+        :charity_a_id => 2,
+        :charity_b_id => 1
     }
 ]
 

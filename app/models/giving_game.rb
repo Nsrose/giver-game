@@ -1,5 +1,7 @@
 class GivingGame < ActiveRecord::Base
   belongs_to :user
+  belongs_to :charity_a, :class_name => 'Charity'
+  belongs_to :charity_b, :class_name => 'Charity'
 
   # titles of giving games should be unique
   validates :title, uniqueness: true
@@ -12,15 +14,24 @@ class GivingGame < ActiveRecord::Base
   validates :total_money, :numericality => { :greater_than_or_equal_to => 0 }
   validates :per_transaction, :numericality => { :greater_than_or_equal_to => 0 }
   # needs titles for all of the titles of things.
-  validates_presence_of :title, :charityA_title, :charityB_title, :total_money, :per_transaction
+  validates_presence_of :title, :total_money, :per_transaction
+  
+  validate :check_charities_not_equal
+
 
   mount_uploader :charityA_image, CharityAImageUploader
   mount_uploader :charityB_image, CharityBImageUploader
-
+  
+  def check_charities_not_equal
+    errors.add("Charity A", "cannot be the same as Charity B") if self.charity_a_id == self.charity_b_id
+  end
+  
+  def generate_error_message()
+  end
   def vote(charity)
-    if charity == self.charityA_title
+    if charity == self.charity_a_id
       self.voteForA
-    elsif charity == self.charityB_title
+    elsif charity == self.charity_b_id
       self.voteForB
     end
   end
