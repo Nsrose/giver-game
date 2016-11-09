@@ -242,6 +242,10 @@ Then /^the "([^"]*)" checkbox(?: within (.*))? should not be checked$/ do |label
   end
 end
 
+Then(/^I should see the images for "([^"]*)"$/) do |arg1|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
 Then /^the "([^"]*)" radio button(?: within (.*))? should be chosen$/ do |label, parent|
   with_scope(parent) do
     field_checked = find_field(label)['checked']

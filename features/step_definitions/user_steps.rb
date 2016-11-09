@@ -7,7 +7,7 @@ Given /the following users exist/ do |users_table|
 end
 
 Given(/^some games and some users exist:$/) do
-  games = [{:title => 'Game 1', :description =>'This is game', :charityA_title => 'Charity A', :charityB_title => 'Charity B', :tutorial => false, :user_id => 1, :resource_id => 9873},
+  games = [{:title => 'Game 1', :description =>'This is game', :charityA_title => 'Charity A', :charityB_title => 'Charity B', :tutorial => false, :user_id => 1, :resource_id => 9873, :total_money => 10, :per_transaction => 2},
         {:title => 'Game 2', :description =>'This is not a tutorial', :charityA_title => 'Charity A', :charityB_title => 'Charity B', :tutorial => false, :resource_id => 9872},
         {:title => 'Game 3', :description =>'This is not a tutorial', :charityA_title => 'Charity A', :charityB_title => 'Charity B', :tutorial => false,  :resource_id => 3493}]
   games.each do |game|
