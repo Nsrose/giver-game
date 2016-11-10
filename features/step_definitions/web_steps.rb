@@ -305,6 +305,10 @@ Then /^show me the page$/ do
   save_and_open_page
 end
 
-Then /^I should see the image "(.+)"$/ do |url|
+Then /^I should( not)? see the image "(.+)"$/ do |not_see, url|
+    if not_see
+        page.should_not have_xpath("//img[@src=\"#{url}\"]")
+    else
     page.should have_xpath("//img[@src=\"#{url}\"]")
+    end
 end
