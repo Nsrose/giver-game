@@ -21,8 +21,8 @@ When /^I fill out the form$/ do
     And I fill in "Description" with "Descriptive description to describe"
     And I fill in "TotalMoney" with "1000"
     And I fill in "AmountPerVote" with "10"
-    When I select "Against Malaria Foundation" from "game_default_charity_a"
-    When I select "GiveDirectly" from "game_default_charity_b"
+    When I select "Against Malaria Foundation" from "game_charity_a_id"
+    When I select "GiveDirectly" from "game_charity_b_id"
     }
 end
 
@@ -32,8 +32,8 @@ When /^I fill out the form with a second game$/ do
     And I fill in "Description" with "Descriptive description to describe"
     And I fill in "TotalMoney" with "100"
     And I fill in "AmountPerVote" with "10"
-    When I select "Schistosomiasis Control Initiative (SCI)" from "game_default_charity_a"
-    When I select "GiveDirectly" from "game_default_charity_b"
+    When I select "Schistosomiasis Control Initiative (SCI)" from "game_charity_a_id"
+    When I select "GiveDirectly" from "game_charity_b_id"
   }
 end
 
@@ -73,8 +73,8 @@ When /^I fill out the form without descriptions$/ do
     And I fill in "Description" with "Descriptive description to describe"
     And I fill in "TotalMoney" with "1000"
     And I fill in "AmountPerVote" with "10"
-    When I select "Schistosomiasis Control Initiative (SCI)" from "game_default_charity_a"
-    When I select "GiveDirectly" from "game_default_charity_b"
+    When I select "Schistosomiasis Control Initiative (SCI)" from "game_charity_a_id"
+    When I select "GiveDirectly" from "game_charity_b_id"
   }
 end
 
@@ -86,6 +86,12 @@ end
 Then /^I should see "(.*)" in my table$/ do |game|
   table_results = page.find('table.table.table-hover')
   table_results.should have_content(game)
+end
+
+Then /^I should see "(.*)" centered/ do |text|
+  within('.text-center') do
+    page.should have_content(text)
+  end
 end
 
 And /^The game "(.*)" should be able to show results$/ do |game|
@@ -101,16 +107,12 @@ When(/^I upload an image called "([^"]*)"$/) do |image|
 end
 
 
-Then /^I should see the image "(.+)"$/ do |image|
-   expect(page).to have_xpath("//img[contains(@src,'#{image}')]")
-end
-
 When /^I create a( private)? game called "(.*)"$/ do |secret, name|
   steps %Q{
     When I am on the new games page
     And I fill out the form with values "Title": "#{name}","Description": "Descriptive description to describe","TotalMoney": "100","AmountPerVote": "10"
-    When I select "Schistosomiasis Control Initiative (SCI)" from "game_default_charity_a"
-    When I select "GiveDirectly" from "game_default_charity_b"
+    When I select "Schistosomiasis Control Initiative (SCI)" from "game_charity_a_id"
+    When I select "GiveDirectly" from "game_charity_b_id"
     Then the "private_game" radio button should be chosen
   }
   if not secret

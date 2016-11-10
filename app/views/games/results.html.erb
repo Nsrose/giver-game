@@ -2,7 +2,7 @@
     <div class="row">
         <div class="page-header">
             <div class="pull-right">
-                <% if @expired %>
+                <% if @game.expired %>
                     <%= link_to archive_game_path(params[:resource_id]), class:'btn btn-default' do %>
                         <i class="fa fa-arrow-left" aria-hidden="true" style="padding-right: 5px"></i>Go back to Game Page
                     <% end %>
@@ -15,7 +15,7 @@
                     <% end %>
                 <% end %>
             </div>
-            <h1><small>Results:</small> <small class="game-name-header"><%=@title %></small></h1>
+            <h1><small>Results:</small> <small class="game-name-header"><%=@game.title %></small></h1>
         </div>
     </div>
     <div class="row top-buffer" style="text-align: center">
@@ -23,28 +23,28 @@
             <div class="panel-body">
                 <% if @leadingCharity == nil %>
                     <h3>The votes are tied!</h3>
-                <% elsif @expired %>
-                    <h3>Winning Charity: <%= @leadingCharity %></h3>
+                <% elsif @game.expired %>
+                    <h3>Winning Charity: <%= @leadingCharit.name %></h3>
                 <% else %>
-                    <h3>Leading Charity: <%= @leadingCharity %></h3>
+                    <h3>Leading Charity: <%= @leadingCharity.name %></h3>
                 <% end %> 
             </div>
         </div>
     </div>
-    <% if current_user.present? and current_user.id == @owner %>
+    <% if current_user.present? and current_user.id == @game.user_id %>
         <div class="row">
-            <h5><%= @charityA %></h5>
+            <h5><%= @charityA.name %></h5>
             <div class="progress">
               <div class="progress-bar <%= 'progress-bar-success' if @leadingCharity == @charityA %><%= 'progress-bar-danger' if @leadingCharity == @charityB %><%= 'progress-bar-info' if @leadingCharity == nil %>" role="progressbar" aria-valuenow="<%= @votes_progressA %>" aria-valuemin="0" aria-valuemax="<%= @total_money %>" style="width: <%= @votes_progressA %>%">
-                <%= number_to_currency(@current_moneyA) %>/<%= number_to_currency(@total_money) %>
+                <%= number_to_currency(@current_moneyA) %>/<%= number_to_currency(@game.total_money) %>
               </div>
             </div>
         </div>
         <div class="row">
-            <h5><%= @charityB %></h5>
+            <h5><%= @charityB.name %></h5>
             <div class="progress">
               <div class="progress-bar <%= 'progress-bar-success' if @leadingCharity == @charityB %><%= 'progress-bar-danger' if @leadingCharity == @charityA %><%= 'progress-bar-info' if @leadingCharity == nil %>" role="progressbar" aria-valuenow="<%= @votes_progressB %>" aria-valuemin="0" aria-valuemax="<%= @total_money %>" style="width: <%= @votes_progressB %>%">
-                <%= number_to_currency(@current_moneyB) %>/<%= number_to_currency(@total_money) %>
+                <%= number_to_currency(@current_moneyB) %>/<%= number_to_currency(@game.total_money) %>
               </div>
             </div>
         </div>
@@ -52,19 +52,19 @@
     <div class="row top-buffer">
         <div class="col-lg-6" style="text-align: center">
             <button class="btn <%= 'btn-success' if @leadingCharity == @charityA %><%= 'btn-danger' if @leadingCharity == @charityB %><%= 'btn-primary' if @leadingCharity == nil %> btn-lg" type="button">
-              Votes for <%= @charityA %>: <span class="badge left-buffer"><%= @votesA %></span>
+              Votes for <%= @charityA.name %>: <span class="badge left-buffer"><%= @game.votesA %></span>
             </button>
         </div>
         <div class="col-lg-6" style="text-align: center">
             <button class="btn <%= 'btn-success' if @leadingCharity == @charityB %><%= 'btn-danger' if @leadingCharity == @charityA %><%= 'btn-primary' if @leadingCharity == nil %> btn-lg" type="button">
-              Votes for <%= @charityB %>: <span class="badge left-buffer"><%= @votesB %></span>
+              Votes for <%= @charityB.name %>: <span class="badge left-buffer"><%= @game.votesB %></span>
             </button>
         </div>
     </div>
 </div>
 
 <script>
-    if (<%= @expired != true && @charityVotedFor != nil %>) {
+    if (<%= @game.expired != true && @charityVotedFor != nil %>) {
         sweetAlert({
             title: 'Donation Successful!',
             text: 'Your choice: ' + '<%= @charityVotedFor %>',

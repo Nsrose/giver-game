@@ -123,6 +123,10 @@ Then /^(?:|I )should see "([^"]*)"$/ do |text|
   end
 end
 
+Then(/^I should see the link named "([^"]*)" to "([^"]*)"$/) do |link_name, url| 
+    expect(page).to have_link(link_name, href: link)
+
+end
 
 Then /^(?:|I )should see "([^"]*)" appear[s]? "([\d]*)" time[s]?$/ do |text, number|
   regexp = Regexp.new(text)
@@ -181,6 +185,8 @@ Then /^the "([^"]*)" field(?: within (.*))? should not contain "([^"]*)"$/ do |f
     end
   end
 end
+
+
 
 Then /^the "([^"]*)" field should have the error "([^"]*)"$/ do |field, error_message|
   element = find_field(field)
@@ -247,6 +253,10 @@ Then /^the "([^"]*)" checkbox(?: within (.*))? should not be checked$/ do |label
   end
 end
 
+Then(/^I should see the images for "([^"]*)"$/) do |arg1|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
 Then /^the "([^"]*)" radio button(?: within (.*))? should be chosen$/ do |label, parent|
   with_scope(parent) do
     field_checked = find_field(label)['checked']
@@ -293,4 +303,12 @@ end
 
 Then /^show me the page$/ do
   save_and_open_page
+end
+
+Then /^I should( not)? see the image "(.+)"$/ do |not_see, url|
+    if not_see
+        page.should_not have_xpath("//img[@src=\"#{url}\"]")
+    else
+    page.should have_xpath("//img[@src=\"#{url}\"]")
+    end
 end

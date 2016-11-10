@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="page-header">
-            <% if !@tutorial %>
+            <% if !@game.tutorial %>
                 <div class="pull-right">
                     <div class="panel panel-default">
                         <div class="panel-body">
@@ -10,13 +10,13 @@
                     </div>
                 </div>
             <% end %>
-            <h1><small>Play the game:</small> <small class="game-name-header"><%=@title %></small></h1>
+            <h1><small>Play the game:</small> <small class="game-name-header"><%=@game.title %></small></h1>
         </div>
     </div>
     <div class="row top-buffer" style="text-align: center;">
         <div class="panel panel-default">
             <div class="panel-body">
-                <h4><%= @description %></h4>
+                <h4><%= @game.description %></h4>
             </div>
         </div>
     </div>
@@ -31,10 +31,10 @@
             </div>
             <div class="row" style="margin-bottom: 30px">
                  <div class="col-sm-6 col-sm-offset-3">
-                     <span style="text-align: center; word-wrap: break-word;"><%= @descriptionA %></span>
+                     <span style="text-align: center; word-wrap: break-word;"><%= @charityA.description %></span>
                 </div>
             </div>
-            <%= button_to "Donate to #{@charityA}", check_played_path(:id =>@game.id, :charity => @charityA, :show_results => @showResults), :class => "btn btn-primary btn-lg" %>
+            <%= button_to "Donate to #{@charityA.name}", check_played_path(:id =>@game.id, :charity => @charityA, :show_results => @game.show_results), :class => "btn btn-primary btn-lg" %>
         </div>
         <div class="col-lg-6" style="text-align: center; word-wrap: break-word">
             <div style="height: 250px; margin-top: 50px">
@@ -46,10 +46,10 @@
             </div>
             <div class="row" style="margin-bottom: 30px">
                 <div class="col-sm-6 col-sm-offset-3">
-                     <span style="text-align: center; word-wrap: break-word"><%= @descriptionB %></span>
+                     <span style="text-align: center; word-wrap: break-word"><%= @charityB.description %></span>
                 </div>
             </div>
-            <%= button_to "Donate to #{@charityB}", check_played_path(:id =>@game.id, :charity => @charityB, :show_results => @showResults), :class => "btn btn-primary btn-lg" %>
+            <%= button_to "Donate to #{@charityB.name}", check_played_path(:id =>@game.id, :charity => @charityB, :show_results => @game.show_results), :class => "btn btn-primary btn-lg" %>
         </div>
     </div>
 </div>

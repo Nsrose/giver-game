@@ -8,9 +8,9 @@ FactoryGirl.define do
     per_transaction 1.00
     created_at { 10.years.ago }
     updated_at { 2.years.ago }
-    charityA_title 'charity A'
+    charity_a_id 1
     votesA 0
-    charityB_title 'charity B'
+    charity_b_id 2
     votesB 0
   end
 end
