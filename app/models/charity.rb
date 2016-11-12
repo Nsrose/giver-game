@@ -12,7 +12,7 @@ class Charity < ActiveRecord::Base
     validate :remote_image_exists
     
     def remote_image_exists
-      if image_link == nil
+      if !image_link || image_link == ""
         return true
       end
       url = URI.parse(image_link)
