@@ -64,9 +64,9 @@ Scenario: Admin cannot create a default charity with invalid image, charity home
   When I go to the new charity page
   When I fill out the form with values "Title": "New Charity","Description": "charity description","ein": "123","image_link": "fake_url.com","homepage_link": "fake_url.com","donation_link": "fake_url.com"
   When I press "Submit"
-  Then I should see "Image link is not a valid image URL!"
-  Then I should see "The donation page URL cannot be found!"
-  Then I should see "The homepage URL cannot be found"
+  Then I should see "Image link is not a valid image URL."
+  Then I should see "Donation link cannot be found."
+  Then I should see "Homepage link cannot be found."
   And I should be on the new charity page
 
 Scenario: Admin can edit existing default charities 

@@ -4,10 +4,10 @@ class Charity < ActiveRecord::Base
     validates :ein, presence: true
     validates :homepage_link,
             presence: true,
-            format: { with: URI.regexp(%w(http https)), message: "The homepage URL cannot be found!" }
+            format: { with: URI.regexp(%w(http https)), message: "cannot be found" }
     validates :donation_link,
             presence: true,
-            format: { with: URI.regexp(%w(http https)), message: "The donation page URL cannot be found!" }
+            format: { with: URI.regexp(%w(http https)), message: "cannot be found" }
 
     validate :remote_image_exists
     
@@ -26,9 +26,17 @@ class Charity < ActiveRecord::Base
             end
           end
       rescue
-        errors.add(:image_link, "is not a valid image URL!")
+        errors.add(:image_link, "is not a valid image URL")
         return false
       end
       return true
+    end
+    
+    def generate_error_message()
+      totalMessage = ""
+        self.errors.messages.each do |key, message|
+          totalMessage += "#{key.to_s().tr('_', ' ').capitalize} #{message.join(" and ")}. "
+        end
+      return totalMessage
     end
 end
