@@ -80,7 +80,7 @@ Given(/^some charities exist$/) do
                 {
                   :name => 'Schistosomiasis Control Initiative (SCI)',
                   :description => sci_description, :ein => '20-8625442',
-                  :image_link => 'http://www3.imperial.ac.uk/newseventsimages?p_image_type=mainnews2012&p_image_id=35469',
+                  :image_link => 'https://www.againstmalaria.com/images/logo_AMF.gif',
                   :homepage_link => 'https://www.imperial.ac.uk/schistosomiasis-control-initiative',
                   :donation_link => 'http://www.imperial.ac.uk/schistosomiasis-control-initiative/donate/'
                 }, 
