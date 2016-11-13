@@ -50,5 +50,5 @@ Feature: Improvements to the create game page
   Scenario: Goal amount and per-person amount should be centered
     Given I am logged in as "j0e@tr8er.org" with password "TRAITORJOE"
     When I am on the new games page
-    Then I should see "Goal Amount of Money to Reach" centered
-    And I should see "Per Person Amount" centered
+    Then I should see "Goal Amount of Money to Reach" in "goal" centered
+    And I should see "Per Person Amount" in "per_person" centered

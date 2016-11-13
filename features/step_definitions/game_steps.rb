@@ -88,8 +88,8 @@ Then /^I should see "(.*)" in my table$/ do |game|
   table_results.should have_content(game)
 end
 
-Then /^I should see "(.*)" centered/ do |text|
-  within('.text-center') do
+Then /^I should see "(.*)" in "(.*)" centered/ do |text, field|
+  within('.text-center #%s' % [field]) do
     page.should have_content(text)
   end
 end
