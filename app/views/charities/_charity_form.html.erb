@@ -12,8 +12,11 @@
     <div class='field-form-group'><%= text_field :charity, :ein, id: 'ein', size: '35' %></div>
 </div>
 <div class="row">
-    <div class=form-header>Image URL</div>
-    <div class='field-form-group'><%= text_field :charity, :image_link, id: 'image_link', size: '350' %></div>
+    <div class=form-header>Image URL </div>
+    <div class='field-form-group'>    
+        <i>The Image URL must end in gif, png, jpeg, or jpg</i>
+        <br><%= text_field :charity, :image_link, id: 'image_link', size: '350' %>
+    </div>
 </div>
     
 <!--Add something to show the image here -->

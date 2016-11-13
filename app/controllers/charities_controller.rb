@@ -28,10 +28,7 @@ class CharitiesController < ApplicationController
            flash[:success] = "#{@charity.name} was Successfully Created."
            redirect_to charities_path
        else
-           totalMessage = ""
-           @charity.errors.messages.each do |key, message|
-               totalMessage += "#{key.to_s().gsub('_', ' ').capitalize} #{message.join("', and'")}; "
-           end
+           totalMessage = @charity.generate_error_message
            flash[:danger] = totalMessage
            session[:charity] = @charity
            redirect_to new_charity_path()

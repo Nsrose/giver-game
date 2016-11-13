@@ -23,7 +23,6 @@ require 'uri'
 require 'cgi'
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "paths"))
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "selectors"))
-
 module WithinHelpers
   def with_scope(locator)
     locator ? within(*selector_for(locator)) { yield } : yield
@@ -124,7 +123,7 @@ Then /^(?:|I )should see "([^"]*)"$/ do |text|
 end
 
 Then(/^I should see the link named "([^"]*)" to "([^"]*)"$/) do |link_name, url| 
-    expect(page).to have_link(link_name, href: link)
+    expect(page).to have_link(link_name, href: url)
 
 end
 
@@ -312,3 +311,8 @@ Then /^I should( not)? see the image "(.+)"$/ do |not_see, url|
     page.should have_xpath("//img[@src=\"#{url}\"]")
     end
 end
+
+Then /^I should see an image with the class "(.*)"$/ do |className|
+  page.should have_css("img." + className);
+end
+

@@ -9,8 +9,8 @@ Background:
             | Daniel        | lollolol |  lollolol            |  daniel@gmail.com     |     true    |
             | Joe           | password |  password            |  joe@gmail.com        |     false   |
     Given the following charities exist:
-            |name       | ein | description           |donation_link  |
-            |charity1   | 492 | charity1 description  |link           |
+            |name       | ein | description           |donation_link    | homepage_link |
+            |charity1   | 492 | charity1 description  |http://google.com| http://gmail.com|
 
 Scenario: Non-Admin cannot view existing default charities
   Given I am logged in as "joe@gmail.com" with password "password"
@@ -54,9 +54,9 @@ Scenario: Admin can create new default charities
 Scenario: Admin cannot create a default charity with an image_link with the wrong extension
   Given I am logged in as "daniel@gmail.com" with password "lollolol"
   When I go to the new charity page
-  When I fill out the form with values "Title": "New Charity","Description": "charity description","ein": "123","image_link": "jeffnash.net/JeffNashResume.pdf","homepage_link": "https://www.google.com","donation_link": "https://www.google.com"
+  When I fill out the form with values "Title": "New Charity","Description": "charity description","ein": "123","image_link": "https://www.irs.gov/pub/irs-pdf/fw2.pdf","homepage_link": "https://www.google.com","donation_link": "https://www.google.com"
   When I press "Submit"
-  Then I should see "image url has the wrong extension"
+  Then I should see "Image link is not a valid image URL!"
   And I should be on the new charity page
   
 Scenario: Admin cannot create a default charity with invalid image, charity homepage, and charity donation page. 
@@ -64,9 +64,9 @@ Scenario: Admin cannot create a default charity with invalid image, charity home
   When I go to the new charity page
   When I fill out the form with values "Title": "New Charity","Description": "charity description","ein": "123","image_link": "fake_url.com","homepage_link": "fake_url.com","donation_link": "fake_url.com"
   When I press "Submit"
-  Then I should see "The image url cannot be found"
-  Then I should see "The home page url cannot be found"
-  Then I should see "The donation page url cannot be found"
+  Then I should see "Image link is not a valid image URL."
+  Then I should see "Donation link cannot be found."
+  Then I should see "Homepage link cannot be found."
   And I should be on the new charity page
 
 Scenario: Admin can edit existing default charities 

@@ -29,7 +29,7 @@ FactoryGirl.define do
     name 'Against Malaria Foundation'
     description "Description"
     ein '20-3069841'
-    image_link 'https://www.againstmalaria.com/images/logo_AMF.gif'
+    image_link 'http://www.againstmalaria.com/images/logo_AMF_Square.png'
     homepage_link 'https://www.againstmalaria.com/Default.aspx'
     donation_link 'https://www.againstmalaria.com/donate.aspx?GroupID=81'
   end
