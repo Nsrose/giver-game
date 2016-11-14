@@ -135,6 +135,18 @@ class GamesController < ApplicationController
     @charityVotedFor = params[:charity]
   end
   
+  def show_results_if_played(game)
+    if current_user.has_played_game?(game)
+      flash[:warning] = "You have already played that game."
+      if game.show_results
+        redirect_to results_path(:resource_id => game.resource_id) and return true
+      else
+        redirect_to play_index_path and return true
+      end
+    end
+    return false
+  end
+  
   def play_game
     chosen_game = GivingGame.where(:resource_id => params[:resource_id])[0]
 
@@ -143,6 +155,9 @@ class GamesController < ApplicationController
       redirect_to new_user_session_path
     else
       @game = chosen_game
+      if !chosen_game.tutorial
+        show_results_if_played(chosen_game)
+      end
       @charityA = @game.charity_a
       @charityB = @game.charity_b
       if @game.expiration_time?
@@ -163,13 +178,8 @@ class GamesController < ApplicationController
   def check_if_played_and_reroute
     game = GivingGame.find(params[:id])
     
-    if !game.tutorial
-      if current_user.has_played_game?(game)
-        flash[:warning] = "You have already played that game."
-        redirect_to play_index_path and return
-      else
-          current_user.add_to_played_giving_games(game)
-      end
+    if !game.tutorial and !show_results_if_played(game)
+      current_user.add_to_played_giving_games(game)
     end
 
     charity = params[:charity]
@@ -177,7 +187,7 @@ class GamesController < ApplicationController
     game.check_total_money
 
     if game.show_results
-      redirect_to results_path(:resource_id => game.resource_id, :charity => charity)
+      redirect_to results_path(:resource_id => game.resource_id)
     else
       redirect_to play_index_path(:charity => charity)
     end
@@ -197,7 +207,6 @@ class GamesController < ApplicationController
   
   def results
     @game = GivingGame.where(:resource_id => params[:resource_id]).first
-    # @game = populateCharityInfo(@game)
     @charityVotedFor = params[:charity]
     @charityA = @game.charity_a
     @charityB = @game.charity_b
@@ -208,8 +217,7 @@ class GamesController < ApplicationController
     
     @current_moneyA = @game.current_moneyA
     @current_moneyB = @game.current_moneyB
+    @remaining_money = @game.total_money - (@game.current_moneyA + @game.current_moneyB)
   end
-  
-  
-  
+
 end
