@@ -18,48 +18,69 @@
             <h1><small>Results:</small> <small class="game-name-header"><%=@game.title %></small></h1>
         </div>
     </div>
-    <div class="row top-buffer" style="text-align: center">
-         <div class="panel panel-default">
-            <div class="panel-body">
-                <% if @leadingCharity == nil %>
-                    <h3>The votes are tied!</h3>
-                <% elsif @game.expired %>
-                    <h3>Winning Charity: <%= @leadingCharit.name %></h3>
-                <% else %>
-                    <h3>Leading Charity: <%= @leadingCharity.name %></h3>
-                <% end %> 
+    <div class="row">
+        <div class="col-md-4">
+            <div style="display: flex; flex-direction: column; align-items: center">
+                <h3 style="min-height: 70px"><%= @charityA.name %></h3>
+                <div style="display: flex; align-items: center; height: 150px; max-width: 50%; margin: auto">
+                    <% if @charityA.image_link == nil || @charityA.image_link == ""  %>
+                        <%= image_tag asset_path("default-image1.png"), :style => "width: 200px; max-height: 100%", :class =>"default_image_A"%>
+                    <% else %>
+                        <%= image_tag @charityA.image_link, :style => "width: 100%; max-height: 100%"%>
+                    <% end %>
+                </div>
+                <div class="progress progress-bar-vertical" style="width:60px; margin:0">
+                    <div class="progress-bar progress-bar-success progress-bar-striped active"
+                        role="progressbar"
+                        aria-valuenow="<%= @current_moneyA %>"
+                        aria-valuemin="0" 
+                        aria-valuemax="<%= @game.total_money %>"
+                        style="height:<%= (@current_moneyA*100 / @game.total_money) %>%"></div>
+                </div>
+                <div style="padding: 10px"><%= number_to_currency(@current_moneyA) %></div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div style="display: flex; flex-direction: column; align-items: center">
+                <h3 style="min-height: 70px">Money Remaining</h3>
+                <div style="display: flex; align-items: center; height: 150px; max-width: 50%; margin: auto"></div>
+                <div class="progress progress-bar-vertical" style="width:60px; margin:0">
+                    <div class="progress-bar progress-bar-success progress-bar-striped active"
+                        role="progressbar"
+                        aria-valuenow="<%= @remaining_money %>"
+                        aria-valuemin="0"
+                        aria-valuemax="<%= @total_money %>"
+                        style="height:<%= (@remaining_money*100 / @game.total_money) %>%">
+                    </div>
+                </div>
+                <div style="padding: 10px"><%= number_to_currency(@remaining_money) %></div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div style="display: flex; flex-direction: column; align-items: center">
+                <h3 style="min-height: 70px"><%= @charityB.name %></h3>
+                <div style="display: flex; align-items: center; height: 150px; max-width: 50%; margin: auto">
+                    <% if @charityB.image_link == nil || @charityB.image_link == ""  %>
+                        <%= image_tag asset_path("default-image2.png"), :style => "width: 200px; max-height: 100%", :class =>"default_image_B"%>
+                    <% else %>
+                        <%= image_tag @charityB.image_link, :style => "width: 100%; max-height: 100%"%>
+                    <% end %>
+                </div>
+                <div class="progress progress-bar-vertical" style="width:60px; margin:0">
+                    <div class="progress-bar progress-bar-success progress-bar-striped active"
+                    role="progressbar"
+                    aria-valuenow="<%= @current_moneyB %>"
+                    aria-valuemin="0"
+                    aria-valuemax="<%= @game.total_money %>"
+                    style="height:<%= (@current_moneyB*100 / @game.total_money) %>%"></div>
+                </div>
+                <div style="padding: 10px"><%= number_to_currency(@current_moneyB) %></div>
             </div>
         </div>
     </div>
-    <% if current_user.present? and current_user.id == @game.user_id %>
-        <div class="row">
-            <h5><%= @charityA.name %></h5>
-            <div class="progress">
-              <div class="progress-bar <%= 'progress-bar-success' if @leadingCharity == @charityA %><%= 'progress-bar-danger' if @leadingCharity == @charityB %><%= 'progress-bar-info' if @leadingCharity == nil %>" role="progressbar" aria-valuenow="<%= @votes_progressA %>" aria-valuemin="0" aria-valuemax="<%= @total_money %>" style="width: <%= @votes_progressA %>%">
-                <%= number_to_currency(@current_moneyA) %>/<%= number_to_currency(@game.total_money) %>
-              </div>
-            </div>
-        </div>
-        <div class="row">
-            <h5><%= @charityB.name %></h5>
-            <div class="progress">
-              <div class="progress-bar <%= 'progress-bar-success' if @leadingCharity == @charityB %><%= 'progress-bar-danger' if @leadingCharity == @charityA %><%= 'progress-bar-info' if @leadingCharity == nil %>" role="progressbar" aria-valuenow="<%= @votes_progressB %>" aria-valuemin="0" aria-valuemax="<%= @total_money %>" style="width: <%= @votes_progressB %>%">
-                <%= number_to_currency(@current_moneyB) %>/<%= number_to_currency(@game.total_money) %>
-              </div>
-            </div>
-        </div>
-    <% end %>
-    <div class="row top-buffer">
-        <div class="col-lg-6" style="text-align: center">
-            <button class="btn <%= 'btn-success' if @leadingCharity == @charityA %><%= 'btn-danger' if @leadingCharity == @charityB %><%= 'btn-primary' if @leadingCharity == nil %> btn-lg" type="button">
-              Votes for <%= @charityA.name %>: <span class="badge left-buffer"><%= @game.votesA %></span>
-            </button>
-        </div>
-        <div class="col-lg-6" style="text-align: center">
-            <button class="btn <%= 'btn-success' if @leadingCharity == @charityB %><%= 'btn-danger' if @leadingCharity == @charityA %><%= 'btn-primary' if @leadingCharity == nil %> btn-lg" type="button">
-              Votes for <%= @charityB.name %>: <span class="badge left-buffer"><%= @game.votesB %></span>
-            </button>
-        </div>
+    <div class="well" style="margin:100px">
+        <div>There is still <%= number_to_currency(@remaining_money) %> remaining to donate. 
+        Please share this link so that your friends can vote on the remaining money!</div>
     </div>
 </div>
 

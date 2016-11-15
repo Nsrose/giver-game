@@ -109,7 +109,7 @@ Given(/^some charities exist$/) do
                ]
   
   charities.each do |game|
-      Charity.create!(game)
+    Charity.create!(game)
   end
 end
 
