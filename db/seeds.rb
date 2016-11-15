@@ -141,22 +141,14 @@ end
 
 
 userObj = {
-    :email => 'jo@trader.com',
-    :username => 'Trader_Joe123',
-}
-userObjNew = {
     :password => 'lulzlulz',
     :password_confirmation => 'lulzlulz',
     :giving_games => GivingGame.all,
     :email => 'jo@trader.com',
     :username => 'Trader_Joe123'
 }
+
 adminObj = {
-    :email => 'admin@givinggame.com',
-    :username => 'Admin',
-    :is_admin => true
-}
-adminObjNew = {
     :email => 'admin@givinggame.com',
     :password => 'gameadmin123',
     :password_confirmation => 'gameadmin123',
@@ -165,16 +157,5 @@ adminObjNew = {
     :is_admin => true
 }
 
-if (User.where(userObj).length == 0)
-  user = User.create!(userObjNew ) # this is a syntax error, can't put the ! after this for some reason
-else
-  user = User.where(userObj)[0]
-  user.update_attributes(userObjNew)
-end
-
-if (User.where(adminObj).length == 0)
-  admin = User.create!(adminObjNew)
-else
-  admin = User.where(adminObj)[0]
-  admin.update_attributes(adminObjNew)
-end
+User.where(email: userObj[:email]).first_or_create!.update_attributes!(userObj)
+User.where(email: adminObj[:email]).first_or_create!.update_attributes!(adminObj)
