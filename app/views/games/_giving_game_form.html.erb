@@ -5,7 +5,7 @@
          console.log(parent);
          
          id = $("option:selected", this).val();
-         str = "#charity-" + id;
+         str = "#charity-" + id + "-" + myparent.attr('id');
          $(".charity_info", myparent).hide();
          $(str, myparent).show();
      });
@@ -35,26 +35,34 @@
             <div class='field-form-group'><%= text_area :game, :description, id: 'Description', rows: "7", cols: "100"%></div>
             </div>
             <div class="row">
-                <div class="col-sm-6 charity_selector">
+                <div class="col-sm-6 charity_selector" id="A">
                 <div class=form-header>Charity A</div>
                 <div class='field-form-group'><%= collection_select(:game, :charity_a_id, @defaultCharities, :id, :name, { :selected => @game.charity_a_id })%></div>
 
                 <% @defaultCharities.each do |charity| %>
                 <center>
-                <div class="charity_info" id="charity-<%= charity.id %>" style="display: none;">
-                    <img src="<%= charity.image_link %>" style="display: block; width: 50%;">
+                <div class="charity_info" id="charity-<%= charity.id %>-A" style="display: none;">
+                    <% if charity.image_link == nil || charity.image_link == "" %>
+                        <%= image_tag asset_path("default-image1.png"), :style => "display: block; width: 50%;" %>
+                    <% else %>
+                        <%= image_tag charity.image_link, :style => "display: block; width: 50%;" %>
+                    <% end %>
                     <%= charity.description %>
                 </div>
                 </center>
                 <% end %>
                 </div>
-                <div class="col-sm-6 charity_selector">
+                <div class="col-sm-6 charity_selector" id="B">
                 <div class=form-header>Charity B</div>
                     <div class='field-form-group'><%= collection_select(:game, :charity_b_id, @defaultCharities, :id, :name, { :selected => @game.charity_b_id })%></div>
                 <% @defaultCharities.each do |charity| %>
                 <center>
-                <div class="charity_info" id="charity-<%= charity.id %>" style="display: none;">
-                    <img src="<%= charity.image_link %>" style="display: block; width: 50%;">
+                <div class="charity_info" id="charity-<%= charity.id %>-B" style="display: none;">
+                    <% if charity.image_link == nil || charity.image_link == "" %>
+                        <%= image_tag asset_path("default-image1.png"), :style => "display: block; width: 50%;" %>
+                    <% else %>
+                        <%= image_tag charity.image_link, :style => "display: block; width: 50%;" %>
+                    <% end %>
                     <%= charity.description %>
                 </div>
                 </center>
