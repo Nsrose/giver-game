@@ -252,9 +252,6 @@ Then /^the "([^"]*)" checkbox(?: within (.*))? should not be checked$/ do |label
   end
 end
 
-Then(/^I should see the images for "([^"]*)"$/) do |arg1|
-  pending # Write code here that turns the phrase above into concrete actions
-end
 
 Then /^the "([^"]*)" radio button(?: within (.*))? should be chosen$/ do |label, parent|
   with_scope(parent) do
@@ -302,6 +299,14 @@ end
 
 Then /^show me the page$/ do
   save_and_open_page
+end
+
+Then(/^I should see the images for "([^"]*)"$/) do |arg1|
+  game = GivingGame.where(:title => arg1).first
+  charityA = game.charity_a
+  charityB = game.charity_b
+  step "I should see the image \"#{charityA.image_link}\""
+  step "I should see the image \"#{charityB.image_link}\""
 end
 
 Then /^I should( not)? see the image "(.+)"$/ do |not_see, url|
