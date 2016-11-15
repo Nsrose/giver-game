@@ -43,6 +43,7 @@ class GamesController < ApplicationController
   def new
     if current_user.nil?
       flash[:warning] = "You must be logged in to create a new giving game."
+      session[:user_return_to] = new_game_path
       redirect_to new_user_session_path
     end
     @defaultCharities = Charity.all
@@ -152,6 +153,7 @@ class GamesController < ApplicationController
 
     if current_user.nil? and !chosen_game.tutorial?
       flash[:warning] = "You must be logged in to play an actual giving game."
+      session[:user_return_to] = play_game_path(:resource_id => params[:resource_id])
       redirect_to new_user_session_path
     else
       @game = chosen_game
