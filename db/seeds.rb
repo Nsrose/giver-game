@@ -60,6 +60,7 @@ charities = [
 charities.each do |charity|
   existing_charity = Charity.where(:name => charity[:name])
   if existing_charity.present?
+    existing_charity = existing_charity.first
     existing_charity.update_attributes!(charity)
   else
     Charity.create!(charity)
@@ -141,11 +142,17 @@ games = [
 # end
 
 games.each do |game|
-    GivingGame.where(title: game[:title]).first_or_create!.update_attributes!(game)
+    existing_game = GivingGame.where(:title => game[:title])
+    if existing_game.present?
+      existing_game = existing_game.first
+      existing_game.update_attributes!(game)
+    else
+      GivingGame.create!(game)
+    end
 end
 
 
-userObj = {
+user_obj = {
     :password => 'lulzlulz',
     :password_confirmation => 'lulzlulz',
     :giving_games => GivingGame.all,
@@ -153,7 +160,7 @@ userObj = {
     :username => 'Trader_Joe123'
 }
 
-adminObj = {
+admin_obj = {
     :email => 'admin@givinggame.com',
     :password => 'gameadmin123',
     :password_confirmation => 'gameadmin123',
@@ -162,5 +169,18 @@ adminObj = {
     :is_admin => true
 }
 
-User.where(email: userObj[:email]).first_or_create!.update_attributes!(userObj)
-User.where(email: adminObj[:email]).first_or_create!.update_attributes!(adminObj)
+existing_user = User.where(:email => user_obj[:email])
+if existing_user.present?
+  existing_user = existing_user.first
+  existing_user.update_attributes!(user_obj)
+else
+  User.create!(user_obj)
+end
+
+existing_admin = User.where(:email => admin_obj[:email])
+if existing_admin.present?
+  existing_admin = existing_admin.first
+  existing_admin.update_attributes!(admin_obj)
+else
+  User.create!(admin_obj)
+end
