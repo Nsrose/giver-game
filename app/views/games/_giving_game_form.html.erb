@@ -1,9 +1,4 @@
- <script>
-//     $(document).on('ready page:load', function () {
-//     tinymce.remove();
-//     tinymce.init({selector:'textarea'});
-//     });    
- </script>
+<%= javascript_include_tag "create_game.js" %>
 
 
             <div class="row">
@@ -18,49 +13,55 @@
               <%= radio_button(:game, :is_private, false, :id=>"public_game", checked: !@game.is_private) %>
               <%= label_tag(:public, "Public game") %>
               <small>Your game will be listed publicly and can be played by anyone.</small>
-
-              <!--<%= radio_button_tag("game[game_access_level]", "private", true, :id=>"private_game") %>-->
-              <!--<%= label_tag(:private, "Private game") %>-->
-
-              <!--<br>-->
-              <!--<%= radio_button_tag("game[game_access_level]", "public", false, :id=>"public_game") %>-->
-              <!--<%= label_tag(:public, "Public game") %>-->
-
-
+              
             </div>
-
-
             <div class=form-header>Description</div>
             <div class='field-form-group'><%= text_area :game, :description, id: 'Description', rows: "7", cols: "100"%></div>
             </div>
-
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-6 charity_selector" id="A">
                 <div class=form-header>Charity A</div>
                 <div class='field-form-group'><%= collection_select(:game, :charity_a_id, @defaultCharities, :id, :name, { :selected => @game.charity_a_id })%></div>
-                                <!-- <div class="form-header">Charity A Image</div> -->
-                <!--<div class="field-form-group"><%= file_field :game, :charityA_image, id: 'CharityA-Image' %></div> -->
-                <!-- <div class="field-form-group"><%= hidden_field :game, :charityA_image_cache, id: 'CharityA-Image-hidden' %></div> -->
+
+                <% @defaultCharities.each do |charity| %>
+                <center>
+                <div class="charity_info" id="charity-<%= charity.id %>-A" style="display: none;">
+                    <% if charity.image_link == nil || charity.image_link == "" %>
+                        <%= image_tag asset_path("default-image1.png"), :style => "display: block; width: 50%;" %>
+                    <% else %>
+                        <%= image_tag charity.image_link, :style => "display: block; width: 50%;" %>
+                    <% end %>
+                    <%= charity.description %>
                 </div>
-                
-                <div class="col-sm-6">
+                </center>
+                <% end %>
+                </div>
+                <div class="col-sm-6 charity_selector" id="B">
                 <div class=form-header>Charity B</div>
                     <div class='field-form-group'><%= collection_select(:game, :charity_b_id, @defaultCharities, :id, :name, { :selected => @game.charity_b_id })%></div>
-
-                <!-- <div class="form-header">Charity B Image</div> -->
-                <!--<div class="field-form-group"><%= file_field :game, :charityB_image, id: 'CharityB-Image' %></div> -->
-                <!-- <div class="field-form-group"><%= hidden_field :game, :charityB_image_cache, id: 'CharityB-Image-hidden'%></div> -->
+                <% @defaultCharities.each do |charity| %>
+                <center>
+                <div class="charity_info" id="charity-<%= charity.id %>-B" style="display: none;">
+                    <% if charity.image_link == nil || charity.image_link == "" %>
+                        <%= image_tag asset_path("default-image2.png"), :style => "display: block; width: 50%;" %>
+                    <% else %>
+                        <%= image_tag charity.image_link, :style => "display: block; width: 50%;" %>
+                    <% end %>
+                    <%= charity.description %>
+                </div>
+                </center>
+                <% end %>
                 </div>
             </div>
             
             <div class="row">
                 <div class="text-center">
-                <div class=form-header>Goal Amount of Money to Reach</div>
+                <div class=form-header id="goal">Goal Amount of Money to Reach</div>
                 <div class='field-form-group'><%= text_field :game, :total_money, id: 'TotalMoney' %></div>
                 </div>
                 
                 <div class="text-center">
-                <div class=form-header>Per Person Amount</div>
+                <div class=form-header id="per_person">Per Person Amount</div>
                 <div class='field-form-group'><%= text_field :game, :per_transaction, id: 'AmountPerVote' %></div>
                 </div>
             </div>
