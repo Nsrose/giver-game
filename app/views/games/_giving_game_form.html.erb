@@ -29,15 +29,11 @@
               <%= radio_button(:game, :is_private, false, :id=>"public_game", checked: !@game.is_private) %>
               <%= label_tag(:public, "Public game") %>
               <small>Your game will be listed publicly and can be played by anyone.</small>
-
-
+              
             </div>
-
-
             <div class=form-header>Description</div>
             <div class='field-form-group'><%= text_area :game, :description, id: 'Description', rows: "7", cols: "100"%></div>
             </div>
-
             <div class="row">
                 <div class="col-sm-6 charity_selector">
                 <div class=form-header>Charity A</div>
