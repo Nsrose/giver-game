@@ -1,15 +1,4 @@
- <script>
- change_func = function() {
-         myparent = $(this).closest(".charity_selector");
-         id = $("option:selected", this).val();
-         str = "#charity-" + id + "-" + myparent.attr('id');
-         $(".charity_info", myparent).hide();
-         $(str, myparent).show();
-     });
- $(document).ready(function() {
-     $("select").change(change_func);
- });
- </script>
+<%= javascript_include_tag "create_game.js" %>
 
 
             <div class="row">
@@ -54,7 +43,7 @@
                 <center>
                 <div class="charity_info" id="charity-<%= charity.id %>-B" style="display: none;">
                     <% if charity.image_link == nil || charity.image_link == "" %>
-                        <%= image_tag asset_path("default-image1.png"), :style => "display: block; width: 50%;" %>
+                        <%= image_tag asset_path("default-image2.png"), :style => "display: block; width: 50%;" %>
                     <% else %>
                         <%= image_tag charity.image_link, :style => "display: block; width: 50%;" %>
                     <% end %>
