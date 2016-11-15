@@ -19,7 +19,7 @@ Feature: Improvements to the create game page
   Scenario: Show charity info when selecting two charities
     Given I am logged in as "j0e@tr8er.org" with password "TRAITORJOE"
     When I am on the new games page
-    And I select "Against Malaria Foundation" from "game_default_charity_a"
+    And I select "Against Malaria Foundation" from "game_charity_a_id"
     Then I should see "Malaria is one of the leading killers"
     And I should see the image "https://www.againstmalaria.com/images/logo_AMF.gif"
     And I select "Schistosomiasis Control Initiative (SCI)" from "game_default_charity_b"
@@ -29,12 +29,12 @@ Feature: Improvements to the create game page
   Scenario: Charity info should be dynamic
     Given I am logged in as "j0e@tr8er.org" with password "TRAITORJOE"
     When I am on the new games page
-    And I select "Against Malaria Foundation" from "game_default_charity_a"
+    And I select "Against Malaria Foundation" from "game_charity_a_id"
     Then I should see "Malaria is one of the leading killers"
     And I should not see "GiveDirectly transfers cash to"
     And I should see the image "https://www.againstmalaria.com/images/logo_AMF.gif"
     And I should not see the image "https://cdn.givedirectly.org/8fa1cf088be076b2943084a6efe2b7ab/asic-income-link.jpg"
-    Then I select "GiveDirectly" from "game_default_charity_a"
+    Then I select "GiveDirectly" from "game_charity_a_id"
     And I should see "GiveDirectly transfers cash to"
     And I should not see "Malaria is one of the leading killers"
     And I should see the image "https://cdn.givedirectly.org/8fa1cf088be076b2943084a6efe2b7ab/basic-income-link.jpg"
@@ -43,12 +43,12 @@ Feature: Improvements to the create game page
   Scenario: Default image should display for charities without an image
     Given I am logged in as "j0e@tr8er.org" with password "TRAITORJOE"
     When I am on the new games page
-    And I select "CharityNoImage" from "game_default_charity_a"
+    And I select "CharityNoImage" from "game_charity_a_id"
     Then I should see "A Charity without an image"
     And I should see the image "./assets/images/default-image1.png"
 
   Scenario: Goal amount and per-person amount should be centered
     Given I am logged in as "j0e@tr8er.org" with password "TRAITORJOE"
     When I am on the new games page
-    Then I should see "Goal Amount of Money to Reach" centered
-    And I should see "Per Person Amount" centered
+    Then I should see "Goal Amount of Money to Reach" in "goal" centered
+    And I should see "Per Person Amount" in "per_person" centered
