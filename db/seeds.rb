@@ -27,7 +27,7 @@ charities = [
         :name => 'Against Malaria Foundation',
         :description => malaria_description,
         :ein => '20-3069841',
-        :image_link => 'https://www.againstmalaria.com/images/logo_AMF.gif',
+        :image_link => 'http://www.againstmalaria.com/images/logo_AMF_Square.png',
         :homepage_link => 'https://www.againstmalaria.com/Default.aspx',
         :donation_link => 'https://www.againstmalaria.com/donate.aspx?GroupID=81'
     },
@@ -55,7 +55,7 @@ charities = [
 ]
 
 charities.each do |charity|
-  Charity.where(charity).first_or_create!
+  Charity.where(charity).first_or_create!.update_attributes!(charity)
 end
 
 charA = Charity.all[0].id
