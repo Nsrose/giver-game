@@ -18,7 +18,7 @@ Feature: Display votes
     Then I should be on the game page for "Game 1"
     And I press "Donate to GiveDirectly"
     Then I should be on the results page for "Game 1"
-    And I should see "Votes for GiveDirectly: 1"
+    And I should see "GiveDirectly $1.00"
 
   Scenario: Selecting one charity and confirming the votes for the other charity did not increase
     When I follow "Play a giving game"
@@ -28,7 +28,7 @@ Feature: Display votes
     When I follow "Game 1" in my table
     And I press "Donate to Against Malaria Foundation"
     Then I should be on the results page for "Game 1"
-    And I should see "Votes for GiveDirectly: 0"
+    And I should see "GiveDirectly $0.00"
 
   Scenario: Should not be able to view results if the option is not selected
     When I follow "Play a giving game"
