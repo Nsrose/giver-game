@@ -58,7 +58,12 @@ charities = [
 ]
 
 charities.each do |charity|
-  Charity.where(name: charity[:name]).first_or_create!.update_attributes!(charity)
+  existing_charity = Charity.where(:name => charity[:name])
+  if existing_charity.present?
+    existing_charity.update_attributes!(charity)
+  else
+    Charity.create!(charity)
+  end
 end
 
 charA = Charity.all[0].id
