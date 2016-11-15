@@ -35,8 +35,7 @@ Feature: As a user who wants to play
     And I should be on the results page for "Game 1"
     When I follow "Go to Games List"
     And I follow "Game 1" in my table
-    And I press "Donate to GiveDirectly"
-    Then I should be on the existing games page
+    Then I should be on the results page for "Game 1"
     And I should see "You have already played that game"
 
   Scenario: Only users should be able to play a game
