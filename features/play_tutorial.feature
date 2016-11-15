@@ -19,5 +19,5 @@ Feature: Play a tutorial
     And The game "Tutorial" should be able to show results
     And I press "Donate to Against Malaria Foundation"
     Then I should be on the results page for "Tutorial"
-    And I should see "Leading Charity: Against Malaria Foundation"
+  
 

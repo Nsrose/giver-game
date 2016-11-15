@@ -43,6 +43,7 @@ class GamesController < ApplicationController
   def new
     if current_user.nil?
       flash[:warning] = "You must be logged in to create a new giving game."
+      session[:user_return_to] = new_game_path
       redirect_to new_user_session_path
     end
     @defaultCharities = Charity.all
@@ -135,14 +136,30 @@ class GamesController < ApplicationController
     @charityVotedFor = params[:charity]
   end
   
+  def show_results_if_played(game)
+    if current_user.has_played_game?(game)
+      flash[:warning] = "You have already played that game."
+      if game.show_results
+        redirect_to results_path(:resource_id => game.resource_id) and return true
+      else
+        redirect_to play_index_path and return true
+      end
+    end
+    return false
+  end
+  
   def play_game
     chosen_game = GivingGame.where(:resource_id => params[:resource_id])[0]
 
     if current_user.nil? and !chosen_game.tutorial?
       flash[:warning] = "You must be logged in to play an actual giving game."
+      session[:user_return_to] = play_game_path(:resource_id => params[:resource_id])
       redirect_to new_user_session_path
     else
       @game = chosen_game
+      if !chosen_game.tutorial
+        show_results_if_played(chosen_game)
+      end
       @charityA = @game.charity_a
       @charityB = @game.charity_b
       if @game.expiration_time?
@@ -163,13 +180,8 @@ class GamesController < ApplicationController
   def check_if_played_and_reroute
     game = GivingGame.find(params[:id])
     
-    if !game.tutorial
-      if current_user.has_played_game?(game)
-        flash[:warning] = "You have already played that game."
-        redirect_to play_index_path and return
-      else
-          current_user.add_to_played_giving_games(game)
-      end
+    if !game.tutorial and !show_results_if_played(game)
+      current_user.add_to_played_giving_games(game)
     end
 
     charity = params[:charity]
@@ -177,7 +189,7 @@ class GamesController < ApplicationController
     game.check_total_money
 
     if game.show_results
-      redirect_to results_path(:resource_id => game.resource_id, :charity => charity)
+      redirect_to results_path(:resource_id => game.resource_id)
     else
       redirect_to play_index_path(:charity => charity)
     end
@@ -197,7 +209,6 @@ class GamesController < ApplicationController
   
   def results
     @game = GivingGame.where(:resource_id => params[:resource_id]).first
-    # @game = populateCharityInfo(@game)
     @charityVotedFor = params[:charity]
     @charityA = @game.charity_a
     @charityB = @game.charity_b
@@ -208,8 +219,7 @@ class GamesController < ApplicationController
     
     @current_moneyA = @game.current_moneyA
     @current_moneyB = @game.current_moneyB
+    @remaining_money = @game.total_money - (@game.current_moneyA + @game.current_moneyB)
   end
-  
-  
-  
+
 end

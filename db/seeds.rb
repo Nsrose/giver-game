@@ -33,13 +33,16 @@ charities = [
     },
     {
         :name => 'Schistosomiasis Control Initiative (SCI)',
-        :description => sci_description, :ein => '20-8625442',
-        :image_link => 'http://www3.imperial.ac.uk/newseventsimages?p_image_type=mainnews2012&p_image_id=35469',
+        :description => sci_description, 
+        :ein => '20-8625442',
+        :image_link => 'http://www.goodventures.org/images/grants/SCI-treatment.jpeg',
         :homepage_link => 'https://www.imperial.ac.uk/schistosomiasis-control-initiative',
         :donation_link => 'http://www.imperial.ac.uk/schistosomiasis-control-initiative/donate/'},
     {
         :name => 'Deworm the World Initiative',
-        :description => deworm_description, :ein => '26-3455539',
+        :description => deworm_description, 
+        :ein => '26-3455539',
+        :image_link => 'http://altruismoeficaz.info/wp-content/uploads/2015/07/deworm_logo.jpg',
         :homepage_link => 'http://www.evidenceaction.org/dewormtheworld/',
         :donation_link => 'https://give.evidenceaction.org'
 

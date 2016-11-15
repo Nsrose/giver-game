@@ -23,7 +23,6 @@ require 'uri'
 require 'cgi'
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "paths"))
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "selectors"))
-
 module WithinHelpers
   def with_scope(locator)
     locator ? within(*selector_for(locator)) { yield } : yield
@@ -124,7 +123,7 @@ Then /^(?:|I )should see "([^"]*)"$/ do |text|
 end
 
 Then(/^I should see the link named "([^"]*)" to "([^"]*)"$/) do |link_name, url| 
-    expect(page).to have_link(link_name, href: link)
+    expect(page).to have_link(link_name, href: url)
 
 end
 
@@ -253,9 +252,6 @@ Then /^the "([^"]*)" checkbox(?: within (.*))? should not be checked$/ do |label
   end
 end
 
-Then(/^I should see the images for "([^"]*)"$/) do |arg1|
-  pending # Write code here that turns the phrase above into concrete actions
-end
 
 Then /^the "([^"]*)" radio button(?: within (.*))? should be chosen$/ do |label, parent|
   with_scope(parent) do
@@ -305,6 +301,14 @@ Then /^show me the page$/ do
   save_and_open_page
 end
 
+Then(/^I should see the images for "([^"]*)"$/) do |arg1|
+  game = GivingGame.where(:title => arg1).first
+  charityA = game.charity_a
+  charityB = game.charity_b
+  step "I should see the image \"#{charityA.image_link}\""
+  step "I should see the image \"#{charityB.image_link}\""
+end
+
 Then /^I should( not)? see the image "(.+)"$/ do |not_see, url|
     if not_see
         page.should_not have_xpath("//img[@src=\"#{url}\"]")
@@ -312,3 +316,8 @@ Then /^I should( not)? see the image "(.+)"$/ do |not_see, url|
     page.should have_xpath("//img[@src=\"#{url}\"]")
     end
 end
+
+Then /^I should see an image with the class "(.*)"$/ do |className|
+  page.should have_css("img." + className);
+end
+

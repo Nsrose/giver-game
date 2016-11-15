@@ -26,7 +26,7 @@ class GivingGame < ActiveRecord::Base
   def generate_error_message()
     totalMessage = ""
       self.errors.messages.each do |key, message|
-        totalMessage += "#{key.to_s().tr('_', ' ').capitalize} #{message.join(", and ")}. "
+        totalMessage += "#{key.to_s().tr('_', ' ').capitalize} #{message.join(" and ")}. "
       end
     return totalMessage
   end
