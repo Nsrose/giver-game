@@ -1,13 +1,13 @@
  <script>
- $(document).ready(function() {
-     $("select").click(function() {
+ change_func = function() {
          myparent = $(this).closest(".charity_selector");
          id = $("option:selected", this).val();
          str = "#charity-" + id + "-" + myparent.attr('id');
          $(".charity_info", myparent).hide();
          $(str, myparent).show();
      });
-     $("select").click();
+ $(document).ready(function() {
+     $("select").change(change_func);
  });
  </script>
 
