@@ -2,17 +2,12 @@
  $(document).ready(function() {
      $("select").click(function() {
          myparent = $(this).closest(".charity_selector");
-         console.log(parent);
-         
          id = $("option:selected", this).val();
          str = "#charity-" + id + "-" + myparent.attr('id');
          $(".charity_info", myparent).hide();
          $(str, myparent).show();
      });
-     
      $("select").click();
-     
-     console.log("Loaded");
  });
  </script>
 
