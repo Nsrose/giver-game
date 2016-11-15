@@ -136,9 +136,7 @@ games = [
 # end
 
 games.each do |game|
-  if GivingGame.where(:title => game[:title]).length == 0
-    GivingGame.create!(game) # Will that work? yesi think
-  end
+    GivingGame.where(title: game[:title]).first_or_create!.update_attributes!(game)
 end
 
 
