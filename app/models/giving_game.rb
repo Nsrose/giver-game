@@ -91,4 +91,8 @@ class GivingGame < ActiveRecord::Base
       end
     end
   end
+
+  def send_email
+    GameMailer.game_finished_email(self)
+  end
 end
