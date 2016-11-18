@@ -91,4 +91,21 @@ class GivingGame < ActiveRecord::Base
       end
     end
   end
+  
+  
+  def expired= (bool)
+    if (self.expired == false) && (bool ==true)
+    #Nick & Ross's function
+  
+    end
+    write_attribute(:expired, bool)
+  end
+  
+ def check_expired()
+    @games = GivingGame.where("expired = ? AND expiration_time < ?", false, DateTime.now)
+    games.each do |game|
+      game.expired = true
+    end
+  end
+    
 end
