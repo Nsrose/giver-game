@@ -63,7 +63,6 @@ group :development, :test do
   gem 'autotest'
   gem 'jasmine-rails' # if you plan to use JavaScript/CoffeeScript
   gem 'rspec-rails', '3.3.2'
-  gem 'timecop'
 
 end
 

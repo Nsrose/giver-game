@@ -9,7 +9,7 @@ Feature: Make Games End
     And the following games exist:
     | title        | id | description                                 | expired | expiration_time          | total_money | per_transaction  | votesA | resource_id | charity_a_id     | charity_b_id|  is_private |
     | Expirein     |  1 | 'This game should expire'                   | true    |                          | 100         | 1                |        | 1           | 4                |1            |   false     |
-    | Expire2      |  2 | 'This game should also expire'              | false   | 2016-04-20 01:00:00 PT   | 100         | 1                |        | 2           |1                 |2            |   false     |
+    | Expire2      |  2 | 'This game should also expire'              | true   | 2016-04-20 01:00:00 PT   | 100         | 1                |        | 2           |1                 |2            |   false     |
     | Expire3      |  3 | 'This game should also expire too'          | false   |                          | 100         | 1                | 99     | 3           |2                 |4            |   false     |
     # And the following games exist:
     # | title        | id | description                                 | charityA_title                                | charityB_title                                | expired | expiration_time          | total_money | per_transaction  | votesA | resource_id | default_charity_a| default_charity_b|  
@@ -41,18 +41,3 @@ Feature: Make Games End
     When I follow "View Expired Games"
     Then I should see "Expire3"
   
-  Scenario: If the current date is past a game's expiration date, the game should be expired
-    Given this test is pending
-    Given I am logged in as "j0e@tr8er.org" with password "TRAITORJOE"
-    And it is currently 2016-04-19 01:00:00 PT
-    When I follow "Play a giving game"
-    Then I should see "Expire2"
-    Given it is currently 2016-04-20 00:00:00 PT
-    When I follow "Play Game"
-    Then I should not see "Expire2"
-    When I follow "View Expired Games"
-    Then I should see "Expire2"
-
-
-
-
