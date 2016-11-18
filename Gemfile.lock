@@ -497,6 +497,7 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.5)
+    timecop (0.8.1)
     trollop (2.1.2)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
@@ -563,6 +564,7 @@ DEPENDENCIES
   sqlite3
   sweet-alert
   test-unit
+  timecop
   tinymce-rails!
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
