@@ -4,7 +4,32 @@
   <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
 </head>
 <body>
-<h1>Your Giving Game, <%= @game.title %> has ended.</h1>
-<p>Thanks for playing!</p>
+<h1 style="color:#500050">Your Giving Game, <%= @game.title %> has ended.</h1>
+
+<% if @game.goal_reached? %>
+  <h4 style="color:#3c763d">Your Giving Game goal of $<%= @game.total_money %> was reached!</h4>
+<% else %>
+  <h4 style="color:#8a6d3b">Your Giving Game expired before the goal of $<%= @game.total_money %> was reached.</h4>
+<% end %>
+
+<p>$<%= @game.current_moneyA %> was pledged to <%= @game.charity_a.name %>.</p>
+<p>Pledge $<%= @game.current_moneyA %> to <%= @game.charity_a.name %> by visiting their
+  <a href="<%= @game.charity_a.donation_link %>">donation page</a>.
+</p>
+
+<br>
+
+<p>$<%= @game.current_moneyB %> was pledged to <%= @game.charity_b.name %>.</p>
+<p>Pledge $<%= @game.current_moneyB %> to <%= @game.charity_b.name %> by visiting their
+  <a href="<%= @game.charity_b.donation_link %>">donation page</a>.
+</p>
+
+<br>
+
+<a href="<%= @results_link %>">Results Page</a>
+<br>
+<a href="<%= @create_new_game_link %>">Create New Game</a>
+
+<h3 style="color:#3c763d">Thanks for playing!</h3>
 </body>
 </html>
