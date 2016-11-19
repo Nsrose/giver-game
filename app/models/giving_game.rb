@@ -102,7 +102,7 @@ class GivingGame < ActiveRecord::Base
   end
   
  def self.expire_games
-    games = GivingGame.where("expired = ? AND expiration_time < ?", false, DateTime.now)
+    games = GivingGame.where("expired = ? AND expiration_time <= ?", false, DateTime.now)
     games.each do |game|
       game.expired = true
       game.save!
