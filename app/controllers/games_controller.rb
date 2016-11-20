@@ -196,8 +196,10 @@ class GamesController < ApplicationController
 
     if game.show_results
       redirect_to results_path(:resource_id => game.resource_id)
+      return
     else
       redirect_to play_index_path(:charity => charity)
+      return 
     end
   end
   

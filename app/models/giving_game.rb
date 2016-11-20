@@ -109,8 +109,6 @@ class GivingGame < ActiveRecord::Base
     
 
   def send_email
-    # g = GameMailer.instance
-    byebug
-    GameMailer.game_finished_email(self)
+    GameMailer.game_finished_email(self).deliver_now()
   end
 end
