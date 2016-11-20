@@ -23,7 +23,9 @@ class GivingGame < ActiveRecord::Base
   mount_uploader :charityB_image, CharityBImageUploader
   
   def per_transaction_total_money
-    errors.add("", "Goal Amount of Money to Reach must be a multiple of Per Person Amount") if self.total_money%self.per_transaction != 0
+    if (!self.total_money.nil? && !self.per_transaction.nil? && !self.per_transaction == 0)
+      errors.add("", "Goal Amount of Money to Reach must be a multiple of Per Person Amount") if self.total_money%self.per_transaction != 0
+    end
   end
   
   def check_charities_not_equal

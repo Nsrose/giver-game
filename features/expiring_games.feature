@@ -7,18 +7,14 @@ Feature: Make Games End
     Given I am on the home page
     Given some charities exist
     And the following games exist:
-    | title        | id | description                                 | expired | expiration_time          | total_money | per_transaction  | votesA | resource_id | charity_a_id     | charity_b_id|  is_private |
-    | Expirein     |  1 | 'This game should expire'                   | true    |                          | 100         | 1                |        | 1           | 4                |1            |   false     |
-    | Expire2      |  2 | 'This game should also expire'              | true   | 2016-04-20 01:00:00 PT   | 100         | 1                |        | 2           |1                 |2            |   false     |
-    | Expire3      |  3 | 'This game should also expire too'          | false   |                          | 100         | 1                | 99     | 3           |2                 |4            |   false     |
-    # And the following games exist:
-    # | title        | id | description                                 | charityA_title                                | charityB_title                                | expired | expiration_time          | total_money | per_transaction  | votesA | resource_id | default_charity_a| default_charity_b|  
-    # | Expirein     |  1 | 'This game should expire'                   | GiveDirectly                                  | Against Malaria Foundation                    | true    |                          | 100         | 1                |        | 1           | 4                |1|
-    # | Expire2      |  2 | 'This game should also expire'              | Against Malaria Foundation                    | Schistosomiasis Control Initiative (SCI)      | false   | 2016-04-20 01:00:00 UTC  | 100         | 1                |        | 2           |1                 |2|
-    # | Expire3      |  3 | 'This game should also expire too'          | Schistosomiasis Control Initiative (SCI)      | GiveDirectly                                  | false   |                          | 100         | 1                | 99     | 3           |2                 |4|
+    | title        | id | description                                 | expired | expiration_time          | total_money | per_transaction  | votesA | resource_id | charity_a_id     | charity_b_id|  is_private | user_id |
+    | Expirein     |  1 | 'This game should expire'                   | true    |                          | 100         | 1                |        | 1           | 4                |1            |   false     | 1       |
+    | Expire2      |  2 | 'This game should also expire'              | true    | 2016-04-20 01:00:00 PT   | 100         | 1                |        | 2           |1                 |2            |   false     | 1       |
+    | Expire3      |  3 | 'This game should also expire too'          | false   |                          | 100         | 1                | 99     | 3           |2                 |4            |   false     | 1       |
+   
     And the following users exist:
-    | username           | password   | password_confirmation  |     email             |
-    | Traitor_JOSEPHINE  | TRAITORJOE |  TRAITORJOE            |  j0e@tr8er.org        |
+    | username           | id   |password   | password_confirmation  |     email             |
+    | Traitor_JOSEPHINE  | 1    |TRAITORJOE |  TRAITORJOE            |  j0e@tr8er.org        |
 
   Scenario: Should not be able to play a game that is expired
     When I follow "Play a giving game"
