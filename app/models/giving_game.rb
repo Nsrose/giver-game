@@ -75,23 +75,20 @@ class GivingGame < ActiveRecord::Base
     self.save
   end
 
-  def total_moneyA
-    self.votesA * self.per_transaction
+  def goal_reached?
+    (self.total_money <= self.current_moneyA + self.current_moneyB) and !self.tutorial
   end
 
-  def total_moneyB
-    self.votesB * self.per_transaction
+  def expired_before_goal?
+    !self.goal_reached? and self.expired
   end
 
   def check_total_money
-    if self.total_money <= self.total_moneyA + self.total_moneyB
-      if !self.tutorial
-        self.expired = true
-        self.save
-      end
+    if self.goal_reached?
+      self.expired = true
+      self.save
     end
   end
-  
   
   def expired= (bool)
     if (self.expired == false) && (bool ==true)
@@ -109,4 +106,8 @@ class GivingGame < ActiveRecord::Base
     end
   end
     
+
+  def send_email
+    GameMailer.game_finished_email(self)
+  end
 end
