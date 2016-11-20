@@ -24,6 +24,7 @@ class GivingGame < ActiveRecord::Base
   
   def per_transaction_total_money
     errors.add("", "Total Money must be a multiple of Per Person Amount") if self.total_money%self.per_transaction != 0
+  end
   
   def check_charities_not_equal
     errors.add("Charities ", "A and B must be different") if self.charity_a_id == self.charity_b_id
