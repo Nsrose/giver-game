@@ -16,9 +16,14 @@ class GivingGame < ActiveRecord::Base
   # needs titles for all of the titles of things.
   validates_presence_of :title, :total_money, :per_transaction
   validate :check_charities_not_equal
+  
+  validate :per_transaction_total_money
 
   mount_uploader :charityA_image, CharityAImageUploader
   mount_uploader :charityB_image, CharityBImageUploader
+  
+  def per_transaction_total_money
+    errors.add("", "Total Money must be a multiple of Per Person Amount") if self.total_money%self.per_transaction != 0
   
   def check_charities_not_equal
     errors.add("Charities ", "A and B must be different") if self.charity_a_id == self.charity_b_id
