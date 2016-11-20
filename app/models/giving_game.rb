@@ -1,3 +1,4 @@
+require 'game_mailer'
 class GivingGame < ActiveRecord::Base
   belongs_to :user
   belongs_to :charity_a, :class_name => 'Charity'
@@ -92,10 +93,10 @@ class GivingGame < ActiveRecord::Base
   
   def expired= (bool)
     if (self.expired == false) && (bool ==true)
-    #Nick & Ross's function
-  
+      self.send_email
     end
     write_attribute(:expired, bool)
+
   end
   
  def self.expire_games
@@ -108,6 +109,8 @@ class GivingGame < ActiveRecord::Base
     
 
   def send_email
+    # g = GameMailer.instance
+    byebug
     GameMailer.game_finished_email(self)
   end
 end

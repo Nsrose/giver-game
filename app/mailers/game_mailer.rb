@@ -1,6 +1,8 @@
 class GameMailer < ApplicationMailer
-
+  # include Singleton
+  
   def game_finished_email(game)
+    byebug
     @game = game
     @user = game.user
     @results_link = results_url(:resource_id => game.resource_id)
