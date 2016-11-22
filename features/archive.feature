@@ -7,9 +7,9 @@ Feature: Archive
     Given I am on the home page
     Given some charities exist
     And the following games exist:
-    | title                   | description                                 | votesA | votesB | show_results | expired | resource_id |charity_a_id  |charity_b_id     |
-    | Tutorial                | 'This is the tutorial for the Giving Game'  | 0      | 100    | true         | true    | 1           |1             |2                |
-    | NoShow                  | 'This is a game without showing results on' | 100    | 0      | false        | true    | 2           |4             |2                |
+    | title                   | description                                 | votesA | votesB | show_results | expired | resource_id |charity_a_id  |charity_b_id     | is_private |
+    | Tutorial                | 'This is the tutorial for the Giving Game'  | 0      | 100    | true         | true    | 1           |1             |2                | false      |
+    | NoShow                  | 'This is a game without showing results on' | 100    | 0      | false        | true    | 2           |4             |2                | false      |
     
   Scenario: Should see expired games on the archive page
     When I follow "View Expired Games"

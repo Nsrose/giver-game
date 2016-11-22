@@ -122,3 +122,8 @@ When /^I create a( private)? game called "(.*)"$/ do |secret, name|
     And I press "Submit New Game"
   }
 end
+
+When /^the game "()" should expire in one day$/ do |game|
+  game = Game.where(:title => game)[0]
+  expectgame.expiration
+end

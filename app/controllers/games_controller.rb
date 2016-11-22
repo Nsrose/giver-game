@@ -130,7 +130,8 @@ class GamesController < ApplicationController
   end
 
   def play_index
-    @games = GivingGame.where("expired = ? AND (expiration_time > ? OR expiration_time IS NULL)", false, DateTime.now)
+    # @games = GivingGame.where("expired = ? AND (expiration_time > ? OR expiration_time IS NULL)", false, DateTime.now)
+    @games = GivingGame.where("expired = ?", false)
     @games = @games.where(:is_private => false)
     @counter = @games.length
     @charityVotedFor = params[:charity]
@@ -150,11 +151,16 @@ class GamesController < ApplicationController
   
   def play_game
     chosen_game = GivingGame.where(:resource_id => params[:resource_id])[0]
-
+    if chosen_game.expired 
+      flash[:warning] = "This Game has Expired"
+      redirect_to archive_game_path(:resource_id => chosen_game.resource_id)
+      return
+    end
     if current_user.nil? and !chosen_game.tutorial?
       flash[:warning] = "You must be logged in to play an actual giving game."
       session[:user_return_to] = play_game_path(:resource_id => params[:resource_id])
       redirect_to new_user_session_path
+      return
     else
       @game = chosen_game
       if !chosen_game.tutorial
@@ -190,14 +196,17 @@ class GamesController < ApplicationController
 
     if game.show_results
       redirect_to results_path(:resource_id => game.resource_id)
+      return
     else
       redirect_to play_index_path(:charity => charity)
+      return 
     end
   end
   
   def archive
-    @games = GivingGame.where("expired = ? OR expiration_time < ?", true, DateTime.now)
-    # We possibly need to populate the charityA_title and charityB_title fields
+    @games = GivingGame.where("expired = ?", true)
+    # @games = GivingGame.where("expired = ? OR expiration_time < ?", true, DateTime.now)
+    @games = @games.where(:is_private => false)
     @counter = @games.length
   end
   

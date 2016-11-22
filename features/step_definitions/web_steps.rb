@@ -83,6 +83,10 @@ When /^janet wants to debug$/ do
   expect(page).to have_selector("input[value='New Charity']")
 end
 
+Given /^this test is pending$/ do
+  pending
+end
+
 When /^I should see the input text "([^"]*)"/ do |text|
   expect(page).to have_selector("input[value='#{text}']")
 end

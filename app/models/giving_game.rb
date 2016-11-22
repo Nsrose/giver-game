@@ -1,3 +1,4 @@
+require 'game_mailer'
 class GivingGame < ActiveRecord::Base
   belongs_to :user
   belongs_to :charity_a, :class_name => 'Charity'
@@ -15,9 +16,17 @@ class GivingGame < ActiveRecord::Base
   # needs titles for all of the titles of things.
   validates_presence_of :title, :total_money, :per_transaction
   validate :check_charities_not_equal
+  
+  validate :per_transaction_total_money
 
   mount_uploader :charityA_image, CharityAImageUploader
   mount_uploader :charityB_image, CharityBImageUploader
+  
+  def per_transaction_total_money
+    if (!self.total_money.nil? && !self.per_transaction.nil? && !self.per_transaction == 0)
+      errors.add("", "Goal Amount of Money to Reach must be a multiple of Per Person Amount") if self.total_money%self.per_transaction != 0
+    end
+  end
   
   def check_charities_not_equal
     errors.add("Charities ", "A and B must be different") if self.charity_a_id == self.charity_b_id
@@ -89,8 +98,25 @@ class GivingGame < ActiveRecord::Base
       self.save
     end
   end
+  
+  def expired= (bool)
+    if (self.expired == false) && (bool ==true)
+      self.send_email
+    end
+    write_attribute(:expired, bool)
+
+  end
+  
+ def self.expire_games
+    games = GivingGame.where("expired = ? AND expiration_time <= ?", false, DateTime.now)
+    games.each do |game|
+      game.expired = true
+      game.save!
+    end
+  end
+    
 
   def send_email
-    GameMailer.game_finished_email(self)
+    GameMailer.game_finished_email(self).deliver_now()
   end
 end
