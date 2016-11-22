@@ -24,16 +24,15 @@ RSpec.describe GameMailer, :type => :mailer do
       ]
       charity_a = Charity.create!(charities[0])
       charity_b = Charity.create!(charities[1])
-      game = GivingGame.new(:title => 'Expired Game 1',
+      game = GivingGame.create!(:title => 'Expired Game 1',
                         :description =>'This is an expired game',
                         :tutorial => false,
                         :show_results => false,
-                        :expired => true,
+                        :expired => false,
                         :is_private => false,
                         :resource_id => "e1",
                         :charity_a_id => charity_a.id,
                         :charity_b_id => charity_b.id)
-      game.save!
                          
       user = User.create!(:password => 'lulzlulz',
                    :password_confirmation => 'lulzlulz',
