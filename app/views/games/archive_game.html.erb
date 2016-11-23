@@ -1,6 +1,16 @@
 <div class="container">
     <div class="row">
         <div class="page-header">
+            <% if !@game.tutorial %>
+                <div class="pull-right">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            Expiration Date: <%= @expiration_time %>
+                        </div>
+                    </div>
+                </div>
+            <% end %>
+            <h1><small>Expired Game: </small> <small class="game-name-header"><%=@game.title %></small></h1>
             <div class="pull-right">
                 <%= link_to archive_path, class:'btn btn-default' do %>
                     <i class="fa fa-arrow-left" aria-hidden="true" style="padding-right: 5px"></i>Go Back to Expired Games List
@@ -11,7 +21,6 @@
                     <% end %>
                 <% end %>
             </div>
-            <h1><small>Play the game:</small> <small class="game-name-header"><%=@game.title %></small></h1>
         </div>
     </div>
     <div class="row top-buffer" style="text-align: center;">
@@ -24,14 +33,20 @@
     <div class="row top-buffer">
         <div class="col-lg-6" style="text-align: center">
             <div style="height: 250px; margin-top: 50px">
-                <% if @game.charityA_image_identifier.nil? %>
-                    <%= image_tag asset_path("default-image1.png"), :style => "width: 200px; max-height: 250px;"%>
+                <% if @charityA.image_link == nil || @charityA.image_link == ""  %>
+                    <%= image_tag asset_path("default-image1.png"), :style => "width: 200px; max-height: 250px;", :class =>"default_image_A"%>
                 <% else %>
-                    <%= image_tag @game.charityA_image_url, :style => "width: 300px; margin-bottom: 50px;"%>
+                    <%= image_tag @charityA.image_link, :style => "width: 300px; max-height: 100%; margin-bottom: 50px;"%>
                 <% end %>
+                
             </div>
-            <div class="row" style="margin-bottom: 30px">
-                 <div class="col-sm-6 col-sm-offset-3">
+            <div class="row" style="margin-bottom: 30px; margin-top: 30px;">
+                 <div class="col-sm-8 col-sm-offset-2">
+                     <span><%= link_to @charityA.name + ' Homepage', @charityA.homepage_link%></span>
+                 </div>
+            </div>
+            <div class="row" style="margin-bottom: 30px; margin-top: 30px;">
+                 <div class="col-sm-8 col-sm-offset-2">
                      <span style="text-align: center; word-wrap: break-word;"><%= @charityA.description %></span>
                 </div>
             </div>
@@ -39,14 +54,19 @@
         </div>
         <div class="col-lg-6" style="text-align: center; word-wrap: break-word">
             <div style="height: 250px; margin-top: 50px">
-                <% if @game.charityB_image_identifier.nil? %>
-                    <%= image_tag asset_path("default-image2.png"), :style => "width: 275px; height: 195px;"%>
+                <% if @charityB.image_link == nil || @charityB.image_link == ""   %>
+                    <%= image_tag asset_path("default-image2.png"), :style => "width: 275px; height: 195px;", :class =>"default_image_B"%>
                 <% else %>
-                    <%= image_tag @game.charityB_image_url, :style => "width: 300px; max-height: 275px; margin-bottom: 50px;"%>
+                    <%= image_tag @charityB.image_link, :style => "width: 300px; max-height: 100%; max-height: 275px; margin-bottom: 50px;"%>
                 <% end %>
             </div>
-            <div class="row" style="margin-bottom: 30px">
-                <div class="col-sm-6 col-sm-offset-3">
+            <div class="row" style="margin-bottom: 30px; margin-top: 30px;">
+                 <div class="col-sm-8 col-sm-offset-2">
+                     <span><%= link_to @charityB.name + ' Homepage', @charityB.homepage_link%></span>
+                 </div>
+            </div>
+            <div class="row" style="margin-bottom: 30px; margin-top: 30px;">
+                <div class="col-sm-8 col-sm-offset-2">
                      <span style="text-align: center; word-wrap: break-word"><%= @charityB.description %></span>
                 </div>
             </div>
@@ -54,6 +74,3 @@
         </div>
     </div>
 </div>
-
-
-

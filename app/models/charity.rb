@@ -2,6 +2,8 @@ require 'net/http'
 class Charity < ActiveRecord::Base
     validates :name, presence: true
     validates :ein, presence: true
+    validates :description,
+        presence: { message: "%{attribute} required!" }
     validates :homepage_link,
             presence: true,
             format: { with: URI.regexp(%w(http https)), message: "cannot be found" }

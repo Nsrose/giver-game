@@ -84,3 +84,12 @@ Scenario: Admin can edit existing default charities
   Then I should see "new description"
   Then I should see the input text "492"
   
+Scenario: Description required for charity upon creation
+  Given I am logged in as "daniel@gmail.com" with password "lollolol"
+  When I go to the charities page
+  When I follow "Create New Charity"
+  Then I should be on the new charity page
+  When I fill out the form with values "Title": "Descriptionless Charity","ein": "123","image_link": "https://www.google.com/images/nav_logo242_hr.png","homepage_link": "https://www.google.com","donation_link": "https://www.google.com"
+  When I press "Submit"
+  Then I should see "Description required!"
+  And I should be on the new charity page
