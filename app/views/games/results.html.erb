@@ -18,7 +18,7 @@
             <h1><small>Results:</small> <small class="game-name-header"><%=@game.title %></small></h1>
         </div>
     </div>
-    <div class="row">
+    <div class="row" style="text-align: center">
         <div class="col-md-4">
             <h3 style="min-height: 70px"><%= @charityA.name %></h3>
             <div style="display: flex; align-items: center; height: 150px; max-width: 50%; margin: auto">
@@ -84,10 +84,15 @@
             </div>
         </div>
     </div>
-    <div class="well" style="margin:100px">
-        <div>There is still <%= number_to_currency(@remaining_money) %> remaining to donate. 
+    
+    <% if !@game.expired %>
+    <div class="well" style="margin:100px; text-align: center">
+        <div>There is still <%= number_to_currency(@remaining_money) %> remaining to donate.
         Please share this link so that your friends can vote on the remaining money!</div>
+        <br/><br/>
+        <a href="https://<%= request.host_with_port+play_game_path(@game.resource_id) %>"><%= request.host_with_port+play_game_path(@game.resource_id) %></a>
     </div>
+    <% end %>
 </div>
 
 <script>
@@ -99,4 +104,3 @@
         });
     }
 </script>
-
