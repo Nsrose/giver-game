@@ -20,47 +20,57 @@
             </div>
         </div>
     </div>
-    <div class="row top-buffer">
-        <div class="col-lg-6" style="text-align: center">
-            <div style="height: 250px; margin-top: 50px">
-                <% if @charityA.image_link == nil || @charityA.image_link == ""  %>
-                    <%= image_tag asset_path("default-image1.png"), :style => "width: 200px; max-height: 250px;", :class =>"default_image_A"%>
-                <% else %>
-                    <%= image_tag @charityA.image_link, :style => "width: 300px; max-height: 100%; margin-bottom: 50px;"%>
-                <% end %>
-                
-            </div>
-            <div class="row" style="margin-bottom: 30px; margin-top: 30px;">
-                 <div class="col-sm-8 col-sm-offset-2">
-                     <span><%= link_to @charityA.name + ' Homepage', @charityA.homepage_link%></span>
-                 </div>
-            </div>
-            <div class="row" style="margin-bottom: 30px; margin-top: 30px;">
-                 <div class="col-sm-8 col-sm-offset-2">
-                     <span style="text-align: center; word-wrap: break-word;"><%= @charityA.description %></span>
+    
+    <div class="row" style="text-align: center; padding-bottom: 20px">
+        <div class="col-sm-6">
+            <div>
+                <div>
+                    <div style="display: flex; align-items: flex-end; justify-content: center; height: 300px; width: 100%; padding-bottom: 20px; padding-top: 20px">
+                        <% if @charityA.image_link == nil || @charityA.image_link == "" %>
+                            <%= image_tag asset_path("default-image1.png"), :style => "max-height: 100%; max-width: 100%" %>
+                        <% else %>
+                            <%= image_tag @charityA.image_link, :style => "max-height: 100%; max-width: 100%" %>
+                        <% end %>
+                    </div>
+                    
+                    <div class="row" style="margin-bottom: 30px; margin-top: 30px;">
+                         <div class="col-sm-8 col-sm-offset-2">
+                             <span><%= link_to @charityA.name + ' Homepage', @charityA.homepage_link%></span>
+                         </div>
+                    </div>    
+                    
+                    <%= @charityA.description %>
                 </div>
             </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div>
+                <div>
+                    <div style="display: flex; align-items: flex-end; justify-content: center; height: 300px; width: 100%; padding-bottom: 20px; padding-top: 20px">
+                        <% if @charityB.image_link == nil || @charityB.image_link == "" %>
+                            <%= image_tag asset_path("default-image2.png"),  :style => "max-height: 100%; max-width: 100%" %>
+                        <% else %>
+                            <%= image_tag @charityB.image_link, :style => "max-height: 100%; max-width: 100%" %>
+                        <% end %>
+                    </div>
+                    
+                    <div class="row" style="margin-bottom: 30px; margin-top: 30px;">
+                         <div class="col-sm-8 col-sm-offset-2">
+                             <span><%= link_to @charityB.name + ' Homepage', @charityB.homepage_link%></span>
+                         </div>
+                    </div>                    
+                    
+                    <%= @charityB.description %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="text-align: center">
+        <div class="col-sm-6">
             <%= button_to "Donate to #{@charityA.name}", check_played_path(:id =>@game.id, :charity => @charityA, :show_results => @game.show_results), :class => "btn btn-primary btn-lg" %>
         </div>
-        <div class="col-lg-6" style="text-align: center; word-wrap: break-word">
-            <div style="height: 250px; margin-top: 50px">
-                <% if @charityB.image_link == nil || @charityB.image_link == ""   %>
-                    <%= image_tag asset_path("default-image2.png"), :style => "width: 275px; height: 195px;", :class =>"default_image_B"%>
-                <% else %>
-                    <%= image_tag @charityB.image_link, :style => "width: 300px; max-height: 100%; max-height: 275px; margin-bottom: 50px;"%>
-                <% end %>
-            </div>
-            <div class="row" style="margin-bottom: 30px; margin-top: 30px;">
-                 <div class="col-sm-8 col-sm-offset-2">
-                     <span><%= link_to @charityB.name + ' Homepage', @charityB.homepage_link%></span>
-                 </div>
-            </div>
-            <div class="row" style="margin-bottom: 30px; margin-top: 30px;">
-                <div class="col-sm-8 col-sm-offset-2">
-                     <span style="text-align: center; word-wrap: break-word"><%= @charityB.description %></span>
-                </div>
-            </div>
+        <div class="col-sm-6" style="text-align: center">
             <%= button_to "Donate to #{@charityB.name}", check_played_path(:id =>@game.id, :charity => @charityB, :show_results => @game.show_results), :class => "btn btn-primary btn-lg" %>
         </div>
     </div>
-</div>

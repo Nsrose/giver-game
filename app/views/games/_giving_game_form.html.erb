@@ -2,25 +2,26 @@
 
 
             <div class="row">
-            <div class=form-header>Name of Game</div>
-            <div class='field-form-group'><%= text_field :game, :title, id: 'Title', size: '65' %></div>
-
-            <div class='field-form-group'>
-              <%= radio_button(:game, :is_private, true, :id=>"private_game", checked: @game.is_private) %>
-              <%= label_tag(:private, "Private game") %>
-              <small>Your game will be unlisted and only accessible through a link.</small>
-              <br>
-              <%= radio_button(:game, :is_private, false, :id=>"public_game", checked: !@game.is_private) %>
-              <%= label_tag(:public, "Public game") %>
-              <small>Your game will be listed publicly and can be played by anyone.</small>
-              
+                <div class=form-header>Name of Game</div>
+                <div class='field-form-group'><%= text_field :game, :title, id: 'Title', size: '65' %></div>
+    
+                <div class='field-form-group'>
+                  <%= radio_button(:game, :is_private, true, :id=>"private_game", checked: @game.is_private) %>
+                  <%= label_tag(:private, "Private game") %>
+                  <small>Your game will be unlisted and only accessible through a link.</small>
+                  <br>
+                  <%= radio_button(:game, :is_private, false, :id=>"public_game", checked: !@game.is_private) %>
+                  <%= label_tag(:public, "Public game") %>
+                  <small>Your game will be listed publicly and can be played by anyone.</small>
+                  
+                </div>
+                <div class=form-header>Description</div>
+                <div class='field-form-group'><%= text_area :game, :description, id: 'Description', rows: "7", cols: "100"%></div>
             </div>
-            <div class=form-header>Description</div>
-            <div class='field-form-group'><%= text_area :game, :description, id: 'Description', rows: "7", cols: "100"%></div>
-            </div>
+            
             <div class="row" style="text-align: center; padding-bottom: 20px">
                 <div class="col-sm-6 charity_selector" id="A">
-                    <div class=form-header>Charity A</div>
+                    <div class="form-header">Charity A</div>
                     <div class='field-form-group'><%= collection_select(:game, :charity_a_id, @defaultCharities, :id, :name, { :selected => @game.charity_a_id })%></div>
     
                     <% @defaultCharities.each do |charity| %>
@@ -39,8 +40,8 @@
                     <% end %>
                 </div>
                 <div class="col-sm-6 charity_selector" id="B">
-                    <div class=form-header>Charity B</div>
-                        <div class='field-form-group'><%= collection_select(:game, :charity_b_id, @defaultCharities, :id, :name, { :selected => @game.charity_b_id })%></div>
+                    <div class="form-header">Charity B</div>
+                    <div class='field-form-group'><%= collection_select(:game, :charity_b_id, @defaultCharities, :id, :name, { :selected => @game.charity_b_id })%></div>
                     <% @defaultCharities.each do |charity| %>
                     <div>
                         <div class="charity_info" id="charity-<%= charity.id %>-B" style="display: none;">
