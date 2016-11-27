@@ -27,7 +27,7 @@
                 <div>
                     <div style="display: flex; align-items: flex-end; justify-content: center; height: 300px; width: 100%; padding-bottom: 20px; padding-top: 20px">
                         <% if @charityA.image_link == nil || @charityA.image_link == "" %>
-                            <%= image_tag asset_path("default-image1.png"), :style => "max-height: 100%; max-width: 100%" %>
+                            <%= image_tag asset_path("default-image1.png"), :style => "max-height: 100%; max-width: 100%", :class =>"default_image_A" %>
                         <% else %>
                             <%= image_tag @charityA.image_link, :style => "max-height: 100%; max-width: 100%" %>
                         <% end %>
@@ -49,7 +49,7 @@
                 <div>
                     <div style="display: flex; align-items: flex-end; justify-content: center; height: 300px; width: 100%; padding-bottom: 20px; padding-top: 20px">
                         <% if @charityB.image_link == nil || @charityB.image_link == "" %>
-                            <%= image_tag asset_path("default-image2.png"),  :style => "max-height: 100%; max-width: 100%" %>
+                            <%= image_tag asset_path("default-image2.png"),  :style => "max-height: 100%; max-width: 100%",  :class =>"default_image_B" %>
                         <% else %>
                             <%= image_tag @charityB.image_link, :style => "max-height: 100%; max-width: 100%" %>
                         <% end %>
