@@ -1,7 +1,7 @@
-change_func = function() {
-         myparent = $(this).closest(".charity_selector");
-         id = $("option:selected", this).val();
-         str = "#charity-" + id + "-" + myparent.attr('id');
+var change_func = function() {
+         var myparent = $(this).closest(".charity_selector");
+         var id = $("option:selected", this).val();
+         var str = "#charity-" + id + "-" + myparent.attr('id');
          $(".charity_info", myparent).hide();
          $(str, myparent).show();
      };

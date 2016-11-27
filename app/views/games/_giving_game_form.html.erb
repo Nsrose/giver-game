@@ -2,55 +2,60 @@
 
 
             <div class="row">
-            <div class=form-header>Name of Game</div>
-            <div class='field-form-group'><%= text_field :game, :title, id: 'Title', size: '65' %></div>
-
-            <div class='field-form-group'>
-              <%= radio_button(:game, :is_private, true, :id=>"private_game", checked: @game.is_private) %>
-              <%= label_tag(:private, "Private game") %>
-              <small>Your game will be unlisted and only accessible through a link.</small>
-              <br>
-              <%= radio_button(:game, :is_private, false, :id=>"public_game", checked: !@game.is_private) %>
-              <%= label_tag(:public, "Public game") %>
-              <small>Your game will be listed publicly and can be played by anyone.</small>
-              
-            </div>
-            <div class=form-header>Description</div>
-            <div class='field-form-group'><%= text_area :game, :description, id: 'Description', rows: "7", cols: "100"%></div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6 charity_selector" id="A">
-                <div class=form-header>Charity A</div>
-                <div class='field-form-group'><%= collection_select(:game, :charity_a_id, @defaultCharities, :id, :name, { :selected => @game.charity_a_id })%></div>
-
-                <% @defaultCharities.each do |charity| %>
-                <center>
-                <div class="charity_info" id="charity-<%= charity.id %>-A" style="display: none;">
-                    <% if charity.image_link == nil || charity.image_link == "" %>
-                        <%= image_tag asset_path("default-image1.png"), :style => "display: block; width: 50%;" %>
-                    <% else %>
-                        <%= image_tag charity.image_link, :style => "display: block; width: 50%;" %>
-                    <% end %>
-                    <%= charity.description %>
+                <div class=form-header>Name of Game</div>
+                <div class='field-form-group'><%= text_field :game, :title, id: 'Title', size: '65' %></div>
+    
+                <div class='field-form-group'>
+                  <%= radio_button(:game, :is_private, true, :id=>"private_game", checked: @game.is_private) %>
+                  <%= label_tag(:private, "Private game") %>
+                  <small>Your game will be unlisted and only accessible through a link.</small>
+                  <br>
+                  <%= radio_button(:game, :is_private, false, :id=>"public_game", checked: !@game.is_private) %>
+                  <%= label_tag(:public, "Public game") %>
+                  <small>Your game will be listed publicly and can be played by anyone.</small>
+                  
                 </div>
-                </center>
-                <% end %>
+                <div class=form-header>Description</div>
+                <div class='field-form-group'><%= text_area :game, :description, id: 'Description', rows: "7", cols: "100"%></div>
+            </div>
+            
+            <div class="row" style="text-align: center; padding-bottom: 20px">
+                <div class="col-sm-6 charity_selector" id="A">
+                    <div class="form-header">Charity A</div>
+                    <div class='field-form-group'><%= collection_select(:game, :charity_a_id, @defaultCharities, :id, :name, { :selected => @game.charity_a_id })%></div>
+    
+                    <% @defaultCharities.each do |charity| %>
+                    <div>
+                        <div class="charity_info" id="charity-<%= charity.id %>-A" style="display: none;">
+                            <div style="display: flex; align-items: flex-end; justify-content: center; height: 300px; width: 100%; padding-bottom: 20px; padding-top: 20px">
+                                <% if charity.image_link == nil || charity.image_link == "" %>
+                                    <%= image_tag asset_path("default-image1.png"), :style => "max-height: 100%; max-width: 100%" %>
+                                <% else %>
+                                    <%= image_tag charity.image_link, :style => "max-height: 100%; max-width: 100%" %>
+                                <% end %>
+                            </div>
+                            <%= charity.description %>
+                        </div>
+                    </div>
+                    <% end %>
                 </div>
                 <div class="col-sm-6 charity_selector" id="B">
-                <div class=form-header>Charity B</div>
+                    <div class="form-header">Charity B</div>
                     <div class='field-form-group'><%= collection_select(:game, :charity_b_id, @defaultCharities, :id, :name, { :selected => @game.charity_b_id })%></div>
-                <% @defaultCharities.each do |charity| %>
-                <center>
-                <div class="charity_info" id="charity-<%= charity.id %>-B" style="display: none;">
-                    <% if charity.image_link == nil || charity.image_link == "" %>
-                        <%= image_tag asset_path("default-image2.png"), :style => "display: block; width: 50%;" %>
-                    <% else %>
-                        <%= image_tag charity.image_link, :style => "display: block; width: 50%;" %>
+                    <% @defaultCharities.each do |charity| %>
+                    <div>
+                        <div class="charity_info" id="charity-<%= charity.id %>-B" style="display: none;">
+                            <div style="display: flex; align-items: flex-end; justify-content: center; height: 300px; width: 100%; padding-bottom: 20px; padding-top: 20px">
+                                <% if charity.image_link == nil || charity.image_link == "" %>
+                                    <%= image_tag asset_path("default-image2.png"),  :style => "max-height: 100%; max-width: 100%" %>
+                                <% else %>
+                                    <%= image_tag charity.image_link, :style => "max-height: 100%; max-width: 100%" %>
+                                <% end %>
+                            </div>
+                            <%= charity.description %>
+                        </div>
+                    </div>
                     <% end %>
-                    <%= charity.description %>
-                </div>
-                </center>
-                <% end %>
                 </div>
             </div>
             

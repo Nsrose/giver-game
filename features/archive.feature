@@ -20,18 +20,14 @@ Feature: Archive
   Scenario: Clicking on an expired game with show_results set to false 
     When I follow "View Expired Games"
     And I follow "NoShow" in my table
-    Then I should be on the expired game info page for "NoShow"
-    And I should see "This is a game without showing results on"
-    And I should see "Expired Game: "
-    And I should not see "See Results for this Giving Game"
+    Then I should be on the results page for "NoShow"
+      And I should not see "Money Remaining"
 
   Scenario: Clicking on an expired game with show_results set to true
     When I follow "View Expired Games"
     And I follow "Tutorial" in my table
-    Then I should be on the expired game info page for "Tutorial"
-    And I should see "This is the tutorial for the Giving Game"
-    And I should see "Expired Game: "
-    And I should see "See Results for this Giving Game"
+    Then I should be on the results page for "Tutorial"
+    And I should see "Money Remaining"
     
 
     
