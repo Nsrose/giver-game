@@ -9,7 +9,7 @@ Feature: Make Games End
     And the following games exist:
     | title        | id | description                                 | expired | expiration_time          | total_money | per_transaction  | votesA | resource_id | charity_a_id     | charity_b_id|  is_private | user_id |
     | Expirein     |  1 | 'This game should expire'                   | true    |                          | 100         | 1                |        | 1           | 4                |1            |   false     | 1       |
-    | Expire2      |  2 | 'This game should also expire'              | true    | 2016-04-20 01:00:00 PT   | 100         | 1                |        | 2           |1                 |2            |   false     | 1       |
+    | Expire2      |  2 | 'This game should also expire'              | true    |            | 100         | 1                |        | 2           |1                 |2            |   false     | 1       |
     | Expire3      |  3 | 'This game should also expire too'          | false   |                          | 100         | 1                | 99     | 3           |2                 |4            |   false     | 1       |
    
     And the following users exist:

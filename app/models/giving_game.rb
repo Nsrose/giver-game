@@ -30,7 +30,7 @@ class GivingGame < ActiveRecord::Base
   end
   
   def check_expiration
-    if (self.expiration_time < DateTime.now)
+    if (!self.expiration_time.nil? && self.expiration_time < DateTime.now)
        errors.add("Expiration Date", "can not be in the past make sure date was formatted xx/xx/xxxx") 
     end
   end
