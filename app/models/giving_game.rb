@@ -31,7 +31,7 @@ class GivingGame < ActiveRecord::Base
   
   def check_expiration
     if (!self.expiration_time.nil? && self.expiration_time < Date.strptime("01/01/2000", "%m/%d/%Y"))
-      errors.add("Expiration Date", "must be formatted MM/DD/YYYY") 
+      errors.add("", "Expiration Date must be formatted MM/DD/YYYY") 
     end
   end
   def check_charities_not_equal
