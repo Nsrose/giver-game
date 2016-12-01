@@ -98,4 +98,11 @@ Feature: Create a new game
     And I should see "is not a number"
     Then I should see "Descriptive description to describe"
 
-
+ Scenario: Cannot create a game with incorrect date format
+    Given I am logged in as "j0e@tr8er.org" with password "TRAITORJOE"
+    When I follow "Create New Game"
+    When I fill out the form
+    And I fill in "Expiration" with "11/12/16"
+    And I press "Submit New Game"
+    Then I should be on the new games page
+    Then I should see "Expiration Date must be formatted MM/DD/YYYY"
