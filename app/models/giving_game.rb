@@ -18,6 +18,7 @@ class GivingGame < ActiveRecord::Base
   validate :check_charities_not_equal
   
   validate :per_transaction_total_money
+  validate :check_expiration
 
   mount_uploader :charityA_image, CharityAImageUploader
   mount_uploader :charityB_image, CharityBImageUploader
@@ -28,6 +29,11 @@ class GivingGame < ActiveRecord::Base
     end
   end
   
+  def check_expiration
+    if (!self.expiration_time.nil? && self.expiration_time < Date.strptime("01/01/2000", "%m/%d/%Y"))
+      errors.add("Expiration Date", "must be formatted MM/DD/YYYY") 
+    end
+  end
   def check_charities_not_equal
     errors.add("Charities ", "A and B must be different") if self.charity_a_id == self.charity_b_id
   end

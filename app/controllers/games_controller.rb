@@ -9,6 +9,7 @@ def parse_expiration_date(gp)
         gp[:expiration_time] = nil
       else
         gp[:expiration_time] = Date.strptime(gp[:expiration_time], "%m/%d/%Y")
+        print gp[:expiration_time]
       end
     end
     return true
