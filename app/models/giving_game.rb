@@ -106,7 +106,7 @@ class GivingGame < ActiveRecord::Base
   end
   
   def expired= (bool)
-    if (self.expired == false) && (bool ==true)
+    if (self.expired == false) && (bool ==true) && (!self.user_id.nil?)
       self.send_email
     end
     write_attribute(:expired, bool)

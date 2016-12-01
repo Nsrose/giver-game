@@ -106,33 +106,34 @@ games = [
         :description =>'This is an expired game',
         :tutorial => false,
         :show_results => false,
-        :expired => true,
         :is_private => false,
         :resource_id => "e1",
         :charity_a_id => 3,
-        :charity_b_id => 1
+        :charity_b_id => 1,
+        :expired => true,
+
     },
     {
         :title => 'Expired Game 2',
         :description =>'This is also an expired game',
         :tutorial => false,
         :show_results => false,
-        :expired => true,
         :is_private => false,
         :resource_id => "e2",
         :charity_a_id => 3,
-        :charity_b_id => 2
+        :charity_b_id => 2,
+        :expired => true,
     },
     {
         :title => 'Expired Game 3',
         :description =>'This is the last expired game',
         :tutorial => false,
         :show_results => true,
-        :expired => true,
         :is_private => false,
         :resource_id => "e3",
         :charity_a_id => 2,
-        :charity_b_id => 1
+        :charity_b_id => 1,
+        :expired => true,
     }
 ]
 
