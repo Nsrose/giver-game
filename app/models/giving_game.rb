@@ -30,8 +30,13 @@ class GivingGame < ActiveRecord::Base
   end
   
   def check_expiration
+<<<<<<< HEAD
     if (!self.expiration_time.nil? && self.expiration_time < DateTime.now)
        errors.add("Expiration Date", "can not be in the past make sure date was formatted MM/DD/YYYY") 
+=======
+    if (!self.expiration_time.nil? && self.expiration_time < Date.strptime("01/01/2000", "%m/%d/%Y"))
+      errors.add("Expiration Date", "must be formatted MM/DD/YYYY") 
+>>>>>>> 7e6c15e81be3ca2c21d8ed87640ba316bf37caf0
     end
   end
   def check_charities_not_equal
