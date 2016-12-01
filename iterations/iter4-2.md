@@ -1,4 +1,4 @@
-# Iter 3-2
+# Iter 4-2
 
 User stories implemented:
 * Automatically expire games once the expiration date passes and when total money is reached
